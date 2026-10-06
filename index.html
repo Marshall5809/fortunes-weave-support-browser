@@ -425,8 +425,7 @@ h1 {
     <div id="grid" class="grid"></div>
 
     <div class="note-panel">
-      <strong>How it works:</strong> A-rank chains are shown as <strong>C → B → A</strong>.
-      B, C, and unknown (?) entries match the source chart.
+      <strong>How it works:</strong> The IGN chart shows the <strong>maximum support rank</strong>. Every normal support starts at C, so this browser expands ranks as follows: <strong>C = C</strong>, <strong>B = C → B</strong>, and <strong>A = C → B → A</strong>. Unknown (?) entries are preserved as unknown.
       Portraits are loaded from the Fortune's Weave recruitment tracker portrait set.
       Inside a character page, click any support portrait or name to jump directly to that character.
     </div>
@@ -475,6 +474,13 @@ function portrait(name, cls='') {
 
 function badge(x) {
   return `<span class="badge ${x === '?' ? 'Q' : x}">${x}</span>`;
+}
+
+function rankSequence(maxRank) {
+  if (maxRank === 'A') return ['C', 'B', 'A'];
+  if (maxRank === 'B') return ['C', 'B'];
+  if (maxRank === 'C') return ['C'];
+  return [maxRank];
 }
 
 function supportLink(name) {
@@ -532,7 +538,7 @@ function showDetail(name) {
       ${list.map(s => `
         <div class="support-row">
           <div>${supportLink(s.name)}</div>
-          <div class="badges">${s.levels.map(badge).join('')}</div>
+          <div class="badges">${rankSequence(s.levels[s.levels.length - 1]).map(badge).join('')}</div>
         </div>
       `).join('')}
     </div>
