@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fortune's Weave Support Browser</title>
+<style>
+:root {
+  --bg-1:#0f1627;
+  --bg-2:#1b2742;
+  --panel:#f4eedf;
+  --panel-2:#fbf7ed;
+  --ink:#1f2330;
+  --muted:#6b6f79;
+  --navy:#27395f;
+  --navy-2:#354d7e;
+  --gold:#d9b66c;
+  --gold-deep:#b88a35;
+  --gold-soft:#edd9ab;
+  --green:#3b7f64;
+  --purple:#7a5ca6;
+  --brown:#6d5332;
+  --shadow:0 14px 34px rgba(0,0,0,.22);
+}
+
+* { box-sizing:border-box; }
+
+body {
+  margin:0;
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,.08), transparent 32%),
+    linear-gradient(180deg, rgba(255,255,255,.04), transparent 180px),
+    linear-gradient(180deg, var(--bg-2), var(--bg-1));
+  min-height:100vh;
+}
+
+body::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.18;
+  background-image:
+    linear-gradient(transparent 96%, rgba(255,255,255,.1) 100%),
+    linear-gradient(90deg, transparent 96%, rgba(255,255,255,.08) 100%);
+  background-size:40px 40px, 40px 40px;
+}
+
+.shell {
+  max-width:1220px;
+  margin:0 auto;
+  padding:30px 20px 48px;
+  position:relative;
+  z-index:1;
+}
+
+.banner {
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.03)),
+    linear-gradient(135deg, #1b2d52, #0f1830 70%);
+  color:#f7f1e2;
+  border:1px solid rgba(217,182,108,.45);
+  border-radius:26px;
+  padding:28px 28px 24px;
+  box-shadow:var(--shadow);
+}
+
+.banner::before,
+.banner::after {
+  content:"✦";
+  position:absolute;
+  color:rgba(217,182,108,.35);
+  font-size:120px;
+  line-height:1;
+  font-family: Georgia, serif;
+}
+
+.banner::before { right:24px; top:-10px; transform:rotate(8deg); }
+.banner::after { left:18px; bottom:-34px; transform:rotate(-8deg); font-size:92px; }
+
+.kicker {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.22em;
+  color:#ecd59e;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.kicker::before, .kicker::after {
+  content:"";
+  width:28px;
+  height:1px;
+  background:linear-gradient(90deg, transparent, #d9b66c, transparent);
+}
+
+h1 {
+  margin:0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size:clamp(34px, 5vw, 56px);
+  line-height:1.02;
+  letter-spacing:-.03em;
+}
+
+.banner p {
+  margin:12px 0 0;
+  color:#d5dbee;
+  font-size:17px;
+  max-width:780px;
+}
+
+.toolbar {
+  margin:22px 0 20px;
+  background:rgba(7,11,21,.38);
+  border:1px solid rgba(217,182,108,.3);
+  border-radius:20px;
+  padding:16px;
+  box-shadow:var(--shadow);
+  backdrop-filter: blur(8px);
+}
+
+.search {
+  width:100%;
+  padding:17px 18px;
+  font-size:17px;
+  border-radius:16px;
+  border:1px solid rgba(184,138,53,.38);
+  background:linear-gradient(180deg, #fbf7ee, #efe6d1);
+  color:var(--ink);
+  outline:none;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7);
+}
+
+.search:focus {
+  border-color:var(--gold-deep);
+  box-shadow:0 0 0 4px rgba(217,182,108,.22), inset 0 1px 0 rgba(255,255,255,.7);
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:16px;
+}
+
+.unit {
+  position:relative;
+  background:linear-gradient(180deg, var(--panel-2), var(--panel));
+  border:1px solid #d8c497;
+  border-radius:22px;
+  padding:14px;
+  min-height:104px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  width:100%;
+  text-align:left;
+  cursor:pointer;
+  box-shadow:0 10px 24px rgba(0,0,0,.12);
+  transition:transform .14s ease, box-shadow .14s ease, border-color .14s ease;
+}
+
+.unit::before {
+  content:"";
+  position:absolute;
+  inset:8px;
+  border-radius:16px;
+  border:1px solid rgba(117,81,24,.14);
+  pointer-events:none;
+}
+
+.unit:hover {
+  transform:translateY(-3px);
+  box-shadow:0 18px 28px rgba(0,0,0,.17);
+  border-color:#c79a4a;
+}
+
+.portrait {
+  position:relative;
+  width:72px;
+  height:72px;
+  flex:0 0 auto;
+  border-radius:18px;
+  overflow:hidden;
+  border:2px solid var(--gold);
+  background:linear-gradient(180deg, #dce7fa, #bacbe8);
+  box-shadow:0 5px 12px rgba(33,46,79,.18);
+}
+
+.portrait.small {
+  width:58px;
+  height:58px;
+  border-radius:16px;
+}
+
+.portrait.hero {
+  width:104px;
+  height:104px;
+  border-radius:24px;
+  border-width:3px;
+}
+
+.portrait img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 15%;
+  display:block;
+  position:relative;
+  z-index:2;
+}
+
+.fallback {
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  font-family: Georgia, serif;
+  font-weight:700;
+  color:#355a99;
+  font-size:26px;
+  z-index:1;
+}
+
+.small .fallback { font-size:20px; }
+.hero .fallback { font-size:38px; }
+
+.name {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size:24px;
+  line-height:1.05;
+  font-weight:700;
+  color:#1d2740;
+}
+
+.count {
+  margin-top:8px;
+  font-size:13px;
+  color:var(--muted);
+  font-weight:600;
+}
+
+.detail { display:none; }
+.detail.active { display:block; }
+.home.hidden { display:none; }
+
+.back {
+  appearance:none;
+  border:1px solid rgba(217,182,108,.45);
+  background:linear-gradient(180deg, #2c4068, #1b2743);
+  color:#f8f3e7;
+  padding:13px 18px;
+  border-radius:15px;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:var(--shadow);
+  margin-bottom:16px;
+}
+
+.back:hover {
+  filter:brightness(1.06);
+}
+
+.hero-card {
+  position:relative;
+  background:linear-gradient(180deg, #fbf7ed, #f1e8d6);
+  border:1px solid #d8c497;
+  border-radius:26px;
+  padding:22px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-bottom:18px;
+  box-shadow:0 18px 34px rgba(0,0,0,.14);
+}
+
+.hero-card::after {
+  content:"";
+  position:absolute;
+  inset:9px;
+  border:1px solid rgba(117,81,24,.14);
+  border-radius:18px;
+  pointer-events:none;
+}
+
+.hero-card h2 {
+  margin:0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size:clamp(32px, 5vw, 44px);
+  color:#1b2743;
+}
+
+.hero-card .sub {
+  margin-top:8px;
+  color:var(--muted);
+  font-size:15px;
+}
+
+.support-list {
+  display:grid;
+  gap:12px;
+}
+
+.support-row {
+  background:linear-gradient(180deg, #fbf7ed, #f1e8d6);
+  border:1px solid #d8c497;
+  border-radius:20px;
+  padding:12px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  box-shadow:0 8px 20px rgba(0,0,0,.09);
+}
+
+.person-link {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  color:inherit;
+  border-radius:14px;
+  padding:5px 7px;
+  margin:-5px -7px;
+  transition:background .12s ease, transform .12s ease;
+}
+
+.person-link:hover {
+  background:rgba(53,93,164,.08);
+  transform:translateX(2px);
+}
+
+.person-name {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight:700;
+  font-size:21px;
+  color:#1f2942;
+}
+
+.badges {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:flex-end;
+}
+
+.badge {
+  min-width:44px;
+  height:44px;
+  padding:0 11px;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  color:white;
+  font-weight:900;
+  font-size:18px;
+  border:2px solid rgba(255,255,255,.35);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.24), 0 5px 10px rgba(0,0,0,.14);
+}
+
+.badge.A { background:linear-gradient(180deg, #458b6f, #30654f); }
+.badge.B { background:linear-gradient(180deg, #d0a74f, #a77a26); }
+.badge.C { background:linear-gradient(180deg, #8e6ac2, #6d4b9a); }
+.badge.Q { background:linear-gradient(180deg, #7f858f, #5f6570); }
+
+.note-panel {
+  margin-top:20px;
+  background:rgba(9,14,28,.35);
+  border:1px solid rgba(217,182,108,.25);
+  color:#dce3f3;
+  border-radius:18px;
+  padding:16px 18px;
+  font-size:13px;
+  line-height:1.55;
+  box-shadow:var(--shadow);
+}
+
+.note-panel strong {
+  color:#f3dfad;
+}
+
+.footer-space { height:10px; }
+
+@media (max-width: 780px) {
+  .shell { padding:20px 14px 34px; }
+  .banner { padding:22px 18px 20px; }
+  .toolbar { padding:12px; }
+  .grid { grid-template-columns:1fr 1fr; gap:12px; }
+  .unit { min-height:90px; padding:10px; gap:10px; }
+  .portrait { width:60px; height:60px; border-radius:16px; }
+  .name { font-size:19px; }
+  .hero-card { align-items:flex-start; }
+  .support-row { align-items:flex-start; flex-direction:column; }
+  .badges { justify-content:flex-start; }
+}
+
+@media (max-width: 520px) {
+  .grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <section id="home" class="home">
+    <div class="banner">
+      <div class="kicker">Fortune's Weave</div>
+      <h1>Support Archive</h1>
+      <p>
+        A cleaner, character-focused way to browse the Support Chart.
+        Choose a unit to see every support relationship, then click through to connected characters just like a proper support menu.
+      </p>
+    </div>
+
+    <div class="toolbar">
+      <input id="search" class="search" placeholder="Search characters…" />
+    </div>
+
+    <div id="grid" class="grid"></div>
+
+    <div class="note-panel">
+      <strong>How it works:</strong> A-rank chains are shown as <strong>C → B → A</strong>.
+      B, C, and unknown (?) entries match the source chart.
+      Portraits are loaded from the Fortune's Weave recruitment tracker portrait set.
+      Inside a character page, click any support portrait or name to jump directly to that character.
+    </div>
+  </section>
+
+  <section id="detail" class="detail">
+    <button id="back" class="back">← Return to Character List</button>
+    <div id="detailContent"></div>
+  </section>
+
+  <div class="footer-space"></div>
+</div>
+
+<script>
+const DATA = {"names": ["Eshmel", "Hong Hua", "Troy", "Cai", "Peter", "Tialla", "Ultand", "Dietrich", "Fabio", "Esmeralda", "Mikaela", "Theodora", "Bonaventure", "Tobias", "Lilian", "Lysander", "Leda", "Buccar", "Sirocco", "Mu", "Olympia", "Bertrand", "Gaitz", "Jester", "Goliath", "Dante", "Orchel", "Diego", "Loretta", "Seteth", "Ninae", "Anatolia", "Nezha", "Halvin", "Dadao", "Sha Lan", "Talimun", "Ursula", "Ludia", "Fianna", "Simon", "Alexandra", "Anna", "Benditz", "Catania", "Centurio", "Guzran", "Inyoni", "Io", "Jasmine", "Kiroc", "Majde", "Noctula", "Nuzzuno", "Nydine", "Peppe", "Sofia", "Yang Jie", "Zarcone", "Creek", "Nathan", "Aswan", "Tahonia"], "supports": {"Eshmel": [{"name": "Hong Hua", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Cai", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Peter", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Tialla", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Ultand", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Dietrich", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Fabio", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Esmeralda", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Mikaela", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Theodora", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Bonaventure", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Tobias", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Lilian", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Lysander", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Leda", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Buccar", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Sirocco", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Mu", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Olympia", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Gaitz", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Jester", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Goliath", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Dante", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Diego", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Loretta", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Ninae", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Nezha", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Halvin", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Dadao", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Sha Lan", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Ursula", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Ludia", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Fianna", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Simon", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Alexandra", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Anna", "rank": "C", "levels": ["C"]}, {"name": "Benditz", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Catania", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Guzran", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Inyoni", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Io", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Jasmine", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Majde", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Noctula", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Nydine", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Peppe", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Sofia", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Yang Jie", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Zarcone", "rank": "A", "levels": ["C", "B", "A"]}], "Hong Hua": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Sha Lan", "rank": "C", "levels": ["C"]}], "Troy": [{"name": "Theodora", "rank": "?", "levels": ["?"]}, {"name": "Bonaventure", "rank": "?", "levels": ["?"]}], "Cai": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Peter", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Tialla", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Ultand", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Dietrich", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Esmeralda", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Theodora", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Leda", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Mu", "rank": "B", "levels": ["B"]}, {"name": "Bertrand", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Goliath", "rank": "B", "levels": ["B"]}, {"name": "Ninae", "rank": "B", "levels": ["B"]}, {"name": "Anatolia", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Alexandra", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Centurio", "rank": "C", "levels": ["C"]}], "Peter": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Cai", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Tialla", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Ultand", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Mu", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Jester", "rank": "B", "levels": ["B"]}, {"name": "Ninae", "rank": "B", "levels": ["B"]}, {"name": "Dadao", "rank": "B", "levels": ["B"]}, {"name": "Ursula", "rank": "B", "levels": ["B"]}, {"name": "Sofia", "rank": "B", "levels": ["B"]}], "Tialla": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Cai", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Peter", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Ultand", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Theodora", "rank": "B", "levels": ["B"]}, {"name": "Bonaventure", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Seteth", "rank": "B", "levels": ["B"]}, {"name": "Talimun", "rank": "B", "levels": ["B"]}, {"name": "Ludia", "rank": "B", "levels": ["B"]}, {"name": "Io", "rank": "B", "levels": ["B"]}, {"name": "Creek", "rank": "?", "levels": ["?"]}], "Ultand": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Cai", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Peter", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Tialla", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Tobias", "rank": "B", "levels": ["B"]}, {"name": "Goliath", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Orchel", "rank": "C", "levels": ["C"]}, {"name": "Loretta", "rank": "B", "levels": ["B"]}, {"name": "Nezha", "rank": "B", "levels": ["B"]}, {"name": "Centurio", "rank": "C", "levels": ["C"]}, {"name": "Peppe", "rank": "B", "levels": ["B"]}], "Dietrich": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Cai", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Fabio", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Esmeralda", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Mikaela", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Theodora", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Leda", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Buccar", "rank": "B", "levels": ["B"]}, {"name": "Seteth", "rank": "C", "levels": ["C"]}, {"name": "Halvin", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Talimun", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Catania", "rank": "B", "levels": ["B"]}], "Fabio": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Dietrich", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Esmeralda", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Mikaela", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Tobias", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Anatolia", "rank": "B", "levels": ["B"]}, {"name": "Nezha", "rank": "B", "levels": ["B"]}, {"name": "Halvin", "rank": "B", "levels": ["B"]}], "Esmeralda": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Cai", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Dietrich", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Fabio", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Mikaela", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Lysander", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Leda", "rank": "B", "levels": ["B"]}, {"name": "Diego", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Dadao", "rank": "B", "levels": ["B"]}, {"name": "Ludia", "rank": "B", "levels": ["B"]}, {"name": "Kiroc", "rank": "C", "levels": ["C"]}], "Mikaela": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Dietrich", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Fabio", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Esmeralda", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Mu", "rank": "B", "levels": ["B"]}, {"name": "Jester", "rank": "B", "levels": ["B"]}, {"name": "Loretta", "rank": "B", "levels": ["B"]}, {"name": "Simon", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Guzran", "rank": "B", "levels": ["B"]}, {"name": "Sofia", "rank": "B", "levels": ["B"]}], "Theodora": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Troy", "rank": "?", "levels": ["?"]}, {"name": "Cai", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Tialla", "rank": "B", "levels": ["B"]}, {"name": "Dietrich", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Bonaventure", "rank": "B", "levels": ["B"]}, {"name": "Tobias", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Lilian", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Lysander", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Leda", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Bertrand", "rank": "B", "levels": ["B"]}, {"name": "Diego", "rank": "C", "levels": ["C"]}, {"name": "Nezha", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Talimun", "rank": "B", "levels": ["B"]}, {"name": "Simon", "rank": "B", "levels": ["B"]}, {"name": "Alexandra", "rank": "C", "levels": ["C"]}], "Bonaventure": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Troy", "rank": "?", "levels": ["?"]}, {"name": "Tialla", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Theodora", "rank": "B", "levels": ["B"]}, {"name": "Tobias", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Lilian", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Lysander", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Orchel", "rank": "B", "levels": ["B"]}, {"name": "Halvin", "rank": "B", "levels": ["B"]}, {"name": "Ursula", "rank": "B", "levels": ["B"]}, {"name": "Nydine", "rank": "C", "levels": ["C"]}], "Tobias": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Ultand", "rank": "B", "levels": ["B"]}, {"name": "Fabio", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Theodora", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Bonaventure", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Lilian", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Lysander", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Olympia", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Loretta", "rank": "B", "levels": ["B"]}, {"name": "Anatolia", "rank": "B", "levels": ["B"]}, {"name": "Sofia", "rank": "C", "levels": ["C"]}], "Lilian": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Theodora", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Bonaventure", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Tobias", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Lysander", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Mu", "rank": "B", "levels": ["B"]}, {"name": "Gaitz", "rank": "B", "levels": ["B"]}, {"name": "Diego", "rank": "B", "levels": ["B"]}, {"name": "Talimun", "rank": "B", "levels": ["B"]}, {"name": "Simon", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Nydine", "rank": "B", "levels": ["B"]}], "Lysander": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Esmeralda", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Theodora", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Bonaventure", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Tobias", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Lilian", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Ninae", "rank": "B", "levels": ["B"]}, {"name": "Fianna", "rank": "B", "levels": ["B"]}, {"name": "Catania", "rank": "B", "levels": ["B"]}], "Leda": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Cai", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Dietrich", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Esmeralda", "rank": "B", "levels": ["B"]}, {"name": "Theodora", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Buccar", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Sirocco", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Mu", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Olympia", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Jester", "rank": "B", "levels": ["B"]}, {"name": "Dante", "rank": "B", "levels": ["B"]}, {"name": "Orchel", "rank": "B", "levels": ["B"]}, {"name": "Talimun", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Guzran", "rank": "B", "levels": ["B"]}, {"name": "Aswan", "rank": "C", "levels": ["C"]}], "Buccar": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Dietrich", "rank": "B", "levels": ["B"]}, {"name": "Leda", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Sirocco", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Mu", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Olympia", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Jester", "rank": "B", "levels": ["B"]}, {"name": "Dadao", "rank": "B", "levels": ["B"]}, {"name": "Ludia", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Jasmine", "rank": "B", "levels": ["B"]}], "Sirocco": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Leda", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Buccar", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Mu", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Olympia", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Dante", "rank": "B", "levels": ["B"]}, {"name": "Ninae", "rank": "B", "levels": ["B"]}, {"name": "Anatolia", "rank": "C", "levels": ["C"]}, {"name": "Sha Lan", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Ursula", "rank": "B", "levels": ["B"]}, {"name": "Alexandra", "rank": "C", "levels": ["C"]}], "Mu": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Cai", "rank": "B", "levels": ["B"]}, {"name": "Peter", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Mikaela", "rank": "B", "levels": ["B"]}, {"name": "Lilian", "rank": "B", "levels": ["B"]}, {"name": "Leda", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Buccar", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Sirocco", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Olympia", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Guzran", "rank": "C", "levels": ["C"]}, {"name": "Peppe", "rank": "B", "levels": ["B"]}], "Olympia": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Tobias", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Leda", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Buccar", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Sirocco", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Mu", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Goliath", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Fianna", "rank": "B", "levels": ["B"]}, {"name": "Alexandra", "rank": "B", "levels": ["B"]}, {"name": "Jasmine", "rank": "C", "levels": ["C"]}, {"name": "Creek", "rank": "C", "levels": ["C"]}], "Bertrand": [{"name": "Cai", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Theodora", "rank": "B", "levels": ["B"]}, {"name": "Talimun", "rank": "A", "levels": ["C", "B", "A"]}], "Gaitz": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Lilian", "rank": "B", "levels": ["B"]}, {"name": "Goliath", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Dante", "rank": "C", "levels": ["C"]}, {"name": "Ursula", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Ludia", "rank": "B", "levels": ["B"]}, {"name": "Alexandra", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Zarcone", "rank": "C", "levels": ["C"]}], "Jester": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Peter", "rank": "B", "levels": ["B"]}, {"name": "Mikaela", "rank": "B", "levels": ["B"]}, {"name": "Leda", "rank": "B", "levels": ["B"]}, {"name": "Buccar", "rank": "B", "levels": ["B"]}, {"name": "Goliath", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Dante", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Halvin", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Noctula", "rank": "B", "levels": ["B"]}], "Goliath": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Cai", "rank": "B", "levels": ["B"]}, {"name": "Ultand", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Olympia", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Gaitz", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Jester", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Dante", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Loretta", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Noctula", "rank": "B", "levels": ["B"]}], "Dante": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Leda", "rank": "B", "levels": ["B"]}, {"name": "Sirocco", "rank": "B", "levels": ["B"]}, {"name": "Gaitz", "rank": "C", "levels": ["C"]}, {"name": "Jester", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Goliath", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Seteth", "rank": "B", "levels": ["B"]}, {"name": "Anatolia", "rank": "C", "levels": ["C"]}, {"name": "Talimun", "rank": "B", "levels": ["B"]}, {"name": "Nydine", "rank": "B", "levels": ["B"]}], "Orchel": [{"name": "Ultand", "rank": "C", "levels": ["C"]}, {"name": "Bonaventure", "rank": "B", "levels": ["B"]}, {"name": "Leda", "rank": "B", "levels": ["B"]}, {"name": "Ninae", "rank": "C", "levels": ["C"]}, {"name": "Fianna", "rank": "C", "levels": ["C"]}, {"name": "Majde", "rank": "C", "levels": ["C"]}], "Diego": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Esmeralda", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Theodora", "rank": "C", "levels": ["C"]}, {"name": "Lilian", "rank": "B", "levels": ["B"]}, {"name": "Seteth", "rank": "C", "levels": ["C"]}, {"name": "Ninae", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Halvin", "rank": "B", "levels": ["B"]}, {"name": "Sha Lan", "rank": "C", "levels": ["C"]}, {"name": "Io", "rank": "B", "levels": ["B"]}, {"name": "Nuzzuno", "rank": "C", "levels": ["C"]}], "Loretta": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Ultand", "rank": "B", "levels": ["B"]}, {"name": "Mikaela", "rank": "B", "levels": ["B"]}, {"name": "Tobias", "rank": "B", "levels": ["B"]}, {"name": "Goliath", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Seteth", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Sha Lan", "rank": "B", "levels": ["B"]}, {"name": "Yang Jie", "rank": "B", "levels": ["B"]}], "Seteth": [{"name": "Tialla", "rank": "B", "levels": ["B"]}, {"name": "Dietrich", "rank": "C", "levels": ["C"]}, {"name": "Dante", "rank": "B", "levels": ["B"]}, {"name": "Diego", "rank": "C", "levels": ["C"]}, {"name": "Loretta", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Dadao", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Ludia", "rank": "B", "levels": ["B"]}], "Ninae": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Cai", "rank": "B", "levels": ["B"]}, {"name": "Peter", "rank": "B", "levels": ["B"]}, {"name": "Lysander", "rank": "B", "levels": ["B"]}, {"name": "Sirocco", "rank": "B", "levels": ["B"]}, {"name": "Orchel", "rank": "C", "levels": ["C"]}, {"name": "Diego", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Simon", "rank": "B", "levels": ["B"]}, {"name": "Peppe", "rank": "B", "levels": ["B"]}], "Anatolia": [{"name": "Cai", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Fabio", "rank": "B", "levels": ["B"]}, {"name": "Tobias", "rank": "B", "levels": ["B"]}, {"name": "Sirocco", "rank": "C", "levels": ["C"]}, {"name": "Dante", "rank": "C", "levels": ["C"]}, {"name": "Yang Jie", "rank": "B", "levels": ["B"]}], "Nezha": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Ultand", "rank": "B", "levels": ["B"]}, {"name": "Fabio", "rank": "B", "levels": ["B"]}, {"name": "Theodora", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Halvin", "rank": "C", "levels": ["C"]}, {"name": "Dadao", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Sha Lan", "rank": "B", "levels": ["B"]}, {"name": "Majde", "rank": "C", "levels": ["C"]}], "Halvin": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Dietrich", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Fabio", "rank": "B", "levels": ["B"]}, {"name": "Bonaventure", "rank": "B", "levels": ["B"]}, {"name": "Jester", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Diego", "rank": "B", "levels": ["B"]}, {"name": "Nezha", "rank": "C", "levels": ["C"]}, {"name": "Sha Lan", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Zarcone", "rank": "C", "levels": ["C"]}], "Dadao": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Peter", "rank": "B", "levels": ["B"]}, {"name": "Esmeralda", "rank": "B", "levels": ["B"]}, {"name": "Buccar", "rank": "B", "levels": ["B"]}, {"name": "Seteth", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Nezha", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Inyoni", "rank": "B", "levels": ["B"]}], "Sha Lan": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Hong Hua", "rank": "C", "levels": ["C"]}, {"name": "Sirocco", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Diego", "rank": "C", "levels": ["C"]}, {"name": "Loretta", "rank": "B", "levels": ["B"]}, {"name": "Nezha", "rank": "B", "levels": ["B"]}, {"name": "Halvin", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Yang Jie", "rank": "B", "levels": ["B"]}], "Talimun": [{"name": "Tialla", "rank": "B", "levels": ["B"]}, {"name": "Dietrich", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Theodora", "rank": "B", "levels": ["B"]}, {"name": "Lilian", "rank": "B", "levels": ["B"]}, {"name": "Leda", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Bertrand", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Dante", "rank": "B", "levels": ["B"]}, {"name": "Fianna", "rank": "B", "levels": ["B"]}, {"name": "Simon", "rank": "B", "levels": ["B"]}], "Ursula": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Peter", "rank": "B", "levels": ["B"]}, {"name": "Bonaventure", "rank": "B", "levels": ["B"]}, {"name": "Sirocco", "rank": "B", "levels": ["B"]}, {"name": "Gaitz", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Fianna", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Simon", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Jasmine", "rank": "B", "levels": ["B"]}], "Ludia": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Tialla", "rank": "B", "levels": ["B"]}, {"name": "Esmeralda", "rank": "B", "levels": ["B"]}, {"name": "Buccar", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Gaitz", "rank": "B", "levels": ["B"]}, {"name": "Seteth", "rank": "B", "levels": ["B"]}, {"name": "Fianna", "rank": "B", "levels": ["B"]}, {"name": "Simon", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Benditz", "rank": "B", "levels": ["B"]}], "Fianna": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Lysander", "rank": "B", "levels": ["B"]}, {"name": "Olympia", "rank": "B", "levels": ["B"]}, {"name": "Orchel", "rank": "C", "levels": ["C"]}, {"name": "Talimun", "rank": "B", "levels": ["B"]}, {"name": "Ursula", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Ludia", "rank": "B", "levels": ["B"]}, {"name": "Simon", "rank": "A", "levels": ["C", "B", "A"]}], "Simon": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Mikaela", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Theodora", "rank": "B", "levels": ["B"]}, {"name": "Lilian", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Ninae", "rank": "B", "levels": ["B"]}, {"name": "Talimun", "rank": "B", "levels": ["B"]}, {"name": "Ursula", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Ludia", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Fianna", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Zarcone", "rank": "C", "levels": ["C"]}], "Alexandra": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Cai", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Theodora", "rank": "C", "levels": ["C"]}, {"name": "Sirocco", "rank": "C", "levels": ["C"]}, {"name": "Olympia", "rank": "B", "levels": ["B"]}, {"name": "Gaitz", "rank": "A", "levels": ["C", "B", "A"]}], "Anna": [{"name": "Eshmel", "rank": "C", "levels": ["C"]}], "Benditz": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Ludia", "rank": "B", "levels": ["B"]}], "Catania": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Dietrich", "rank": "B", "levels": ["B"]}, {"name": "Lysander", "rank": "B", "levels": ["B"]}], "Centurio": [{"name": "Cai", "rank": "C", "levels": ["C"]}, {"name": "Ultand", "rank": "C", "levels": ["C"]}], "Guzran": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Mikaela", "rank": "B", "levels": ["B"]}, {"name": "Leda", "rank": "B", "levels": ["B"]}, {"name": "Mu", "rank": "C", "levels": ["C"]}], "Inyoni": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Dadao", "rank": "B", "levels": ["B"]}], "Io": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Tialla", "rank": "B", "levels": ["B"]}, {"name": "Diego", "rank": "B", "levels": ["B"]}], "Jasmine": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Buccar", "rank": "B", "levels": ["B"]}, {"name": "Olympia", "rank": "C", "levels": ["C"]}, {"name": "Ursula", "rank": "B", "levels": ["B"]}], "Kiroc": [{"name": "Esmeralda", "rank": "C", "levels": ["C"]}], "Majde": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Orchel", "rank": "C", "levels": ["C"]}, {"name": "Nezha", "rank": "C", "levels": ["C"]}], "Noctula": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Jester", "rank": "B", "levels": ["B"]}, {"name": "Goliath", "rank": "B", "levels": ["B"]}], "Nuzzuno": [{"name": "Diego", "rank": "C", "levels": ["C"]}], "Nydine": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Bonaventure", "rank": "C", "levels": ["C"]}, {"name": "Lilian", "rank": "B", "levels": ["B"]}, {"name": "Dante", "rank": "B", "levels": ["B"]}], "Peppe": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Ultand", "rank": "B", "levels": ["B"]}, {"name": "Mu", "rank": "B", "levels": ["B"]}, {"name": "Ninae", "rank": "B", "levels": ["B"]}], "Sofia": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Peter", "rank": "B", "levels": ["B"]}, {"name": "Mikaela", "rank": "B", "levels": ["B"]}, {"name": "Tobias", "rank": "C", "levels": ["C"]}], "Yang Jie": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Loretta", "rank": "B", "levels": ["B"]}, {"name": "Anatolia", "rank": "B", "levels": ["B"]}, {"name": "Sha Lan", "rank": "B", "levels": ["B"]}], "Zarcone": [{"name": "Eshmel", "rank": "A", "levels": ["C", "B", "A"]}, {"name": "Gaitz", "rank": "C", "levels": ["C"]}, {"name": "Halvin", "rank": "C", "levels": ["C"]}, {"name": "Simon", "rank": "C", "levels": ["C"]}], "Creek": [{"name": "Tialla", "rank": "?", "levels": ["?"]}, {"name": "Olympia", "rank": "C", "levels": ["C"]}, {"name": "Nathan", "rank": "B", "levels": ["B"]}], "Nathan": [{"name": "Creek", "rank": "B", "levels": ["B"]}], "Aswan": [{"name": "Leda", "rank": "C", "levels": ["C"]}], "Tahonia": []}};
+const ASSET_ALIAS = {"Tialla": "tialla", "Majde": "majide", "Nuzzuno": "nuzzuo", "Sha Lan": "sha-lan", "Yang Jie": "yang-jie", "Hong Hua": "hong-hua"};
+
+const home = document.getElementById('home');
+const detail = document.getElementById('detail');
+const grid = document.getElementById('grid');
+const search = document.getElementById('search');
+const back = document.getElementById('back');
+const detailContent = document.getElementById('detailContent');
+
+function initials(name) {
+  const p = name.trim().split(/\s+/);
+  return p.length > 1 ? (p[0][0] + p[p.length - 1][0]).toUpperCase() : name[0].toUpperCase();
+}
+
+function slug(name) {
+  if (ASSET_ALIAS[name]) return ASSET_ALIAS[name];
+  return name.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+function portrait(name, cls='') {
+  const s = slug(name);
+  const src = `https://ffrecruiter.lovable.app/portraits/${s}.webp`;
+  return `<span class="portrait ${cls}">
+    <span class="fallback">${initials(name)}</span>
+    <img src="${src}" alt="${name}" loading="lazy" onerror="this.style.display='none'">
+  </span>`;
+}
+
+function badge(x) {
+  return `<span class="badge ${x === '?' ? 'Q' : x}">${x}</span>`;
+}
+
+function supportLink(name) {
+  return `<a href="#" class="person-link" data-character="${name}">
+    ${portrait(name, 'small')}
+    <span class="person-name">${name}</span>
+  </a>`;
+}
+
+function renderGrid(q='') {
+  q = q.trim().toLowerCase();
+  grid.innerHTML = '';
+  DATA.names
+    .filter(n => n.toLowerCase().includes(q))
+    .forEach(name => {
+      const button = document.createElement('button');
+      button.className = 'unit';
+      button.innerHTML = `
+        ${portrait(name)}
+        <span>
+          <div class="name">${name}</div>
+          <div class="count">${DATA.supports[name].length} supports</div>
+        </span>
+      `;
+      button.onclick = () => showDetail(name);
+      grid.appendChild(button);
+    });
+}
+
+function wireSupportLinks() {
+  detailContent.querySelectorAll('.person-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      showDetail(link.dataset.character);
+    });
+  });
+}
+
+function showDetail(name) {
+  home.classList.add('hidden');
+  detail.classList.add('active');
+
+  const list = DATA.supports[name];
+
+  detailContent.innerHTML = `
+    <div class="hero-card">
+      ${portrait(name, 'hero')}
+      <div>
+        <h2>${name}</h2>
+        <div class="sub">${list.length} support relationship${list.length === 1 ? '' : 's'}</div>
+      </div>
+    </div>
+
+    <div class="support-list">
+      ${list.map(s => `
+        <div class="support-row">
+          <div>${supportLink(s.name)}</div>
+          <div class="badges">${s.levels.map(badge).join('')}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  wireSupportLinks();
+  scrollTo({ top:0, behavior:'smooth' });
+}
+
+back.onclick = () => {
+  detail.classList.remove('active');
+  home.classList.remove('hidden');
+  scrollTo({ top:0, behavior:'smooth' });
+};
+
+search.oninput = e => renderGrid(e.target.value);
+renderGrid();
+</script>
+</body>
+</html>
