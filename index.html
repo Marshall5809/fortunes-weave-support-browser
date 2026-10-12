@@ -245,7 +245,7 @@ let sortMode='roster', rankFilter='all', homeScroll=0, current=null;
 const initials = n => { const p=n.trim().split(/\s+/); return p.length>1 ? (p[0][0]+p[p.length-1][0]).toUpperCase() : n[0].toUpperCase(); };
 const slug = n => ASSET_ALIAS[n] || n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const cls = r => r==='?' ? 'Q' : r;
-const portrait = (n, c='') => `<span class="portrait ${c}"><span class="fallback">${initials(n)}</span><img src="portraits/${slug(n)}.webp" alt="${esc(n)}" loading="lazy" onerror="this.remove()"></span>`;
+const portrait = (n, c='') => `<span class="portrait ${c}"><span class="fallback">${initials(n)}</span><img src="https://ffrecruiter.lovable.app/portraits/${slug(n)}.webp" alt="${esc(n)}" loading="lazy" onerror="this.remove()"></span>`;
 const badge = (x, dim) => `<span class="badge ${cls(x)}${dim?' dim':''}" title="${x==='?'?'Unknown rank':'Rank '+x}">${x}</span>`;
 const rankSeq = m => m==='A'?['C','B','A'] : m==='B'?['C','B'] : m==='C'?['C'] : [m];
 const tally = n => DATA.supports[n].reduce((t,s)=>(t[s.rank]=(t[s.rank]||0)+1,t),{});
