@@ -3,447 +3,185 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Fortune's Weave Support Browser</title>
+<title>Fortune's Weave Support Archive</title>
 <style>
-:root {
-  --bg-1:#0f1627;
-  --bg-2:#1b2742;
-  --panel:#f4eedf;
-  --panel-2:#fbf7ed;
-  --ink:#1f2330;
-  --muted:#6b6f79;
-  --navy:#27395f;
-  --navy-2:#354d7e;
-  --gold:#d9b66c;
-  --gold-deep:#b88a35;
-  --gold-soft:#edd9ab;
-  --green:#3b7f64;
-  --purple:#7a5ca6;
-  --brown:#6d5332;
-  --shadow:0 14px 34px rgba(0,0,0,.22);
+:root{
+  --bg-1:#0b1220;--bg-2:#1b2742;--panel:#f4eedf;--panel-2:#fbf7ed;--ink:#1f2330;--muted:#6b6f79;
+  --navy:#27395f;--gold:#d9b66c;--gold-deep:#b88a35;--gold-soft:#edd9ab;
+  --green:#3b7f64;--purple:#7a5ca6;--line:#d8c497;
+  --serif:Georgia,"Times New Roman",serif;
+  --shadow:0 14px 34px rgba(0,0,0,.24);
 }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);min-height:100vh;
+  background:radial-gradient(circle at 50% -10%,rgba(217,182,108,.14),transparent 38%),
+  radial-gradient(circle at 90% 30%,rgba(122,92,166,.10),transparent 35%),
+  linear-gradient(180deg,var(--bg-2),var(--bg-1)) fixed}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.14;
+  background-image:linear-gradient(transparent 96%,rgba(255,255,255,.12) 100%),linear-gradient(90deg,transparent 96%,rgba(255,255,255,.1) 100%);
+  background-size:40px 40px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.shell{max-width:1220px;margin:0 auto;padding:30px 20px 56px;position:relative;z-index:1}
 
-* { box-sizing:border-box; }
+/* Banner */
+.banner{position:relative;overflow:hidden;color:#f7f1e2;border:1px solid rgba(217,182,108,.5);border-radius:28px;padding:34px 32px 28px;box-shadow:var(--shadow);
+  background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.02)),linear-gradient(135deg,#1d3157,#0e1730 70%)}
+.banner::before,.banner::after{content:"✦";position:absolute;color:rgba(217,182,108,.28);font-family:var(--serif);line-height:1;pointer-events:none}
+.banner::before{right:28px;top:-14px;font-size:130px;transform:rotate(8deg)}
+.banner::after{left:14px;bottom:-38px;font-size:96px;transform:rotate(-8deg)}
+.kicker{display:inline-flex;align-items:center;gap:12px;font-size:12px;text-transform:uppercase;letter-spacing:.24em;color:#ecd59e;font-weight:700;margin-bottom:10px}
+.kicker::before,.kicker::after{content:"";width:34px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+h1{margin:0;font-family:var(--serif);font-size:clamp(36px,5.4vw,60px);line-height:1;letter-spacing:-.03em;
+  background:linear-gradient(180deg,#fff6dc,#e5c982);-webkit-background-clip:text;background-clip:text;color:transparent}
+.banner p{margin:14px 0 0;color:#d5dbee;font-size:17px;max-width:720px;line-height:1.55;position:relative}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;position:relative}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-size:13px;font-weight:700;color:#f3dfad;
+  background:rgba(7,11,21,.4);border:1px solid rgba(217,182,108,.35)}
+.chip b{font-family:var(--serif);font-size:17px;color:#fff}
 
-body {
-  margin:0;
-  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
-  color:var(--ink);
-  background:
-    radial-gradient(circle at top, rgba(255,255,255,.08), transparent 32%),
-    linear-gradient(180deg, rgba(255,255,255,.04), transparent 180px),
-    linear-gradient(180deg, var(--bg-2), var(--bg-1));
-  min-height:100vh;
+/* Toolbar */
+.toolbar{position:sticky;top:10px;z-index:20;margin:22px 0 14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;
+  background:rgba(8,12,24,.62);border:1px solid rgba(217,182,108,.32);border-radius:22px;padding:12px;box-shadow:var(--shadow);backdrop-filter:blur(12px)}
+.search-wrap{position:relative;flex:1 1 280px}
+.search-wrap svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:20px;height:20px;stroke:var(--gold-deep);fill:none;stroke-width:2;stroke-linecap:round}
+.search{width:100%;padding:15px 84px 15px 46px;font-size:17px;border-radius:16px;border:1px solid rgba(184,138,53,.4);color:var(--ink);outline:none;
+  background:linear-gradient(180deg,#fbf7ee,#efe6d1);box-shadow:inset 0 1px 0 rgba(255,255,255,.7);transition:box-shadow .15s,border-color .15s}
+.search:focus{border-color:var(--gold-deep);box-shadow:0 0 0 4px rgba(217,182,108,.25),inset 0 1px 0 rgba(255,255,255,.7)}
+.kbd{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:12px;font-weight:700;color:var(--muted);border:1px solid rgba(184,138,53,.4);border-radius:7px;padding:2px 8px;background:rgba(255,255,255,.5);pointer-events:none}
+.clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);display:none;border:0;background:rgba(39,57,95,.12);color:var(--navy);width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer}
+.has-text .clear{display:block}.has-text .kbd{display:none}
+.seg{display:flex;padding:4px;border-radius:14px;background:rgba(255,255,255,.07);border:1px solid rgba(217,182,108,.22);gap:2px}
+.seg button{border:0;background:transparent;color:#cdd5ea;font:700 13px inherit;font-family:inherit;padding:10px 14px;border-radius:10px;cursor:pointer;transition:background .15s,color .15s}
+.seg button:hover{color:#fff}
+.seg button[aria-pressed="true"]{background:linear-gradient(180deg,var(--gold),var(--gold-deep));color:#1b2743}
+.result-count{color:#aab4cf;font-size:13px;margin:0 4px 14px;min-height:18px}
+
+/* Grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.unit{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--line);border-radius:22px;padding:14px;min-height:108px;
+  display:flex;align-items:center;gap:14px;width:100%;text-align:left;cursor:pointer;font:inherit;color:inherit;box-shadow:0 10px 24px rgba(0,0,0,.14);
+  transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;animation:rise .45s ease both;animation-delay:calc(var(--i,0)*28ms)}
+.unit::before{content:"";position:absolute;inset:8px;border-radius:16px;border:1px solid rgba(117,81,24,.14);pointer-events:none}
+.unit::after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-18deg);transition:left .55s ease;pointer-events:none}
+.unit:hover{transform:translateY(-4px);box-shadow:0 20px 30px rgba(0,0,0,.2);border-color:#c79a4a}
+.unit:hover::after{left:130%}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.name{font-family:var(--serif);font-size:23px;line-height:1.08;font-weight:700;color:#1d2740}
+.count{margin-top:7px;font-size:13px;color:var(--muted);font-weight:600}
+.dots{display:flex;gap:5px;margin-top:8px}
+.dot{font-size:11px;font-weight:800;color:#fff;border-radius:999px;padding:1px 8px}
+.dot.A{background:var(--green)}.dot.B{background:var(--gold-deep)}.dot.C{background:var(--purple)}.dot.Q{background:#6b717c}
+.empty{grid-column:1/-1;text-align:center;color:#cdd5ea;padding:50px 20px;font-family:var(--serif);font-size:22px;border:1px dashed rgba(217,182,108,.4);border-radius:22px}
+.empty small{display:block;font:14px "Segoe UI",system-ui,sans-serif;color:#97a2c0;margin-top:8px}
+
+/* Portraits */
+.portrait{position:relative;width:72px;height:72px;flex:0 0 auto;border-radius:18px;overflow:hidden;border:2px solid var(--gold);display:block;
+  background:linear-gradient(180deg,#dce7fa,#bacbe8);box-shadow:0 5px 12px rgba(33,46,79,.2)}
+.portrait.small{width:58px;height:58px;border-radius:16px}
+.portrait.hero{width:112px;height:112px;border-radius:26px;border-width:3px}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;position:relative;z-index:2}
+.fallback{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--serif);font-weight:700;color:#355a99;font-size:26px;z-index:1}
+.small .fallback{font-size:20px}.hero .fallback{font-size:40px}
+
+/* Detail */
+.view{display:none}.view.active{display:block;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.back{border:1px solid rgba(217,182,108,.5);background:linear-gradient(180deg,#2c4068,#1b2743);color:#f8f3e7;padding:12px 18px;border-radius:15px;font:700 15px inherit;font-family:inherit;cursor:pointer;box-shadow:var(--shadow);margin-bottom:16px;transition:transform .12s,filter .12s}
+.back:hover{filter:brightness(1.1);transform:translateX(-2px)}
+.hero-card{position:relative;background:linear-gradient(180deg,#fbf7ed,#f1e8d6);border:1px solid var(--line);border-radius:28px;padding:24px;display:flex;align-items:center;gap:20px;margin-bottom:18px;box-shadow:0 18px 34px rgba(0,0,0,.16)}
+.hero-card::after{content:"";position:absolute;inset:9px;border:1px solid rgba(117,81,24,.14);border-radius:20px;pointer-events:none}
+.hero-card h2{margin:0;font-family:var(--serif);font-size:clamp(32px,5vw,46px);color:#1b2743;line-height:1}
+.sub{margin-top:8px;color:var(--muted);font-size:15px}
+.hero-card .dots{margin-top:12px}.hero-card .dot{font-size:13px;padding:3px 11px}
+
+.profile-info{display:grid;grid-template-columns:1.05fr 1fr;gap:16px;margin-bottom:8px}
+.info-card{background:linear-gradient(180deg,#fbf7ed,#f1e8d6);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 8px 20px rgba(0,0,0,.1)}
+.info-card h3{margin:0 0 14px;font-family:var(--serif);color:#1b2743;font-size:24px;display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.info-card h3 small{font:700 12px "Segoe UI",system-ui,sans-serif;color:#9a6d22;letter-spacing:.05em;text-transform:uppercase}
+.gbar{display:grid;grid-template-columns:40px 1fr 46px;align-items:center;gap:10px;padding:4px 0}
+.gname{color:#686f7c;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+.track{height:10px;border-radius:99px;background:rgba(39,57,95,.12);overflow:hidden}
+.fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--gold-deep));transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.fill.hi{background:linear-gradient(90deg,#5aa584,var(--green))}.fill.lo{background:linear-gradient(90deg,#9aa0ab,#7b818c)}
+.gval{text-align:right;color:#1b2743;font-weight:900;font-size:14px}
+.info-note{margin-top:12px;color:var(--muted);font-size:12px;line-height:1.5}
+.info-note strong{color:#1b2743}
+.legend{display:flex;gap:14px;margin-top:10px;font-size:11px;font-weight:700;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.recruit-list{display:grid;gap:9px}
+.recruit-item{background:rgba(255,255,255,.55);border:1px solid rgba(184,138,53,.24);border-radius:14px;padding:11px 13px;line-height:1.4;font-size:14px}
+.recruit-label{display:inline-block;background:var(--navy);color:var(--gold-soft);font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.06em;padding:3px 10px;border-radius:99px;margin-bottom:6px}
+.source-link{display:inline-block;margin-top:12px;color:#355a99;font-size:12px;font-weight:700;text-decoration:none;border-bottom:1px dotted #355a99}
+.source-link:hover{color:#1b2743}
+
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:26px 0 12px}
+.section-heading{margin:0;color:#f3dfad;font-family:var(--serif);font-size:27px;display:flex;align-items:center;gap:12px}
+.section-heading::after{content:"✦";color:rgba(217,182,108,.5);font-size:16px}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.filters button{border:1px solid rgba(217,182,108,.35);background:rgba(7,11,21,.4);color:#e6ecfa;font:700 13px inherit;font-family:inherit;padding:7px 14px;border-radius:99px;cursor:pointer;transition:all .15s}
+.filters button:hover{border-color:var(--gold)}
+.filters button[aria-pressed="true"]{background:linear-gradient(180deg,var(--gold),var(--gold-deep));color:#1b2743;border-color:transparent}
+.support-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:12px}
+.support-row{background:linear-gradient(180deg,#fbf7ed,#f1e8d6);border:1px solid var(--line);border-radius:20px;padding:11px 14px;display:flex;align-items:center;justify-content:space-between;gap:14px;box-shadow:0 8px 20px rgba(0,0,0,.1);transition:transform .14s,box-shadow .14s}
+.support-row:hover{transform:translateY(-2px);box-shadow:0 14px 24px rgba(0,0,0,.16)}
+.person-link{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;border-radius:14px;padding:5px 7px;margin:-5px -7px;transition:background .12s,transform .12s}
+.person-link:hover{background:rgba(53,93,164,.09);transform:translateX(2px)}
+.person-name{font-family:var(--serif);font-weight:700;font-size:21px;color:#1f2942}
+.badges{display:flex;gap:6px}
+.badge{min-width:40px;height:40px;padding:0 10px;border-radius:999px;display:grid;place-items:center;color:#fff;font-weight:900;font-size:17px;border:2px solid rgba(255,255,255,.38);box-shadow:inset 0 1px 0 rgba(255,255,255,.26),0 5px 10px rgba(0,0,0,.15)}
+.badge.A{background:linear-gradient(180deg,#458b6f,#30654f)}.badge.B{background:linear-gradient(180deg,#d0a74f,#a77a26)}
+.badge.C{background:linear-gradient(180deg,#8e6ac2,#6d4b9a)}.badge.Q{background:linear-gradient(180deg,#7f858f,#5f6570)}
+.badge.dim{opacity:.38;transform:scale(.92)}
+.none{grid-column:1/-1;color:#aab4cf;padding:24px;text-align:center;border:1px dashed rgba(217,182,108,.3);border-radius:18px}
+
+.note-panel{margin-top:26px;background:rgba(9,14,28,.4);border:1px solid rgba(217,182,108,.25);color:#dce3f3;border-radius:18px;padding:16px 18px;font-size:13px;line-height:1.6}
+.note-panel strong{color:#f3dfad}
+.note-panel .badge{display:inline-grid;min-width:24px;height:24px;font-size:12px;vertical-align:middle;margin:0 2px}
+
+@media(max-width:860px){.profile-info{grid-template-columns:1fr}.support-list{grid-template-columns:1fr}}
+@media(max-width:780px){
+  .shell{padding:18px 14px 36px}.banner{padding:24px 18px 20px}
+  .grid{grid-template-columns:1fr 1fr;gap:12px}
+  .unit{min-height:92px;padding:10px;gap:10px}.unit .portrait{width:58px;height:58px;border-radius:16px}.name{font-size:19px}
+  .hero-card{align-items:flex-start}.portrait.hero{width:84px;height:84px}
+  .seg{width:100%}.seg button{flex:1;padding:10px 6px}.kbd{display:none}
 }
-
-body::before {
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.18;
-  background-image:
-    linear-gradient(transparent 96%, rgba(255,255,255,.1) 100%),
-    linear-gradient(90deg, transparent 96%, rgba(255,255,255,.08) 100%);
-  background-size:40px 40px, 40px 40px;
-}
-
-.shell {
-  max-width:1220px;
-  margin:0 auto;
-  padding:30px 20px 48px;
-  position:relative;
-  z-index:1;
-}
-
-.banner {
-  position:relative;
-  overflow:hidden;
-  background:
-    linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.03)),
-    linear-gradient(135deg, #1b2d52, #0f1830 70%);
-  color:#f7f1e2;
-  border:1px solid rgba(217,182,108,.45);
-  border-radius:26px;
-  padding:28px 28px 24px;
-  box-shadow:var(--shadow);
-}
-
-.banner::before,
-.banner::after {
-  content:"✦";
-  position:absolute;
-  color:rgba(217,182,108,.35);
-  font-size:120px;
-  line-height:1;
-  font-family: Georgia, serif;
-}
-
-.banner::before { right:24px; top:-10px; transform:rotate(8deg); }
-.banner::after { left:18px; bottom:-34px; transform:rotate(-8deg); font-size:92px; }
-
-.kicker {
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:.22em;
-  color:#ecd59e;
-  font-weight:700;
-  margin-bottom:8px;
-}
-
-.kicker::before, .kicker::after {
-  content:"";
-  width:28px;
-  height:1px;
-  background:linear-gradient(90deg, transparent, #d9b66c, transparent);
-}
-
-h1 {
-  margin:0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size:clamp(34px, 5vw, 56px);
-  line-height:1.02;
-  letter-spacing:-.03em;
-}
-
-.banner p {
-  margin:12px 0 0;
-  color:#d5dbee;
-  font-size:17px;
-  max-width:780px;
-}
-
-.toolbar {
-  margin:22px 0 20px;
-  background:rgba(7,11,21,.38);
-  border:1px solid rgba(217,182,108,.3);
-  border-radius:20px;
-  padding:16px;
-  box-shadow:var(--shadow);
-  backdrop-filter: blur(8px);
-}
-
-.search {
-  width:100%;
-  padding:17px 18px;
-  font-size:17px;
-  border-radius:16px;
-  border:1px solid rgba(184,138,53,.38);
-  background:linear-gradient(180deg, #fbf7ee, #efe6d1);
-  color:var(--ink);
-  outline:none;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.7);
-}
-
-.search:focus {
-  border-color:var(--gold-deep);
-  box-shadow:0 0 0 4px rgba(217,182,108,.22), inset 0 1px 0 rgba(255,255,255,.7);
-}
-
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:16px;
-}
-
-.unit {
-  position:relative;
-  background:linear-gradient(180deg, var(--panel-2), var(--panel));
-  border:1px solid #d8c497;
-  border-radius:22px;
-  padding:14px;
-  min-height:104px;
-  display:flex;
-  align-items:center;
-  gap:14px;
-  width:100%;
-  text-align:left;
-  cursor:pointer;
-  box-shadow:0 10px 24px rgba(0,0,0,.12);
-  transition:transform .14s ease, box-shadow .14s ease, border-color .14s ease;
-}
-
-.unit::before {
-  content:"";
-  position:absolute;
-  inset:8px;
-  border-radius:16px;
-  border:1px solid rgba(117,81,24,.14);
-  pointer-events:none;
-}
-
-.unit:hover {
-  transform:translateY(-3px);
-  box-shadow:0 18px 28px rgba(0,0,0,.17);
-  border-color:#c79a4a;
-}
-
-.portrait {
-  position:relative;
-  width:72px;
-  height:72px;
-  flex:0 0 auto;
-  border-radius:18px;
-  overflow:hidden;
-  border:2px solid var(--gold);
-  background:linear-gradient(180deg, #dce7fa, #bacbe8);
-  box-shadow:0 5px 12px rgba(33,46,79,.18);
-}
-
-.portrait.small {
-  width:58px;
-  height:58px;
-  border-radius:16px;
-}
-
-.portrait.hero {
-  width:104px;
-  height:104px;
-  border-radius:24px;
-  border-width:3px;
-}
-
-.portrait img {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center 15%;
-  display:block;
-  position:relative;
-  z-index:2;
-}
-
-.fallback {
-  position:absolute;
-  inset:0;
-  display:grid;
-  place-items:center;
-  font-family: Georgia, serif;
-  font-weight:700;
-  color:#355a99;
-  font-size:26px;
-  z-index:1;
-}
-
-.small .fallback { font-size:20px; }
-.hero .fallback { font-size:38px; }
-
-.name {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size:24px;
-  line-height:1.05;
-  font-weight:700;
-  color:#1d2740;
-}
-
-.count {
-  margin-top:8px;
-  font-size:13px;
-  color:var(--muted);
-  font-weight:600;
-}
-
-.detail { display:none; }
-.detail.active { display:block; }
-.home.hidden { display:none; }
-
-.back {
-  appearance:none;
-  border:1px solid rgba(217,182,108,.45);
-  background:linear-gradient(180deg, #2c4068, #1b2743);
-  color:#f8f3e7;
-  padding:13px 18px;
-  border-radius:15px;
-  font-size:15px;
-  font-weight:700;
-  cursor:pointer;
-  box-shadow:var(--shadow);
-  margin-bottom:16px;
-}
-
-.back:hover {
-  filter:brightness(1.06);
-}
-
-.hero-card {
-  position:relative;
-  background:linear-gradient(180deg, #fbf7ed, #f1e8d6);
-  border:1px solid #d8c497;
-  border-radius:26px;
-  padding:22px;
-  display:flex;
-  align-items:center;
-  gap:18px;
-  margin-bottom:18px;
-  box-shadow:0 18px 34px rgba(0,0,0,.14);
-}
-
-.hero-card::after {
-  content:"";
-  position:absolute;
-  inset:9px;
-  border:1px solid rgba(117,81,24,.14);
-  border-radius:18px;
-  pointer-events:none;
-}
-
-.hero-card h2 {
-  margin:0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size:clamp(32px, 5vw, 44px);
-  color:#1b2743;
-}
-
-.hero-card .sub {
-  margin-top:8px;
-  color:var(--muted);
-  font-size:15px;
-}
-
-.support-list {
-  display:grid;
-  gap:12px;
-}
-
-.support-row {
-  background:linear-gradient(180deg, #fbf7ed, #f1e8d6);
-  border:1px solid #d8c497;
-  border-radius:20px;
-  padding:12px 14px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:14px;
-  box-shadow:0 8px 20px rgba(0,0,0,.09);
-}
-
-.person-link {
-  display:flex;
-  align-items:center;
-  gap:12px;
-  text-decoration:none;
-  color:inherit;
-  border-radius:14px;
-  padding:5px 7px;
-  margin:-5px -7px;
-  transition:background .12s ease, transform .12s ease;
-}
-
-.person-link:hover {
-  background:rgba(53,93,164,.08);
-  transform:translateX(2px);
-}
-
-.person-name {
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight:700;
-  font-size:21px;
-  color:#1f2942;
-}
-
-.badges {
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  justify-content:flex-end;
-}
-
-.badge {
-  min-width:44px;
-  height:44px;
-  padding:0 11px;
-  border-radius:999px;
-  display:grid;
-  place-items:center;
-  color:white;
-  font-weight:900;
-  font-size:18px;
-  border:2px solid rgba(255,255,255,.35);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.24), 0 5px 10px rgba(0,0,0,.14);
-}
-
-.badge.A { background:linear-gradient(180deg, #458b6f, #30654f); }
-.badge.B { background:linear-gradient(180deg, #d0a74f, #a77a26); }
-.badge.C { background:linear-gradient(180deg, #8e6ac2, #6d4b9a); }
-.badge.Q { background:linear-gradient(180deg, #7f858f, #5f6570); }
-
-.note-panel {
-  margin-top:20px;
-  background:rgba(9,14,28,.35);
-  border:1px solid rgba(217,182,108,.25);
-  color:#dce3f3;
-  border-radius:18px;
-  padding:16px 18px;
-  font-size:13px;
-  line-height:1.55;
-  box-shadow:var(--shadow);
-}
-
-.note-panel strong {
-  color:#f3dfad;
-}
-
-.footer-space { height:10px; }
-
-@media (max-width: 780px) {
-  .shell { padding:20px 14px 34px; }
-  .banner { padding:22px 18px 20px; }
-  .toolbar { padding:12px; }
-  .grid { grid-template-columns:1fr 1fr; gap:12px; }
-  .unit { min-height:90px; padding:10px; gap:10px; }
-  .portrait { width:60px; height:60px; border-radius:16px; }
-  .name { font-size:19px; }
-  .hero-card { align-items:flex-start; }
-  .support-row { align-items:flex-start; flex-direction:column; }
-  .badges { justify-content:flex-start; }
-}
-
-@media (max-width: 520px) {
-  .grid { grid-template-columns:1fr; }
-}
-
-.profile-info{display:grid;grid-template-columns:1fr 1.25fr;gap:16px;margin-bottom:18px}
-.info-card{background:linear-gradient(180deg,#fbf7ed,#f1e8d6);border:1px solid #d8c497;border-radius:20px;padding:18px;box-shadow:0 8px 20px rgba(0,0,0,.09)}
-.info-card h3{margin:0 0 12px;font-family:Georgia,"Times New Roman",serif;color:#1b2743;font-size:23px}
-.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.stat{background:rgba(255,255,255,.5);border:1px solid rgba(184,138,53,.26);border-radius:12px;padding:9px 10px;display:flex;justify-content:space-between;gap:8px}
-.stat-name{color:#686f7c;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}.stat-value{color:#1b2743;font-weight:900}
-.info-note{margin-top:10px;color:#6b6f79;font-size:12px;line-height:1.45}.recruit-list{display:grid;gap:8px}
-.recruit-item{background:rgba(255,255,255,.48);border:1px solid rgba(184,138,53,.22);border-radius:12px;padding:10px 11px;line-height:1.35}
-.recruit-label{display:block;color:#9a6d22;font-weight:900;font-size:12px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
-.source-link{display:inline-block;margin-top:10px;color:#355a99;font-size:12px;font-weight:700}.section-heading{margin:20px 0 10px;color:#f3dfad;font-family:Georgia,"Times New Roman",serif;font-size:25px}
-@media(max-width:780px){.profile-info{grid-template-columns:1fr}.stat-grid{grid-template-columns:repeat(3,1fr)}}
-
+@media(max-width:520px){.grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 <div class="shell">
-  <section id="home" class="home">
+  <section id="home" class="view active">
     <div class="banner">
       <div class="kicker">Fortune's Weave</div>
       <h1>Support Archive</h1>
-      <p>
-        A cleaner, character-focused way to browse the Support Chart.
-        Choose a unit to see every support relationship, then click through to connected characters just like a proper support menu.
-      </p>
+      <p>A character-focused way to browse the Support Chart. Choose a unit to see every support bond, growth rates and recruitment, then follow the threads to connected characters.</p>
+      <div class="chips" id="stats"></div>
     </div>
-
-    <div class="toolbar">
-      <input id="search" class="search" placeholder="Search characters…" />
+    <div class="toolbar" id="toolbar">
+      <div class="search-wrap" id="searchWrap">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="search" class="search" type="search" placeholder="Search characters…" autocomplete="off" aria-label="Search characters">
+        <span class="kbd" aria-hidden="true">/</span>
+        <button class="clear" id="clear" aria-label="Clear search">✕</button>
+      </div>
+      <div class="seg" role="group" aria-label="Sort characters">
+        <button data-sort="roster" aria-pressed="true">Roster</button>
+        <button data-sort="az" aria-pressed="false">A–Z</button>
+        <button data-sort="most" aria-pressed="false">Most supports</button>
+      </div>
     </div>
-
+    <div class="result-count" id="resultCount" aria-live="polite"></div>
     <div id="grid" class="grid"></div>
-</section>
+  </section>
 
-  <section id="detail" class="detail">
+  <section id="detail" class="view">
     <button id="back" class="back">← Return to Character List</button>
     <div id="detailContent"></div>
   </section>
-
-  <div class="footer-space"></div>
 </div>
 
 <script>
@@ -453,140 +191,120 @@ const GROWTH = {"Eshmel":[50,45,45,45,45,35,35,40,50],"Cai":[45,45,40,45,45,35,3
 const RECRUITMENT = {"Eshmel":{"items":[{"label":"Prologue","text":"Chapter 1 \u2014 joins automatically."}]},"Hong Hua":{"items":[{"label":"Prologue","text":"Chapter 1 \u2014 joins automatically."}]},"Troy":{"items":[{"label":"Prologue","text":"Chapter 2 \u2014 joins automatically."}]},"Cai":{"items":[{"label":"Cai route","text":"Chapter 1 \u2014 joins automatically."}]},"Dietrich":{"items":[{"label":"Dietrich route","text":"Chapter 1 \u2014 joins automatically."}]},"Theodora":{"items":[{"label":"Theodora route","text":"Chapter 1 \u2014 joins automatically."}]},"Leda":{"items":[{"label":"Leda route","text":"Chapter 1 \u2014 joins automatically."}]},"Tialla":{"items":[{"label":"Cai","text":"Ch. 1 \u2014 automatic."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 9, clear Cai\u2019s paralogue, pay 3,000G."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 10, clear Cai\u2019s paralogue, pay 3,000G."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 8, clear Cai\u2019s paralogue, pay 3,000G."}],"note":"Cai\u2019s paralogue is available from 16th of the 10th month near the south-east exit of Dagsion."},"Peter":{"items":[{"label":"Cai","text":"Ch. 1 \u2014 automatic."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 8, complete Peter\u2019s Request."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 7, complete Peter\u2019s Request."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 10, complete Peter\u2019s Request."}]},"Ultand":{"items":[{"label":"Cai","text":"Ch. 6 \u2014 automatic."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 5, complete Ultand\u2019s Request."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 6, complete Ultand\u2019s Request."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 8, complete Ultand\u2019s Request."}]},"Gaitz":{"items":[{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 10, clear Bertrand\u2019s paralogue and reach Chapter 12."}]},"Jester":{"items":[{"label":"Cai","text":"Ch. 3+ \u2014 Support 3, Renown 10, complete Jester\u2019s Request 3 times."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 6, same condition."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 9, same condition."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 10, same condition."}]},"Goliath":{"items":[{"label":"Cai","text":"Ch. 3+ \u2014 Support 3, Renown 7, give Giant\u2019s Meat x3."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 6, give Giant\u2019s Meat x3."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 9, give Giant\u2019s Meat x3."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 10, give Giant\u2019s Meat x3."}]},"Dante":{"items":[{"label":"Cai","text":"Ch. 3+ \u2014 Support 3, Renown 10, give 8,000G."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 2, Renown 8, give 8,000G."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 6, give 8,000G."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 10, give 8,000G."}]},"Fabio":{"items":[{"label":"Dietrich","text":"Ch. 1 \u2014 automatic."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 9, clear Dietrich\u2019s paralogue, reach 4th of the 11th month, and give a high-value item."}],"note":"Fabio returns the item."},"Esmeralda":{"items":[{"label":"Cai","text":"Ch. 5+ \u2014 Support 2, Renown 7, complete Esmeralda\u2019s Request."},{"label":"Dietrich","text":"Ch. 2 \u2014 automatic."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 9, complete her Request."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 6, complete her Request."}]},"Mikaela":{"items":[{"label":"Cai","text":"Ch. 5+ \u2014 Support 3, Renown 5, give 3,000G."},{"label":"Dietrich","text":"Ch. 4 \u2014 automatic."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 8, give 3,000G."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 6, give 3,000G."}]},"Diego":{"items":[{"label":"Cai","text":"Ch. 3+ \u2014 Support 3, Renown 10, clear Orchel\u2019s paralogue."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 9, clear Orchel\u2019s paralogue."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 2, Renown 8, clear Orchel\u2019s paralogue."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 8, clear Orchel\u2019s paralogue."}]},"Loretta":{"items":[{"label":"Cai","text":"Ch. 3+ \u2014 Support 3, Renown 7, give Iron Sword x3."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 9, give Iron Sword x3."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 5, give Iron Sword x3."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 5, give Iron Sword x3."}]},"Seteth":{"items":[{"label":"Cai","text":"Ch. 3+ \u2014 Support 3, Renown 6, complete Seteth\u2019s Request."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 6, complete Seteth\u2019s Request."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 10, complete Seteth\u2019s Request."}]},"Ninae":{"items":[{"label":"Cai","text":"Ch. 3+ \u2014 Support 3, Renown 6, give Paradise Fish x1."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 8, give Paradise Fish x1."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 6, give Paradise Fish x1."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 8, give Paradise Fish x1."}]},"Bonaventure":{"items":[{"label":"Theodora","text":"Ch. 1 \u2014 automatic."}]},"Tobias":{"items":[{"label":"Theodora","text":"Ch. 1 \u2014 automatic."}]},"Lilian":{"items":[{"label":"Cai","text":"Ch. 4+ \u2014 Support 2, Renown 8, give 5,000G."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 2, Renown 8, give 5,000G."},{"label":"Theodora","text":"Ch. 4 \u2014 automatic."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 2, Renown 7, give 5,000G."}]},"Lysander":{"items":[{"label":"Cai","text":"Ch. 4+ \u2014 Support 3, Renown 8, give Iron Spear x5."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 6, give Iron Spear x5."},{"label":"Theodora","text":"Ch. 4 \u2014 automatic."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 7, give Iron Spear x5."}]},"Ursula":{"items":[{"label":"Cai","text":"Ch. 4+ \u2014 Support 3, Renown 10, clear Talimun\u2019s paralogue and agree 3 times."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 7, same."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 9, same."}]},"Ludia":{"items":[{"label":"Cai","text":"Ch. 4+ \u2014 Support 3, Renown 9, complete Ludia\u2019s Request."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 9, complete it."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 7, complete it."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 7, complete it."}]},"Simon":{"items":[{"label":"Cai","text":"Ch. 4+ \u2014 Support 3, Renown 8, give 500G and choose Tails."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 7, same."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 7, same."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 6, same."}]},"Fianna":{"items":[{"label":"Cai","text":"Ch. 4+ \u2014 Support 3, Renown 8, give 3,000G."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 7, give 3,000G."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 9, give 3,000G."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 5, give 3,000G."}]},"Buccar":{"items":[{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 8, clear Leda\u2019s paralogue."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 8, clear Leda\u2019s paralogue."},{"label":"Leda","text":"Ch. 1 \u2014 automatic."}]},"Sirocco":{"items":[{"label":"Cai","text":"Ch. 4+ \u2014 Support 3, Renown 9, complete Sirocco\u2019s Request."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 9, complete it."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 1, Renown 5, complete it."},{"label":"Leda","text":"Ch. 1 \u2014 automatic."}]},"Olympia":{"items":[{"label":"Cai","text":"Ch. 4+ \u2014 Support 3, Renown 8, complete Olympia\u2019s Request 3 times."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 6, same."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 9, same."},{"label":"Leda","text":"Ch. 3 \u2014 automatic at the end."}]},"Mu":{"items":[{"label":"Cai","text":"Ch. 4+ \u2014 Support 3, Renown 9, give Glirmosa x3."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 7, give Glirmosa x3."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 9, give Glirmosa x3."},{"label":"Leda","text":"Ch. 1 \u2014 automatic."}]},"Sha Lan":{"items":[{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 10, clear Anatolia\u2019s paralogue and answer all 3 questions correctly."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 8, same."}],"note":"Answers listed by Serenes Forest: Saramis, Da Mina, grounded ship."},"Nezha":{"items":[{"label":"Cai","text":"Ch. 4+ \u2014 Support 3, Renown 6, give Sandworm Meat x3."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 10, give x3."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 2, Renown 6, give x3."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 9, give x3."}]},"Dadao":{"items":[{"label":"Cai","text":"Ch. 4+ \u2014 Support 3, Renown 7, give Kothar Gar x2."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 10, give x2."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 2, Renown 5, give x2."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 2, Renown 5, give x2."}]},"Halvin":{"items":[{"label":"Cai","text":"Ch. 4+ \u2014 Support 3, Renown 5, give Dates x10."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 9, give x10."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 7, give x10."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 7, give x10."}]},"Guzran":{"items":[{"label":"Cai","text":"Ch. 3 \u2014 Support 1, Renown 2; mandatory recruit."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 8."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 8."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 1, Renown 3."}]},"Yang Jie":{"items":[{"label":"Cai","text":"Ch. 3+ \u2014 Support 2, Renown 3; answer 3 questions correctly."},{"label":"Dietrich","text":"Ch. 4 \u2014 Support 1, Renown 2; mandatory recruit."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 9; answer correctly."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 8; answer correctly."}],"note":"Answers: cheese, full moon, then any answer."},"Io":{"items":[{"label":"Cai","text":"Ch. 3+ \u2014 Support 3, Renown 10, give 4,000G."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 2, Renown 3, give 800G."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 10, give 4,000G."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 1, Renown 6, give 1,500G."}]},"Peppe":{"items":[{"label":"Cai","text":"Ch. 3+ \u2014 Support 1, Renown 9, clear Bertrand\u2019s paralogue."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 8, clear it."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 2, Renown 7, clear it."}]},"Noctula":{"items":[{"label":"Cai","text":"Ch. 3+ \u2014 Support 1, Renown 4."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 1, Renown 6."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 1, Renown 3."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 8."}]},"Sofia":{"items":[{"label":"Cai","text":"Ch. 3+ \u2014 Support 3, Renown 9."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 9."},{"label":"Theodora","text":"Ch. 5 \u2014 Support 1, Renown 2; mandatory recruit."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 7."}]},"Catania":{"items":[{"label":"Cai","text":"Ch. 3+ \u2014 Support 3, Renown 10."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 1, Renown 8."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 7."},{"label":"Leda","text":"Ch. 4 \u2014 Support 1, Renown 2; mandatory recruit."}]},"Nydine":{"items":[{"label":"Cai","text":"Ch. 3+ \u2014 Support 1, Renown 6, give Bronze Axe x2."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 2, Renown 5, give Bronze Axe x2."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 5, give Iron Axe x3."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 10, give Iron Axe x3."}]},"Zarcone":{"items":[{"label":"Cai","text":"Ch. 5+ \u2014 Support 3, Renown 8, give 10G\u201310,000G."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 7, same."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 1, Renown 4, same."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 2, Renown 5, same."}]},"Majde":{"items":[{"label":"Cai","text":"Ch. 5+ \u2014 Support 2, Renown 5, agree 3 times."},{"label":"Dietrich","text":"Ch. 4+ \u2014 Support 3, Renown 8, agree 3 times."},{"label":"Theodora","text":"Ch. 5+ \u2014 Support 3, Renown 8, agree 3 times."},{"label":"Leda","text":"Ch. 4+ \u2014 Support 3, Renown 9, agree 3 times."}]},"Benditz":{"items":[{"label":"Cai","text":"Ch. 6+ \u2014 Support 3, Renown 9."},{"label":"Dietrich","text":"Ch. 5+ \u2014 Support 2, Renown 7."},{"label":"Theodora","text":"Ch. 6+ \u2014 Support 1, Renown 8."},{"label":"Leda","text":"Ch. 5+ \u2014 Support 3, Renown 7."}]},"Inyoni":{"items":[{"label":"Cai","text":"Ch. 8+ \u2014 Support 3, Renown 8, give 6,000G."},{"label":"Dietrich","text":"Ch. 8+ \u2014 Support 3, Renown 8, give 6,000G."},{"label":"Theodora","text":"Ch. 9+ \u2014 Support 1, Renown 9, give 4,000G."},{"label":"Leda","text":"Ch. 9+ \u2014 Support 1, Renown 7, give 3,000G."}],"note":"Appears from 10th of the 7th month."},"Jasmine":{"items":[{"label":"Cai","text":"Ch. 6+ \u2014 Support 1, Renown 8, give 2,000G."},{"label":"Dietrich","text":"Ch. 6+ \u2014 Support 3, Renown 9, give 5,000G."},{"label":"Theodora","text":"Ch. 7+ \u2014 Support 3, Renown 8, give 5,000G."},{"label":"Leda","text":"Ch. 6+ \u2014 Support 2, Renown 4, give 500G."}],"note":"Appears from 8th of the 5th month."},"Alexandra":{"items":[{"label":"Cai","text":"Ch. 7+ \u2014 Support 2, Renown 7."},{"label":"Dietrich","text":"Ch. 7+ \u2014 Support 3, Renown 8."},{"label":"Theodora","text":"Ch. 8+ \u2014 Support 1, Renown 6."},{"label":"Leda","text":"Ch. 7+ \u2014 Support 3, Renown 10."}]},"Nuzzuno":{"items":[{"label":"Cai","text":"Ch. 7+ \u2014 Support 2, Renown 6, give Iron Bow x3."},{"label":"Dietrich","text":"Ch. 8+ \u2014 Support 1, Renown 9, give Iron Bow x2."},{"label":"Theodora","text":"Ch. 9+ \u2014 Support 1, Renown 6, give Iron Bow x3."},{"label":"Leda","text":"Ch. 8+ \u2014 Support 3, Renown 9, give Iron Bow x3."}],"note":"Appears from 1st of the 7th month."},"Kiroc":{"items":[{"label":"Cai","text":"Ch. 6+ \u2014 Support 3, Renown 8, give Pure Water x8."},{"label":"Dietrich","text":"Ch. 6+ \u2014 Support 1, Renown 4, give Pure Water x3."},{"label":"Theodora","text":"Ch. 6+ \u2014 Support 3, Renown 10, give Pure Water x8."},{"label":"Leda","text":"Ch. 5+ \u2014 Support 1, Renown 4, give Pure Water x3."}],"note":"Appears from 1st of the 5th month."},"Creek":{"items":[{"label":"Part 2","text":"Chapter 3 \u2014 automatic if \u201cMy Late Sister\u2019s Accessory\u201d was completed in Part 1 and he was defeated in Part 2 Chapter 2."}]},"Nathan":{"items":[{"label":"Part 2","text":"Chapter 4 \u2014 automatic if he was defeated with Creek during Part 2 Chapter 3."}]},"Bertrand":{"items":[{"label":"Part 3","text":"First Section \u2014 limited-capacity recruit after the boss\u2019s first HP bar if that character\u2019s Part 1 paralogue was completed."}]},"Orchel":{"items":[{"label":"Part 3","text":"First Section \u2014 limited-capacity recruit after the boss\u2019s first HP bar if that character\u2019s Part 1 paralogue was completed."}]},"Talimun":{"items":[{"label":"Part 3","text":"First Section \u2014 limited-capacity recruit after the boss\u2019s first HP bar if that character\u2019s Part 1 paralogue was completed."}]},"Anatolia":{"items":[{"label":"Part 3","text":"First Section \u2014 limited-capacity recruit after the boss\u2019s first HP bar if that character\u2019s Part 1 paralogue was completed."}]},"Centurio":{"items":[{"label":"Part 3","text":"Second Section+ \u2014 complete \u201cRescue Centurio\u201d, then speak to him at Dagsion."}]},"Aswan":{"items":[{"label":"Part 3","text":"Fourth Section+ \u2014 joins automatically after returning to Dagsion following the Hanno battle; may need to survive Part 2 Chapter 3."}]},"Tahonia":{"items":[{"label":"Part 3","text":"Fourth Section+ \u2014 joins automatically after returning to Dagsion following the Hanno battle; may need to survive Part 2 Chapter 3."}]},"Anna":{"items":[{"label":"Recruitment","text":"No recruitment entry is listed for Anna on the Serenes Forest recruitment page."}]}};
 const STAT_NAMES=['HP','Str','Mag','Spd','Dex','Def','Res','Lck','Cha'];
 
-const home = document.getElementById('home');
-const detail = document.getElementById('detail');
-const grid = document.getElementById('grid');
-const search = document.getElementById('search');
-const back = document.getElementById('back');
-const detailContent = document.getElementById('detailContent');
+const $ = s => document.querySelector(s);
+const home=$('#home'), detail=$('#detail'), grid=$('#grid'), search=$('#search'), detailContent=$('#detailContent');
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let sortMode='roster', rankFilter='all', homeScroll=0, current=null;
 
-function initials(name) {
-  const p = name.trim().split(/\s+/);
-  return p.length > 1 ? (p[0][0] + p[p.length - 1][0]).toUpperCase() : name[0].toUpperCase();
+const initials = n => { const p=n.trim().split(/\s+/); return p.length>1 ? (p[0][0]+p[p.length-1][0]).toUpperCase() : n[0].toUpperCase(); };
+const slug = n => ASSET_ALIAS[n] || n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const cls = r => r==='?' ? 'Q' : r;
+const portrait = (n, c='') => `<span class="portrait ${c}"><span class="fallback">${initials(n)}</span><img src="https://ffrecruiter.lovable.app/portraits/${slug(n)}.webp" alt="${esc(n)}" loading="lazy" onerror="this.remove()"></span>`;
+const badge = (x, dim) => `<span class="badge ${cls(x)}${dim?' dim':''}" title="${x==='?'?'Unknown rank':'Rank '+x}">${x}</span>`;
+const rankSeq = m => m==='A'?['C','B','A'] : m==='B'?['C','B'] : m==='C'?['C'] : [m];
+const tally = n => DATA.supports[n].reduce((t,s)=>(t[s.rank]=(t[s.rank]||0)+1,t),{});
+const dots = n => { const t=tally(n); return ['A','B','C','?'].filter(r=>t[r]).map(r=>`<span class="dot ${cls(r)}">${t[r]}${r}</span>`).join(''); };
+
+// Header stats
+const bonds = Object.values(DATA.supports).reduce((a,l)=>a+l.length,0)/2;
+$('#stats').innerHTML = `<span class="chip"><b>${DATA.names.length}</b> characters</span><span class="chip"><b>${Math.round(bonds)}</b> support bonds</span><span class="chip"><b>${Object.values(DATA.supports).reduce((a,l)=>a+l.filter(s=>s.rank==='A').length,0)/2}</b> A-rank pairs</span>`;
+
+function renderGrid() {
+  const q = search.value.trim().toLowerCase();
+  $('#searchWrap').classList.toggle('has-text', !!q);
+  let names = DATA.names.filter(n => n.toLowerCase().includes(q));
+  if (sortMode==='az') names.sort((a,b)=>a.localeCompare(b));
+  if (sortMode==='most') names.sort((a,b)=>DATA.supports[b].length-DATA.supports[a].length || a.localeCompare(b));
+  $('#resultCount').textContent = q ? `${names.length} of ${DATA.names.length} characters` : `${names.length} characters`;
+  if (!names.length) { grid.innerHTML = `<div class="empty">No one by that name…<small>Try a shorter search.</small></div>`; return; }
+  grid.innerHTML = names.map((n,i) => `
+    <a class="unit" href="#/${encodeURIComponent(n)}" style="--i:${Math.min(i,24)};text-decoration:none">
+      ${portrait(n)}
+      <span><span class="name" style="display:block">${esc(n)}</span>
+      <span class="count" style="display:block">${DATA.supports[n].length} support${DATA.supports[n].length===1?'':'s'}</span>
+      <span class="dots">${dots(n)}</span></span>
+    </a>`).join('');
 }
 
-function slug(name) {
-  if (ASSET_ALIAS[name]) return ASSET_ALIAS[name];
-  return name.toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
+function growthCard(name) {
+  const v = GROWTH[name];
+  if (!v) return `<div class="info-card"><h3>Growth Rates</h3><div class="info-note">No growth-rate entry found.</div></div>`;
+  const rows = v.map((x,i)=>`<div class="gbar"><span class="gname">${STAT_NAMES[i]}</span><div class="track"><div class="fill ${x>=55?'hi':x<=25?'lo':''}" data-w="${Math.min(100,x/70*100)}"></div></div><span class="gval">${x}%</span></div>`).join('');
+  const mu = name==='Mu' ? `<div class="info-note"><strong>Signs of Growth active:</strong> HP 50% · Str 50% · Mag 25% · Spd 50% · Dex 50% · Def 40% · Res 30% · Lck 30% · Cha 40%</div>` : '';
+  return `<div class="info-card"><h3>Growth Rates <small>Total ${v.reduce((a,b)=>a+b,0)}%</small></h3>${rows}
+    <div class="legend"><span><i style="background:var(--green)"></i>55%+</span><span><i style="background:var(--gold-deep)"></i>Average</span><span><i style="background:#7b818c"></i>25% or less</span></div>
+    <div class="info-note">Personal growth rates. Add class growth rates for the full in-class growth rates.</div>${mu}
+    <a class="source-link" href="https://serenesforest.net/fortunes-weave/characters/growth-rates/" target="_blank" rel="noopener">Source: Serenes Forest ↗</a></div>`;
 }
 
-function portrait(name, cls='') {
-  const s = slug(name);
-  const src = `https://ffrecruiter.lovable.app/portraits/${s}.webp`;
-  return `<span class="portrait ${cls}">
-    <span class="fallback">${initials(name)}</span>
-    <img src="${src}" alt="${name}" loading="lazy" onerror="this.style.display='none'">
-  </span>`;
+function recruitmentCard(name) {
+  const src = `<a class="source-link" href="https://serenesforest.net/fortunes-weave/characters/recruitment/" target="_blank" rel="noopener">Source: Serenes Forest ↗</a>`;
+  const r = RECRUITMENT[name];
+  if (!r) return `<div class="info-card"><h3>Recruitment</h3><div class="info-note">No recruitment entry was found for this character on the Serenes Forest page.</div>${src}</div>`;
+  const items = r.items.map(x=>`<div class="recruit-item"><span class="recruit-label">${esc(x.label)}</span><div>${esc(x.text)}</div></div>`).join('');
+  return `<div class="info-card"><h3>Recruitment</h3><div class="recruit-list">${items}</div>${r.note?`<div class="info-note">${esc(r.note)}</div>`:''}${src}</div>`;
 }
 
-function badge(x) {
-  return `<span class="badge ${x === '?' ? 'Q' : x}">${x}</span>`;
-}
-
-function rankSequence(maxRank) {
-  if (maxRank === 'A') return ['C', 'B', 'A'];
-  if (maxRank === 'B') return ['C', 'B'];
-  if (maxRank === 'C') return ['C'];
-  return [maxRank];
-}
-
-function supportLink(name) {
-  return `<a href="#" class="person-link" data-character="${name}">
-    ${portrait(name, 'small')}
-    <span class="person-name">${name}</span>
-  </a>`;
-}
-
-function renderGrid(q='') {
-  q = q.trim().toLowerCase();
-  grid.innerHTML = '';
-  DATA.names
-    .filter(n => n.toLowerCase().includes(q))
-    .forEach(name => {
-      const button = document.createElement('button');
-      button.className = 'unit';
-      button.innerHTML = `
-        ${portrait(name)}
-        <span>
-          <div class="name">${name}</div>
-          <div class="count">${DATA.supports[name].length} supports</div>
-        </span>
-      `;
-      button.onclick = () => showDetail(name);
-      grid.appendChild(button);
-    });
-}
-
-function wireSupportLinks() {
-  detailContent.querySelectorAll('.person-link').forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      showDetail(link.dataset.character);
-    });
-  });
-}
-
-
-function growthCard(name){
- const vals=GROWTH[name];
- if(!vals)return `<div class="info-card"><h3>Growth Rates</h3><div class="info-note">No growth-rate entry found.</div></div>`;
- const stats=vals.map((v,i)=>`<div class="stat"><span class="stat-name">${STAT_NAMES[i]}</span><span class="stat-value">${v}%</span></div>`).join('');
- const mu=name==='Mu'?`<div class="info-note"><strong>Signs of Growth active:</strong> HP 50% · Str 50% · Mag 25% · Spd 50% · Dex 50% · Def 40% · Res 30% · Lck 30% · Cha 40%</div>`:'';
- return `<div class="info-card"><h3>Growth Rates</h3><div class="stat-grid">${stats}</div><div class="info-note">Personal growth rates. Add class growth rates for the full in-class growth rates.</div>${mu}<a class="source-link" href="https://serenesforest.net/fortunes-weave/characters/growth-rates/" target="_blank" rel="noopener">Source: Serenes Forest ↗</a></div>`;
-}
-function recruitmentCard(name){
- const r=RECRUITMENT[name];
- if(!r)return `<div class="info-card"><h3>Recruitment</h3><div class="info-note">No recruitment entry was found for this character on the Serenes Forest page.</div><a class="source-link" href="https://serenesforest.net/fortunes-weave/characters/recruitment/" target="_blank" rel="noopener">Source: Serenes Forest ↗</a></div>`;
- const items=r.items.map(x=>`<div class="recruit-item"><span class="recruit-label">${x.label}</span>${x.text}</div>`).join('');
- return `<div class="info-card"><h3>Recruitment</h3><div class="recruit-list">${items}</div>${r.note?`<div class="info-note">${r.note}</div>`:''}<a class="source-link" href="https://serenesforest.net/fortunes-weave/characters/recruitment/" target="_blank" rel="noopener">Source: Serenes Forest ↗</a></div>`;
+function renderSupports() {
+  const list = DATA.supports[current].filter(s => rankFilter==='all' || s.rank===rankFilter);
+  $('#supportList').innerHTML = list.length ? list.map(s => `
+    <div class="support-row">
+      <a class="person-link" href="#/${encodeURIComponent(s.name)}">${portrait(s.name,'small')}<span class="person-name">${esc(s.name)}</span></a>
+      <div class="badges">${rankSeq(s.levels[s.levels.length-1]).map(b=>badge(b)).join('')}</div>
+    </div>`).join('') : `<div class="none">No ${rankFilter}-rank supports.</div>`;
+  document.querySelectorAll('.filters button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.f===rankFilter));
 }
 
 function showDetail(name) {
-  home.classList.add('hidden');
-  detail.classList.add('active');
-
-  const list = DATA.supports[name];
-
+  current = name; rankFilter = 'all';
+  const list = DATA.supports[name], t = tally(name);
+  const filters = ['all',...['A','B','C','?'].filter(r=>t[r])].map(f=>`<button data-f="${f}" aria-pressed="${f==='all'}">${f==='all'?'All':f==='?'?'Unknown':f+' rank'}</button>`).join('');
   detailContent.innerHTML = `
     <div class="hero-card">
-      ${portrait(name, 'hero')}
-      <div>
-        <h2>${name}</h2>
-        <div class="sub">${list.length} support relationship${list.length === 1 ? '' : 's'}</div>
-      </div>
+      ${portrait(name,'hero')}
+      <div><h2>${esc(name)}</h2>
+        <div class="sub">${list.length} support relationship${list.length===1?'':'s'}</div>
+        <div class="dots">${dots(name)}</div></div>
     </div>
-
-    <div class="profile-info">
-      ${growthCard(name)}
-      ${recruitmentCard(name)}
-    </div>
-
-    <div class="section-heading">Supports</div>
-    <div class="support-list">
-      ${list.map(s => `
-        <div class="support-row">
-          <div>${supportLink(s.name)}</div>
-          <div class="badges">${rankSequence(s.levels[s.levels.length - 1]).map(badge).join('')}</div>
-        </div>
-      `).join('')}
-    </div>
-  `;
-
-  wireSupportLinks();
-  scrollTo({ top:0, behavior:'smooth' });
+    <div class="profile-info">${growthCard(name)}${recruitmentCard(name)}</div>
+    <div class="section-head"><h3 class="section-heading">Supports</h3>${list.length?`<div class="filters" role="group" aria-label="Filter by rank">${filters}</div>`:''}</div>
+    <div class="support-list" id="supportList"></div>
+    <div class="note-panel"><strong>Reading the chart:</strong> each badge shows a rank the pair can reach — ${badge('C')}${badge('B')}${badge('A')} means the bond climbs all the way to A. Click any name to jump to that character.</div>`;
+  if (list.length) renderSupports(); else $('#supportList').innerHTML = `<div class="none">${esc(name)} has no listed supports.</div>`;
+  detailContent.querySelectorAll('.filters button').forEach(b=>b.onclick=()=>{rankFilter=b.dataset.f;renderSupports();});
+  requestAnimationFrame(()=>requestAnimationFrame(()=>detailContent.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w+'%')));
 }
 
-back.onclick = () => {
-  detail.classList.remove('active');
-  home.classList.remove('hidden');
-  scrollTo({ top:0, behavior:'smooth' });
-};
+function route() {
+  const h = decodeURIComponent(location.hash.replace(/^#\/?/,''));
+  if (h && DATA.supports[h]) {
+    if (home.classList.contains('active')) homeScroll = scrollY;
+    home.classList.remove('active'); detail.classList.add('active');
+    showDetail(h); scrollTo({top:0,behavior:'instant'});
+    document.title = `${h} · Fortune's Weave Support Archive`;
+  } else {
+    const wasDetail = detail.classList.contains('active');
+    detail.classList.remove('active'); home.classList.add('active'); current=null;
+    document.title = "Fortune's Weave Support Archive";
+    if (wasDetail) scrollTo({top:homeScroll,behavior:'instant'});
+  }
+}
 
-search.oninput = e => renderGrid(e.target.value);
-renderGrid();
+$('#back').onclick = () => (history.length > 1 && current && document.referrer !== undefined && window.__nav) ? history.back() : (location.hash = '');
+addEventListener('hashchange', () => { window.__nav = true; route(); });
+search.oninput = renderGrid;
+$('#clear').onclick = () => { search.value=''; renderGrid(); search.focus(); };
+document.querySelectorAll('[data-sort]').forEach(b => b.onclick = () => {
+  sortMode = b.dataset.sort;
+  document.querySelectorAll('[data-sort]').forEach(x=>x.setAttribute('aria-pressed', x===b));
+  renderGrid();
+});
+addEventListener('keydown', e => {
+  const typing = /INPUT|TEXTAREA/.test(document.activeElement.tagName);
+  if (e.key==='/' && !typing && home.classList.contains('active')) { e.preventDefault(); search.focus(); }
+  if (e.key==='Escape') { if (typing && search.value) { search.value=''; renderGrid(); } else if (current) location.hash=''; }
+});
+renderGrid(); route();
 </script>
 </body>
 </html>
