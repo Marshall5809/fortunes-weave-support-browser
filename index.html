@@ -159,7 +159,7 @@ h1{margin:0;font-family:var(--serif);font-size:clamp(36px,5.4vw,60px);line-heigh
 .ability-list{display:grid;gap:8px}.ability-item{background:rgba(255,255,255,.55);border:1px solid rgba(184,138,53,.24);border-radius:14px;padding:10px 12px}
 .ability-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}.ability-name{font-weight:900;color:#1b2743}.ability-unlock{font-size:11px;font-weight:900;color:#9a6d22;text-transform:uppercase;letter-spacing:.05em}
 .ability-desc{font-size:13px;line-height:1.4;color:#545b69}
-.mu-toggle{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;color:#6a5122;cursor:pointer;user-select:none}
+.mu-toggle{display:inline-flex;margin-bottom:12px;align-items:center;gap:8px;font-size:12px;font-weight:800;color:#6a5122;cursor:pointer;user-select:none}
 .mu-toggle input{position:absolute;opacity:0;pointer-events:none}.mu-toggle span{width:38px;height:22px;border-radius:99px;background:#9398a2;position:relative;transition:.15s;box-shadow:inset 0 1px 3px rgba(0,0,0,.25)}
 .mu-toggle span::after{content:"";position:absolute;width:16px;height:16px;left:3px;top:3px;border-radius:50%;background:#fff;transition:.15s;box-shadow:0 1px 4px rgba(0,0,0,.3)}
 .mu-toggle input:checked+span{background:var(--green)}.mu-toggle input:checked+span::after{transform:translateX(16px)}
@@ -193,6 +193,23 @@ h1{margin:0;font-family:var(--serif);font-size:clamp(36px,5.4vw,60px);line-heigh
 .class-toggle input:checked+span{background:var(--green)}
 .class-toggle input:checked+span::after{transform:translateX(16px)}
 .class-selected.off{opacity:.56;filter:saturate(.45)}
+.class-panel{margin:0 0 16px;border:1px solid rgba(184,138,53,.38);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,.35));box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 2px 6px rgba(80,55,15,.06);overflow:hidden}
+.class-panel-main{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px}
+.class-slot{display:flex;align-items:center;gap:11px;min-width:0}
+.class-slot.off{opacity:.55;filter:saturate(.45)}
+.class-slot-icon{flex:0 0 auto;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:#27395f;border:1.5px solid var(--gold);box-shadow:0 2px 5px rgba(0,0,0,.18)}
+.class-slot-icon img,.class-slot-icon .class-icon{width:30px;height:30px;object-fit:contain}
+.class-slot-empty{color:var(--gold-soft);font:800 18px var(--serif);opacity:.7}
+.class-slot-text{display:flex;flex-direction:column;min-width:0;line-height:1.2}
+.class-slot-text small{font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9a6d22}
+.class-slot-text strong{font-family:var(--serif);font-size:17px;color:#1b2743;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.class-panel:not(.has-class) .class-slot-text strong{color:#7b7360;font-weight:600;font-style:italic}
+.class-panel-actions{display:flex;align-items:center;gap:6px;flex:0 0 auto}
+.class-panel-foot{padding:8px 12px;border-top:1px dashed rgba(184,138,53,.35);background:rgba(217,182,108,.12)}
+.class-btn{padding:9px 14px}
+.class-clear{padding:9px 11px}
+@media(max-width:420px){.class-panel-main{flex-wrap:wrap}.class-panel-actions{width:100%}.class-btn{flex:1}}
+
 .gdelta{font-size:10px;font-weight:900;margin-left:3px;color:#28704f}.gdelta.neg{color:#a04949}
 .class-modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(4,8,17,.78);backdrop-filter:blur(6px)}
 .class-modal.open{display:flex}.class-dialog{width:min(1040px,96vw);max-height:90vh;overflow:hidden;display:flex;flex-direction:column;background:linear-gradient(180deg,#fbf7ed,#efe4cf);border:1px solid #d8c497;border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
@@ -376,11 +393,17 @@ function growthCard(name) {
   }).join('');
   const toggle = name==='Mu' ? `<label class="mu-toggle" title="Signs of Growth is active by default"><input id="muGrowthToggle" type="checkbox" ${muPassive?'checked':''}><span></span> Signs of Growth</label>` : '';
   const mu = name==='Mu' ? `<div class="info-note">${muPassive?'<strong>Passive applied:</strong> showing Mu’s effective personal growths with Signs of Growth.':'Showing Mu’s base growths without Signs of Growth.'}</div>` : '';
-  const selected=c ? `<span class="class-selected ${active?'':'off'}">${classIcon(c.name,'class-icon')} ${esc(c.name)}</span>` : '';
-  const classToggle=c ? `<label class="class-toggle"><input id="classGrowthToggle" type="checkbox" ${active?'checked':''}><span></span> Class growths</label>` : '';
+  const slotIcon=c ? classIcon(c.name,'class-icon') : '<span class="class-slot-empty">?</span>';
+  const classPanel=`<div class="class-panel${c?' has-class':''}">
+      <div class="class-panel-main">
+        <div class="class-slot ${c&&!active?'off':''}"><span class="class-slot-icon" data-initial="${c?esc(c.name[0]):'?'}">${slotIcon}</span><span class="class-slot-text"><small>Class</small><strong>${c?esc(c.name):'None selected'}</strong></span></div>
+        <div class="class-panel-actions"><button class="class-btn" id="chooseClassBtn">${c?'Change':'Set Class'}</button>${c?'<button class="class-clear" id="clearClassBtn" title="Remove class">Clear</button>':''}</div>
+      </div>
+      ${c?`<div class="class-panel-foot"><label class="class-toggle"><input id="classGrowthToggle" type="checkbox" ${active?'checked':''}><span></span> Include class growths</label></div>`:''}
+    </div>`;
   const classNote=c&&c.growth ? `<div class="info-note"><strong>${esc(c.name)}</strong> growth modifiers are ${active?'included in':'currently excluded from'} the totals above.</div>` : '';
   return `<div class="info-card"><h3>Growth Rates <small>Total ${v.reduce((a,b)=>a+b,0)}%</small></h3>${toggle}
-    <div class="growth-actions"><button class="class-btn" id="chooseClassBtn">${c?'Change Class':'Set Class'}</button>${selected}${classToggle}${c?'<button class="class-clear" id="clearClassBtn">Clear</button>':''}</div>
+    ${classPanel}
     ${rows}
     <div class="legend"><span><i style="background:var(--green)"></i>50%+ high</span><span><i style="background:var(--gold-deep)"></i>Average</span><span><i style="background:#7b818c"></i>25% or less</span></div>
     <div class="info-note">Character growth + selected class growth = displayed growth.</div>${classNote}${mu}
