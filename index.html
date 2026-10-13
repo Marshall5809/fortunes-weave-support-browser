@@ -178,6 +178,39 @@ h1{margin:0;font-family:var(--serif);font-size:clamp(36px,5.4vw,60px);line-heigh
 @media(max-width:1050px){.profile-info{grid-template-columns:1fr 1fr}.profile-info .info-card:last-child{grid-column:1/-1}}
 @media(max-width:760px){.profile-info{grid-template-columns:1fr}.profile-info .info-card:last-child{grid-column:auto}.growth-page-head{align-items:flex-start;flex-direction:column}.growth-link{width:100%}}
 
+
+/* Class selector */
+.growth-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0 8px}
+.class-btn,.class-clear{border:1px solid rgba(184,138,53,.45);border-radius:11px;padding:8px 11px;font:800 12px inherit;font-family:inherit;cursor:pointer;transition:.15s}
+.class-btn{background:linear-gradient(180deg,#314b7a,#223457);color:#fff7e2}.class-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.class-clear{background:rgba(255,255,255,.55);color:#72531e}.class-clear:hover{background:#fff}
+.class-selected{display:inline-flex;align-items:center;gap:7px;background:rgba(59,127,100,.12);color:#235b45;border:1px solid rgba(59,127,100,.32);border-radius:999px;padding:6px 10px;font-size:12px;font-weight:900}
+.class-selected img{width:24px;height:24px;object-fit:contain;border-radius:5px}
+.class-toggle{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:900;color:#5d512f;cursor:pointer;user-select:none}
+.class-toggle input{position:absolute;opacity:0;pointer-events:none}
+.class-toggle span{width:38px;height:22px;border-radius:99px;background:#9499a3;position:relative;transition:.15s;box-shadow:inset 0 1px 3px rgba(0,0,0,.25)}
+.class-toggle span::after{content:"";position:absolute;width:16px;height:16px;left:3px;top:3px;border-radius:50%;background:#fff;transition:.15s;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.class-toggle input:checked+span{background:var(--green)}
+.class-toggle input:checked+span::after{transform:translateX(16px)}
+.class-selected.off{opacity:.56;filter:saturate(.45)}
+.gdelta{font-size:10px;font-weight:900;margin-left:3px;color:#28704f}.gdelta.neg{color:#a04949}
+.class-modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(4,8,17,.78);backdrop-filter:blur(6px)}
+.class-modal.open{display:flex}.class-dialog{width:min(1040px,96vw);max-height:90vh;overflow:hidden;display:flex;flex-direction:column;background:linear-gradient(180deg,#fbf7ed,#efe4cf);border:1px solid #d8c497;border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.class-dialog-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;padding:20px 22px 15px;border-bottom:1px solid rgba(117,81,24,.18)}
+.class-dialog-head h3{font-family:var(--serif);font-size:28px;color:#1b2743;margin:0}.class-dialog-head p{margin:6px 0 0;color:#687080;font-size:13px;line-height:1.45}
+.class-close{border:0;background:#263b63;color:#fff;width:38px;height:38px;border-radius:50%;font-size:20px;cursor:pointer;flex:0 0 auto}
+.class-body{overflow:auto;padding:18px 22px 24px}.class-tier{margin-bottom:22px}.class-tier:last-child{margin-bottom:0}
+.class-tier-title{display:flex;align-items:center;gap:9px;font-family:var(--serif);color:#1d2945;font-size:20px;margin:0 0 10px}.class-tier-title::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,#caa251,transparent)}
+.class-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px}
+.class-option{position:relative;border:1px solid rgba(184,138,53,.35);background:rgba(255,255,255,.56);border-radius:15px;padding:10px 7px 9px;text-align:center;cursor:pointer;color:#1b2743;transition:.14s;font:inherit;min-height:122px}
+.class-option:hover:not(:disabled){transform:translateY(-2px);border-color:#b88a35;box-shadow:0 8px 18px rgba(43,49,68,.14);background:#fff}
+.class-option.selected{outline:3px solid rgba(59,127,100,.35);border-color:#3b7f64;background:#eef7f1}.class-option:disabled{cursor:not-allowed;opacity:.5}
+.class-icon-wrap{width:68px;height:68px;margin:0 auto 7px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(180deg,#e8edf6,#d8dfeb);overflow:hidden;border:1px solid rgba(39,57,95,.13)}
+.class-icon{width:100%;height:100%;object-fit:contain}.class-icon-fallback{font-family:var(--serif);font-size:24px;font-weight:800;color:#52698f}
+.class-option-name{display:block;font-size:12px;font-weight:900;line-height:1.15}.class-no-data{display:block;margin-top:4px;font-size:9px;font-weight:800;text-transform:uppercase;color:#8e6670}
+.class-growth-summary{font-size:11px;color:#687080;margin-top:4px}
+@media(max-width:600px){.class-modal{padding:8px}.class-dialog{max-height:96vh}.class-body{padding:14px}.class-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.class-option{min-height:108px;padding:7px 4px}.class-icon-wrap{width:58px;height:58px}.class-option-name{font-size:10px}}
+
 </style>
 </head>
 <body>
@@ -225,6 +258,16 @@ h1{margin:0;font-family:var(--serif);font-size:clamp(36px,5.4vw,60px);line-heigh
     <div class="growth-legend"><span class="legend-chip high">50%+ High</span><span class="legend-chip mid">35–49%</span><span class="legend-chip low">0–34%</span></div>
     <div class="growth-table-wrap"><table class="growth-table" id="growthTable"></table></div>
   </section>
+  <div id="classModal" class="class-modal" role="dialog" aria-modal="true" aria-labelledby="classModalTitle">
+    <div class="class-dialog">
+      <div class="class-dialog-head">
+        <div><h3 id="classModalTitle">Choose a Class</h3><p>Select a class to add its growth modifiers to this character's personal growth rates. Classes are grouped by tier.</p></div>
+        <button id="classModalClose" class="class-close" aria-label="Close class selector">×</button>
+      </div>
+      <div id="classModalBody" class="class-body"></div>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -236,6 +279,32 @@ const RECRUITMENT = {"Eshmel":{"items":[{"label":"Prologue","text":"Chapter 1 \u
 const STAT_NAMES=['HP','Str','Mag','Spd','Dex','Def','Res','Lck','Cha'];
 const PERSONAL_ABILITIES={"Eshmel":[["Light of Salvation","Auto","Cancels Underworld Boon for foes within 2 spaces."],["Scorching Sun","Lv 45","Can nullify damage from undead foes (5% trigger)."],["Scorching Sun+","Lv 60","Improves the undead-damage nullification trigger to 10%."]],"Cai":[["Brio","Auto","Grants +1 Mov."],["Flamekeeper","Lv 35","Unit/allies ignore Underworld Flames and take half damage while standing in them."]],"Tialla":[["Tactician’s Wit","Auto","Adds +1 range to combat arts used on allies."],["Tactician’s Insight","Lv 20","After initiating combat, lowers that foe’s Avo by 5 for its next combat."],["Tactician’s Insight+","Lv 35","Improves the Avo penalty to -10."]],"Peter":[["Steady Aim","Auto","Bow combat arts gain +1 range."],["Correct for Drift","Lv 20","At 90%+ displayed hit, gains +10 Hit."],["Correct for Drift+","Lv 35","At 75%+ displayed hit, gains +20 Hit."]],"Ultand":[["Patch Up","Auto","Heals a little HP for an adjacent ally after that ally’s combat."],["Pray for Safety","Lv 20","Adjacent allies gain +10 Ddg."],["Pray for Safety+","Lv 35","Adjacent allies gain +20 Ddg."]],"Bertrand":[["Requiem Style","Auto","Can make a follow-up regardless of AS (5% trigger)."],["Go No Sen","—","Can attack first during enemy-phase combat (25% trigger)."],["Sen No Sen","—","If attacking first, can move the follow-up before the foe’s counter (25% trigger)."]],"Gaitz":[["Brave Assist","Auto","Adjacent allies gain +3 Def."],["Flashing Fang","Lv 20","When attacking, can gain +4 Atk and +50 Hit (20% trigger)."],["Flashing Fang+","Lv 35","Improves the bonus to +7 Atk and +100 Hit."]],"Jester":[["Blink of an Eye","Auto","After Swap, gains +3 Def until the next phase."],["Flickering Edge","Lv 20","After evading an attack, gains +3 Atk for the combat."],["Flickering Edge+","Lv 35","Improves the Atk bonus to +5."]],"Goliath":[["Heavyweight Class","Auto","Cannot become cavalry/flying and gains +5 Bld."],["Pin Down","Lv 20","Adjacent foes suffer -3 Mov."],["Pin Down+","Lv 35","Improves the penalty to -5 Mov."]],"Dante":[["Stage Direction","Auto","Nearby allies can gain +10 Ddg during combat; trigger scales with ally Cha."],["Dramatic Effect","Lv 20","When Stage Direction triggers, also grants +10 Hit."],["Dramatic Effect+","Lv 35","Also grants +10 Hit and +10 Crit."]],"Dietrich":[["Murderous Intent","Auto","If initiating combat, gains +5 Crit."],["Bestial Impulse","Lv 5","After combat, builds +2 Crit until a critical hit occurs."]],"Fabio":[["Dark Calling","Auto","Adjacent foes suffer -5 Ddg."],["Dark Secrets","Lv 20","Extends Dark Calling to 2 spaces."],["Dark Secrets+","Lv 35","Extends Dark Calling to 3 spaces."]],"Esmeralda":[["Brawn","Auto","Reduces equipped item weight to 80%."],["Throwing Arm","Lv 20","Thrown spears gain +10 Hit and +2 Atk."],["Throwing Arm+","Lv 35","Improves to +20 Hit and +4 Atk."]],"Mikaela":[["Veteran’s Mettle","Auto","Gains +10 Hit against adjacent foes."],["Redblade’s Will","Lv 20","Gains +3 Atk against adjacent foes."],["Redblade’s Will+","Lv 35","Keeps the +3 Atk and can add another +3 when attacking adjacent foes."]],"Orchel":[["Solid and Sturdy","Auto","Gains +5 Def, counts as armored, and cannot become cavalry/flying."],["Predictive Sense","—","If initiating, magic attacks gain +20 Hit."],["Harmonic Soul","—","Additional personal ability listed by Serenes Forest."],["Harmonic Soul+","—","Healing an ally with magic also restores some HP to Orchel."],["Self-Repair","—","Restores a large amount of HP at the start of the phase during Overblaze."]],"Diego":[["Caretaker","Auto","Adjacent allies have a chance to prevent enemy follow-ups."],["No Mercy","Lv 20","Follow-up attacks gain +5 Hit/Crit."],["No Mercy+","Lv 35","Improves the bonus to +10 Hit/Crit."]],"Loretta":[["Steadfast","Auto","At 50%+ HP, gains +10 Avo."],["Peak Form","Lv 20","At full HP, gains +3 Atk."],["Peak Form+","Lv 35","At full HP, gains +3 Atk and +10 Avo."]],"Seteth":[["Ready for Battle","Auto","On the first enemy-phase combat, can attack first (50% trigger)."],["Pass Judgement","Lv 20","When Diadem of Balance triggers, gains +4 Atk."],["Pass Judgement+","Lv 35","Improves the bonus to +7 Atk."]],"Ninae":[["Spirits’ Voice","Auto","Against magic-using foes, gains +10 Hit/Avo."],["Spirits’ Guidance","Lv 20","Grants Spirits’ Voice to adjacent allies."],["Spirits’ Guidance+","Lv 35","Extends it to allies within 2 spaces."]],"Theodora":[["Royal Resolve","Auto","Can halve incoming damage when attacked (30% trigger)."],["Unstoppable Force","—","Deals triple damage to obstacles."],["Direct Hit","—","Blaze Arts can deal +10 damage (30% trigger)."]],"Bonaventure":[["Sage Advice","Auto","Adjacent allies gain +3 Def."],["Additional Intel","Lv 20","Adjacent allies can gain +10 Hit in combat."],["Additional Intel+","Lv 35","Improves the Hit bonus to +20."]],"Tobias":[["Power Arts","Auto","Combat arts gain +3 Atk."],["All-Out Attack","Lv 20","Combat art damage can be multiplied by 1.3."],["All-Out Attack+","Lv 35","Improves the multiplier to 1.5."]],"Lilian":[["Safety First","Auto","If the foe cannot counter, gains +10 Hit."],["Upper Hand","Lv 20","At 100% displayed hit, gains +3 Atk when attacking."],["Upper Hand+","Lv 35","Improves the Atk bonus to +5."]],"Lysander":[["Racing Attack","Auto","If initiating combat, gains +15 Avo."],["Accelerate","Lv 20","Defeating foes builds Spd by +1, up to +10 for the map."],["Accelerate+","Lv 35","Builds +2 Spd per defeat, still capped at +10."]],"Talimun":[["Swashbuckler’s Luck","Auto","Grants +3 Lck."],["Cannoning Flair","—","Artillery attacks gain +30 Hit."],["Winds of Victory","—","Can gain +15 Hit when attacking or +15 Avo when attacked; trigger scales with Lck."],["Swashbuckler’s Luck+","—","Raises the Lck bonus to +5 for Talimun and allies."]],"Ursula":[["Management Skills","Auto","Unit and allies within 2 spaces can access storage."],["Seize the Chance","Lv 20","Can multiply attack damage by 1.3; trigger scales with Lck."],["Seize the Chance+","Lv 35","Improves the multiplier to 1.5."]],"Ludia":[["Falcon","Auto","If initiating combat, gains +3 AS."],["Perception","Lv 20","If able to follow up, gains +10 Avo."],["Perception+","Lv 35","Improves the Avo bonus to +20."]],"Simon":[["Close Call","Auto","Can survive lethal damage at 1 HP; trigger scales with Lck."],["Devil’s Luck","Lv 20","Defeating foes builds +1 Lck, up to +10 for the map."],["Devil’s Luck+","Lv 35","Builds +2 Lck per defeat, still capped at +10."]],"Fianna":[["Graceful Light","Auto","Healing magic can cost 0; trigger scales with Lck."],["Gift of Faith","Lv 20","Healing magic can restore +20 extra HP."],["Gift of Faith+","Lv 35","Improves the extra healing to +30 HP."]],"Leda":[["Blindside","Auto","If initiating, can prevent the foe from countering (5% trigger)."],["Improviso","—","After using Blaze Arts during Overblaze, can still attack."]],"Buccar":[["Guardian’s Duty","Auto","Reduces damage taken to 90%."],["Retaliatory Blow","Lv 20","When the foe attacks first, can multiply attack damage by 1.3."],["Retaliatory Blow+","Lv 35","Same multiplier with a higher trigger chance."]],"Sirocco":[["Goddess’s Favor","Auto","Restores 5 HP after combat."],["Wind’s Caprice","Lv 20","Randomly grants +1, +5, or +20 Avo in combat."],["Wind’s Caprice+","Lv 35","Adds a possible +30 Avo result."]],"Olympia":[["Competitive Zeal","Auto","While equipped with magic, gains +10 Crit."],["Ardent Nosferatu","Lv 20","Nosferatu gains +3 Atk and +5 Crit."],["Ardent Nosferatu+","Lv 35","Improves to +5 Atk and +10 Crit."]],"Mu":[["Signs of Growth","Auto","Enhances Mu’s basic stat growths whenever she levels up."],["Warrior’s Blood","Lv 20","Grants a stat bonus based on equipped weapon type."],["Warrior’s Blood+","Lv 35","Grants a larger weapon-based stat bonus."]],"Anatolia":[["Celestial Flow","Auto","Grants +3 Avo."],["Continuum","—","After avoiding an attack, restores 5 HP."],["Continuum+","—","Improves the heal to 10 HP."]],"Sha Lan":[["Cooler Heads","Auto","After Draw Back, can still use assist magic."],["Watchfulness","Lv 20","Adjacent allies gain +2 Spd."],["Watchfulness+","Lv 35","Improves the bonus to +4 Spd."]],"Nezha":[["Quick Draw","Auto","If initiating, can gain +3 Atk (50% trigger)."],["Never Stop","Lv 20","After Quick Draw, can gain +5 Atk when attacking."],["Never Stop+","Lv 35","Raises the trigger chance for the +5 Atk effect."]],"Dadao":[["One Chance","Auto","If neither unit can follow up, gains +5 Atk."],["Full Strength","Lv 20","Can multiply attack damage by 1.3; trigger scales with Str."],["Full Strength+","Lv 35","Improves the multiplier to 1.5."]],"Halvin":[["Adaptability","Auto","After combat, builds +2 Hit up to +30 for the map."],["Halt Advance","Lv 20","After initiating combat, lowers the foe’s Spd by 2 for its next combat."],["Halt Advance+","Lv 35","Improves the Spd penalty to -3."]],"Hong Hua":[["Zhu Ming","Auto","While equipped with magic, gains +10 Hit."],["Amplify Magic","Lv 50","After combat, can gain +4 Atk through the next combat; trigger scales with Mag."],["Amplify Magic+","Lv 60","Improves the Atk bonus to +7."]],"Troy":[["Yun Shou","Auto","While equipped with gauntlets, gains +10 Hit."],["Modified Weapon","Lv 50","Zerberus attacks become effective against flying foes."],["Modified Weapon+","Lv 60","Improves that flying effectiveness."]],"Guzran":[["Hot-Headed","Auto","Randomly gains +10 Hit, Avo, or Crit in combat."],["Top Form","Lv 20","Raises Hot-Headed’s bonus to +15."],["Top Form+","Lv 35","Raises it to +20."]],"Yang Jie":[["Monkly Havoc","Auto","After defeating a foe, can fully heal; trigger scales with Lck."],["Robust Health","Lv 20","Can gain +3 Shld when attacked; trigger scales with remaining HP."],["Robust Health+","Lv 35","Improves the Shld bonus to +5."]],"Io":[["With My Steed","Auto","[Cavalry] If initiating, gains +3 Shld and +30 Ddg."],["Mounted Push","Lv 20","[Cavalry] If initiating, gains +10 Hit."],["Mounted Push+","Lv 35","Also adds +3 Atk."]],"Peppe":[["Hunter’s Snare","Auto","On enemy phase, can attack first if the foe is already damaged."],["King’s Majesty","Lv 20","Against damaged foes, gains +2 Atk and +5 Crit."],["King’s Majesty+","Lv 35","Improves to +4 Atk and +10 Crit."]],"Noctula":[["Warrior’s Clarity","Auto","After combat, gains +3 Avo until the next phase."],["Attuned","Lv 20","When Warrior’s Clarity triggers, can add +10 Avo."],["Attuned+","Lv 35","Raises the trigger chance for the extra +10 Avo."]],"Sofia":[["Healing Knowledge","Auto","Healing magic restores +10 extra HP."],["Distant Healing","Lv 20","Healing magic gains +1 range."],["Distant Healing+","Lv 35","Improves to +2 range."]],"Catania":[["Punishing Squall","Auto","If AS is at least 3 higher than the foe’s, gains +20 Hit."],["Wind My Friend","Lv 20","At AS +5 over the foe, gains +3 Atk."],["Wind My Friend+","Lv 35","Keeps +3 Atk and can also grant +20 Avo at AS +8."]],"Nydine":[["Barge Through","Auto","[Cavalry] Can move through enemy spaces, except large-scale foes."],["At a Gallop","Lv 20","[Cavalry] Reduces terrain movement cost by 1, minimum 1."],["At a Gallop+","Lv 35","Reduces terrain movement cost by 2, minimum 1."]],"Zarcone":[["Hatchet Man","Auto","While equipped with an axe, gains +10 Hit."],["Vulgar Conduct","Lv 20","Against foes at 50% HP or less, gains +20 Hit."],["Vulgar Conduct+","Lv 35","Also grants +3 Atk."]],"Majde":[["Hellbent Axe","Auto","While equipped with an axe, gains +3 Str."],["Fear Nothing","Lv 20","If initiating, gains +3 Atk but suffers -30 Avo."],["Fear Nothing+","Lv 35","Improves the Atk bonus to +6."]],"Benditz":[["Wheeled Warrior","Auto","[Cavalry] As a charioteer, gains +20 Hit."],["Chariot Stagger","Lv 20","As a charioteer, gains +1 use of staggering blows."],["Chariot Stagger+","Lv 35","Improves to +2 uses."]],"Inyoni":[["Heavy-Bow User","Auto","While equipped with a bow, gains +3 Str."],["Pierce","Lv 20","Bow combat arts gain +2 Atk and +5 Crit."],["Pierce+","Lv 35","Improves to +4 Atk and +10 Crit."]],"Jasmine":[["Expert Counter","Auto","If the foe attacks first, gains +20 Hit."],["Raging Counter","Lv 20","If the foe attacks first, gains +3 Atk."],["Raging Counter+","Lv 35","Also adds +10 Crit."]],"Alexandra":[["Silver Maiden","Auto","Gains +5 Hit/Avo for each adjacent ally."],["Soar","Lv 20","On inaccessible terrain, gains +3 AS."],["Soar+","Lv 35","Improves the bonus to +5 AS."]],"Nuzzuno":[["Har Hali Wisdom","Auto","When effective against the foe, gains +3 Atk."],["Precision Strike","Lv 20","When effective, gains +10 Hit."],["Precision Strike+","Lv 35","Improves the Hit bonus to +20."]],"Centurio":[["Sturdy Corundum","Auto","Takes half damage in the first enemy-phase combat."]],"Aswan":[["Princess of Arrows","Auto","While equipped with a bow, gains +20 Hit."]],"Nathan":[["Headlong Rush","Auto","If initiating, gains +3 AS and +10 Hit."]],"Creek":[["Steady Hands","Auto","If the foe attacks first, gains +3 AS and +10 Avo."]],"Kiroc":[["Tyranny","Auto","Against a foe with a status effect, gains +3 Atk and +10 Crit."],["Menace","Lv 20","Can halve the foe’s Ddg (10% trigger)."],["Menace+","Lv 35","Raises the trigger chance to 20%."]],"Tahonia":[["Python Technique","Auto","With a gauntlet combat art, can follow up regardless of AS (15% trigger)."]],"Anna":[["Elephant Rush","Auto","[Cavalry] As an elephant rider, gains +1 use of staggering blows."]]};
 const MU_ENHANCED=[50,50,25,50,50,40,30,30,40];
+const CLASS_DATA=[{"tier":"Beginner","name":"Gladiator","growth":[10,10,0,0,0,0,0,0,0]},{"tier":"Beginner","name":"Hunter","growth":[10,0,0,10,10,0,0,0,0]},{"tier":"Beginner","name":"Soldier","growth":[10,5,0,-5,5,10,0,0,0]},{"tier":"Beginner","name":"Ornius Rider","growth":[10,0,0,10,0,0,5,5,0]},{"tier":"Beginner","name":"Diviner","growth":[5,-5,15,0,5,-5,10,0,0]},{"tier":"Specialty","name":"Myrmidon","growth":[10,0,0,15,10,0,0,5,5]},{"tier":"Specialty","name":"Brigand","growth":[15,15,-5,5,0,5,0,0,5]},{"tier":"Specialty","name":"Pugilist","growth":[15,10,-5,10,5,10,0,0,5]},{"tier":"Specialty","name":"Archer","growth":[10,0,0,10,15,5,0,5,5]},{"tier":"Specialty","name":"Rogue","growth":[10,0,0,15,10,0,5,5,0]},{"tier":"Specialty","name":"Armored Knight","growth":[10,10,-5,-5,5,25,-5,0,5]},{"tier":"Specialty","name":"Light Cavalry","growth":[10,5,-5,5,0,5,0,5,10]},{"tier":"Specialty","name":"Charioteer","growth":[10,5,-5,-5,15,10,0,5,10]},{"tier":"Specialty","name":"Armored Ornius Rider","growth":[10,0,-5,10,5,10,0,5,5]},{"tier":"Specialty","name":"Wing Soldier","growth":[10,0,5,0,5,5,5,5,10]},{"tier":"Specialty","name":"Shaman","growth":[5,-5,15,10,10,-10,10,10,0]},{"tier":"Specialty","name":"Priest","growth":[5,-5,10,5,5,-10,15,15,10]},{"tier":"Advanced","name":"Shido","growth":[10,5,0,15,10,0,-5,5,5]},{"tier":"Advanced","name":"Warrior","growth":[20,20,-5,0,0,5,-5,0,5]},{"tier":"Advanced","name":"Blacksmith","growth":[15,10,10,0,5,10,10,0,5]},{"tier":"Advanced","name":"Sniper","growth":[10,5,0,10,20,5,5,5,5]},{"tier":"Advanced","name":"Forest Knight","growth":[10,5,0,10,10,5,5,5,5]},{"tier":"Advanced","name":"Ranger","growth":[10,5,0,15,15,0,10,15,0]},{"tier":"Advanced","name":"Guardian","growth":[10,10,0,0,5,10,15,5,5]},{"tier":"Advanced","name":"Dreadnought","growth":[15,15,-5,-10,5,30,-10,0,5]},{"tier":"Advanced","name":"Bardinger","growth":[10,10,-5,0,0,5,10,5,10]},{"tier":"Advanced","name":"Elephant Rider","growth":[20,10,-5,-10,20,15,-5,5,10]},{"tier":"Advanced","name":"Caladrius","growth":[15,0,10,10,5,10,10,5,5]},{"tier":"Advanced","name":"Dragoon","growth":[15,5,0,5,0,10,10,10,5]},{"tier":"Advanced","name":"Ovate","growth":[10,-5,20,5,15,-10,15,10,0]},{"tier":"Advanced","name":"Bishop","growth":[10,-5,15,0,5,-10,20,20,10]},{"tier":"Advanced","name":"Troubadour","growth":[10,0,15,0,5,5,15,15,10]},{"tier":"Advanced","name":"Cataphract","growth":null},{"tier":"Advanced","name":"Dancer","growth":null},{"tier":"Master","name":"Swordmaster","growth":[15,10,0,20,15,0,0,5,5]},{"tier":"Master","name":"High Savant","growth":[10,15,15,10,5,5,5,5,5]},{"tier":"Master","name":"Battlemaster","growth":[25,25,-5,5,-5,10,-5,-5,5]},{"tier":"Master","name":"War Monk","growth":[15,10,0,15,0,5,15,5,5]},{"tier":"Master","name":"Bow Adept","growth":[15,5,0,15,20,5,5,5,5]},{"tier":"Master","name":"Bow Knight","growth":[10,10,0,15,10,5,0,5,5]},{"tier":"Master","name":"Shadow Seeker","growth":[15,5,0,25,15,0,10,15,0]},{"tier":"Master","name":"Sentinel","growth":[15,15,0,5,5,10,15,5,5]},{"tier":"Master","name":"Castle Knight","growth":[25,20,-5,-15,5,30,-10,0,5]},{"tier":"Master","name":"Orichaldia","growth":[15,15,-5,5,0,5,5,5,10]},{"tier":"Master","name":"Great Knight","growth":[20,20,-5,-10,0,15,-10,0,5]},{"tier":"Master","name":"Celestial Trooper","growth":[15,5,-5,10,5,5,15,15,10]},{"tier":"Master","name":"Bau Lord","growth":[15,5,0,5,0,10,10,10,5]},{"tier":"Master","name":"Druid","growth":[10,-5,30,10,15,-10,20,10,0]},{"tier":"Master","name":"Wiseman","growth":[10,-5,20,5,0,-10,25,20,10]},{"tier":"Master","name":"Valkyrium","growth":[10,0,15,5,5,5,10,15,10]},{"tier":"Divine","name":"The Blade","growth":[15,10,10,20,20,5,5,5,10]},{"tier":"Divine","name":"The Apsara","growth":[15,5,10,25,15,5,5,10,30]},{"tier":"Divine","name":"The Eternal","growth":[30,30,0,10,0,15,0,0,10]},{"tier":"Divine","name":"The Godhand","growth":[15,10,10,15,5,10,15,5,10]},{"tier":"Divine","name":"The Calamity","growth":[15,5,15,25,20,5,15,15,5]},{"tier":"Divine","name":"The Trident","growth":[15,15,5,10,10,15,15,5,10]},{"tier":"Divine","name":"The Cavalier","growth":[20,15,5,10,10,15,10,5,15]},{"tier":"Divine","name":"The Avatar","growth":[10,-5,30,10,5,-5,30,20,10]}];
+const CLASS_TIERS=["Beginner","Specialty","Advanced","Master","Divine"];
+const CLASS_ICON_DIR="class-icons";
+const CLASS_COOKIE="fwClassPrefs";
+function readCookie(name){
+  const p=name+"=";
+  const hit=document.cookie.split(";").map(x=>x.trim()).find(x=>x.startsWith(p));
+  if(!hit)return null;
+  try{return decodeURIComponent(hit.slice(p.length));}catch{return hit.slice(p.length);}
+}
+function loadClassPrefs(){
+  let v=null, raw=readCookie(CLASS_COOKIE);
+  if(raw){try{v=JSON.parse(raw);}catch{}}
+  if(!v){try{v=JSON.parse(localStorage.getItem("fwClassPrefsFallback")||"null");}catch{}}
+  if(!v){try{const legacy=JSON.parse(localStorage.getItem("fwSelectedClasses")||"null");if(legacy)v={classes:legacy,enabled:{}};}catch{}}
+  return v||{classes:{},enabled:{}};
+}
+const classPrefs=loadClassPrefs();
+const selectedClasses=classPrefs.classes||{};
+const classEnabled=classPrefs.enabled||{};
+Object.keys(selectedClasses).forEach(n=>{if(classEnabled[n]===undefined)classEnabled[n]=true;});
+function saveSelectedClasses(){
+  const state={classes:selectedClasses,enabled:classEnabled};
+  document.cookie=`${CLASS_COOKIE}=${encodeURIComponent(JSON.stringify(state))}; Max-Age=31536000; Path=/; SameSite=Lax`;
+  try{localStorage.setItem("fwClassPrefsFallback",JSON.stringify(state));}catch{}
+}
 let muPassive=true, growthSort='roster', growthSortAsc=true, growthSortClicks={};
 
 const $ = s => document.querySelector(s);
@@ -276,19 +345,65 @@ function renderGrid() {
 
 function growthClass(x){ return x>=50?'hi':x<=25?'lo':''; }
 function growthTone(x){ return x>=50?'high':x>=35?'mid':'low'; }
-function displayedGrowth(name){ return name==='Mu' && muPassive ? MU_ENHANCED : GROWTH[name]; }
-
+function personalGrowth(name){ return name==='Mu' && muPassive ? MU_ENHANCED : GROWTH[name]; }
+function classByName(name){ return CLASS_DATA.find(c=>c.name===name); }
+function classSlug(name){ return name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
+function classIconPath(name, ext='webp'){ return `${CLASS_ICON_DIR}/${classSlug(name)}.${ext}`; }
+function classIcon(name, cls='class-icon'){
+  const slug=classSlug(name);
+  return `<img class="${cls}" src="${CLASS_ICON_DIR}/${slug}.webp" alt="${esc(name)} icon" loading="lazy" data-icon-slug="${slug}" data-icon-try="0" onerror="classIconFallback(this)">`;
+}
+function classIconFallback(img){
+  const tries=['png','jpg','jpeg'];
+  const i=Number(img.dataset.iconTry||0);
+  if(i<tries.length){img.dataset.iconTry=String(i+1);img.src=`${CLASS_ICON_DIR}/${img.dataset.iconSlug}.${tries[i]}`;return;}
+  const wrap=img.parentElement; img.remove(); if(wrap && !wrap.querySelector('.class-icon-fallback')) wrap.insertAdjacentHTML('beforeend',`<span class="class-icon-fallback">${(wrap.dataset.initial||'?')}</span>`);
+}
+function selectedClass(name){ return selectedClasses[name] ? classByName(selectedClasses[name]) : null; }
+function classIsEnabled(name){return !selectedClasses[name]||classEnabled[name]!==false;}
+function displayedGrowth(name){
+  const base=personalGrowth(name); if(!base) return null;
+  const c=selectedClass(name); if(!c||!c.growth||!classIsEnabled(name)) return [...base];
+  return base.map((v,i)=>v+c.growth[i]);
+}
 function growthCard(name) {
-  const v = displayedGrowth(name);
+  const base=personalGrowth(name), c=selectedClass(name), active=classIsEnabled(name), v=displayedGrowth(name);
   if (!v) return `<div class="info-card"><h3>Growth Rates</h3><div class="info-note">No growth-rate entry found.</div></div>`;
-  const rows = v.map((x,i)=>`<div class="gbar"><span class="gname">${STAT_NAMES[i]}</span><div class="track"><div class="fill ${growthClass(x)}" data-w="${Math.min(100,x/70*100)}"></div></div><span class="gval">${x}%</span></div>`).join('');
+  const rows = v.map((x,i)=>{
+    const mod=c&&c.growth&&active?c.growth[i]:0;
+    const delta=mod?`<span class="gdelta ${mod<0?'neg':''}">${mod>0?'+':''}${mod}</span>`:'';
+    return `<div class="gbar"><span class="gname">${STAT_NAMES[i]}</span><div class="track"><div class="fill ${growthClass(x)}" data-w="${Math.min(100,x/90*100)}"></div></div><span class="gval">${x}%${delta}</span></div>`;
+  }).join('');
   const toggle = name==='Mu' ? `<label class="mu-toggle" title="Signs of Growth is active by default"><input id="muGrowthToggle" type="checkbox" ${muPassive?'checked':''}><span></span> Signs of Growth</label>` : '';
   const mu = name==='Mu' ? `<div class="info-note">${muPassive?'<strong>Passive applied:</strong> showing Mu’s effective personal growths with Signs of Growth.':'Showing Mu’s base growths without Signs of Growth.'}</div>` : '';
-  return `<div class="info-card"><h3>Growth Rates <small>Total ${v.reduce((a,b)=>a+b,0)}%</small></h3>${toggle}${rows}
+  const selected=c ? `<span class="class-selected ${active?'':'off'}">${classIcon(c.name,'class-icon')} ${esc(c.name)}</span>` : '';
+  const classToggle=c ? `<label class="class-toggle"><input id="classGrowthToggle" type="checkbox" ${active?'checked':''}><span></span> Class growths</label>` : '';
+  const classNote=c&&c.growth ? `<div class="info-note"><strong>${esc(c.name)}</strong> growth modifiers are ${active?'included in':'currently excluded from'} the totals above.</div>` : '';
+  return `<div class="info-card"><h3>Growth Rates <small>Total ${v.reduce((a,b)=>a+b,0)}%</small></h3>${toggle}
+    <div class="growth-actions"><button class="class-btn" id="chooseClassBtn">${c?'Change Class':'Set Class'}</button>${selected}${classToggle}${c?'<button class="class-clear" id="clearClassBtn">Clear</button>':''}</div>
+    ${rows}
     <div class="legend"><span><i style="background:var(--green)"></i>50%+ high</span><span><i style="background:var(--gold-deep)"></i>Average</span><span><i style="background:#7b818c"></i>25% or less</span></div>
-    <div class="info-note">Personal growth rates. Add class growth rates for the full in-class growth rates.</div>${mu}
-    <a class="source-link" href="https://serenesforest.net/fortunes-weave/characters/growth-rates/" target="_blank" rel="noopener">Source: Serenes Forest ↗</a></div>`;
+    <div class="info-note">Character growth + selected class growth = displayed growth.</div>${classNote}${mu}
+    <a class="source-link" href="https://serenesforest.net/fortunes-weave/characters/growth-rates/" target="_blank" rel="noopener">Character growths: Serenes Forest ↗</a><br>
+    <a class="source-link" href="https://serenesforest.net/fortunes-weave/classes/growth-rates/" target="_blank" rel="noopener">Class growths: Serenes Forest ↗</a></div>`;
 }
+
+function renderClassModal(character){
+  const body=$('#classModalBody');
+  body.innerHTML=CLASS_TIERS.map(tier=>{
+    const rows=CLASS_DATA.filter(c=>c.tier===tier);
+    return `<section class="class-tier"><h4 class="class-tier-title">${tier}</h4><div class="class-grid">${rows.map(c=>{
+      const active=selectedClasses[character]===c.name;
+      const summary=c.growth?c.growth.map((v,i)=>v?`${STAT_NAMES[i]} ${v>0?'+':''}${v}`:'').filter(Boolean).slice(0,2).join(' · '):'';
+      return `<button class="class-option ${active?'selected':''}" data-class="${esc(c.name)}" ${c.growth===null?'disabled':''} title="${c.growth===null?'Growth rates not yet listed by Serenes Forest':esc(c.name)}"><span class="class-icon-wrap" data-initial="${esc(c.name[0])}">${classIcon(c.name)}</span><span class="class-option-name">${esc(c.name)}</span>${c.growth===null?'<span class="class-no-data">Growth data unavailable</span>':summary?`<span class="class-growth-summary">${esc(summary)}</span>`:''}</button>`;
+    }).join('')}</div></section>`;
+  }).join('');
+  body.querySelectorAll('.class-option:not(:disabled)').forEach(btn=>btn.onclick=()=>{
+    selectedClasses[character]=btn.dataset.class; classEnabled[character]=true; saveSelectedClasses(); closeClassModal(); showDetail(character);
+  });
+}
+function openClassModal(character){ renderClassModal(character); $('#classModal').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeClassModal(){ $('#classModal').classList.remove('open'); document.body.style.overflow=''; }
 
 function abilityCard(name){
   const skills=PERSONAL_ABILITIES[name]||[];
@@ -368,6 +483,9 @@ function showDetail(name) {
     <div class="note-panel"><strong>Reading the chart:</strong> each badge shows a rank the pair can reach — ${badge('C')}${badge('B')}${badge('A')} means the bond climbs all the way to A. Click any name to jump to that character.</div>`;
   const muToggle=$('#muGrowthToggle');
   if(muToggle) muToggle.onchange=()=>{muPassive=muToggle.checked;showDetail(name);};
+  const chooseClass=$('#chooseClassBtn'); if(chooseClass) chooseClass.onclick=()=>openClassModal(name);
+  const classGrowthToggle=$('#classGrowthToggle'); if(classGrowthToggle) classGrowthToggle.onchange=()=>{classEnabled[name]=classGrowthToggle.checked;saveSelectedClasses();showDetail(name);};
+  const clearClass=$('#clearClassBtn'); if(clearClass) clearClass.onclick=()=>{delete selectedClasses[name];delete classEnabled[name];saveSelectedClasses();showDetail(name);};
   if (list.length) renderSupports(); else $('#supportList').innerHTML = `<div class="none">${esc(name)} has no listed supports.</div>`;
   detailContent.querySelectorAll('.filters button').forEach(b=>b.onclick=()=>{rankFilter=b.dataset.f;renderSupports();});
   requestAnimationFrame(()=>requestAnimationFrame(()=>detailContent.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w+'%')));
@@ -399,6 +517,11 @@ function route() {
 $('#back').onclick = () => { location.hash = ''; };
 $('#growthBack').onclick = () => { location.hash = ''; };
 $('#growthMuToggle').onchange = e => { muPassive=e.target.checked; renderGrowthTable(); };
+
+$('#classModalClose').onclick=closeClassModal;
+$('#classModal').addEventListener('click',e=>{if(e.target.id==='classModal')closeClassModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape' && $('#classModal').classList.contains('open')) closeClassModal();});
+
 addEventListener('hashchange', route);
 search.oninput = renderGrid;
 $('#clear').onclick = () => { search.value=''; renderGrid(); search.focus(); };
