@@ -163,7 +163,7 @@ h1{margin:0;font-family:var(--serif);font-size:clamp(36px,5.4vw,60px);line-heigh
 .mu-toggle input{position:absolute;opacity:0;pointer-events:none}.mu-toggle span{width:38px;height:22px;border-radius:99px;background:#9398a2;position:relative;transition:.15s;box-shadow:inset 0 1px 3px rgba(0,0,0,.25)}
 .mu-toggle span::after{content:"";position:absolute;width:16px;height:16px;left:3px;top:3px;border-radius:50%;background:#fff;transition:.15s;box-shadow:0 1px 4px rgba(0,0,0,.3)}
 .mu-toggle input:checked+span{background:var(--green)}.mu-toggle input:checked+span::after{transform:translateX(16px)}
-.growth-page-head{background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.02)),linear-gradient(135deg,#1d3157,#0e1730 70%);color:#f7f1e2;border:1px solid rgba(217,182,108,.5);border-radius:24px;padding:24px;display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:14px;box-shadow:var(--shadow)}
+.growth-page-head{background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.02)),linear-gradient(135deg,#1d3157,#0e1730 70%);color:#f7f1e2;border:1px solid rgba(217,182,108,.5);border-radius:24px;padding:24px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:14px;box-shadow:var(--shadow)}
 .growth-page-head h2{font-family:var(--serif);font-size:clamp(30px,5vw,46px);margin:0;color:#f7f1e2}.growth-page-head p{margin:8px 0 0;color:#cdd5ea}.glance-toggle{color:#f3dfad;font-size:13px}
 .growth-legend{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.legend-chip{padding:6px 11px;border-radius:999px;font-size:12px;font-weight:900;border:1px solid rgba(255,255,255,.2)}
 .legend-chip.high{background:#3b7f64;color:#fff}.legend-chip.mid{background:#b88a35;color:#fff}.legend-chip.low{background:#6f7480;color:#fff}
@@ -175,6 +175,39 @@ h1{margin:0;font-family:var(--serif);font-size:clamp(36px,5.4vw,60px);line-heigh
 .growth-table td.char-cell{position:sticky;left:0;text-align:left;background:#f6efdf;z-index:1}.growth-char{display:flex;align-items:center;gap:9px;text-decoration:none}.growth-char .portrait{width:40px;height:40px;border-radius:10px}.growth-char .fallback{font-size:16px}.growth-char-name{font-family:var(--serif);font-size:16px;font-weight:800}
 .growth-val{border-radius:9px;padding:7px 5px;display:block}.growth-val.high{background:#d9eadf;color:#236143}.growth-val.mid{background:#f0dfb6;color:#7a571c}.growth-val.low{background:#e2e3e7;color:#555b65}
 .growth-table tr:hover td.char-cell{background:#eee3cb}.growth-table tr:hover td:not(.char-cell){background:rgba(255,255,255,.4)}
+.glance-opt input,.row-class-toggle input{position:absolute;opacity:0;pointer-events:none}
+.glance-switch,.row-switch{position:relative;display:inline-block;border-radius:999px;background:#7f8794;box-shadow:inset 0 1px 3px rgba(0,0,0,.3);transition:.16s;flex:0 0 auto}
+.glance-switch{width:42px;height:24px}.row-switch{width:34px;height:20px}
+.glance-switch::after,.row-switch::after{content:"";position:absolute;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.3);transition:.16s}
+.glance-switch::after{width:18px;height:18px;left:3px;top:3px}.row-switch::after{width:14px;height:14px;left:3px;top:3px}
+.glance-opt input:checked+.glance-switch,.row-class-toggle input:checked+.row-switch{background:var(--green)}
+.glance-opt input:checked+.glance-switch::after{transform:translateX(18px)}
+.row-class-toggle input:checked+.row-switch::after{transform:translateX(14px)}
+
+.glance-controls{flex:0 0 auto;width:260px;display:flex;flex-direction:column;gap:6px;padding:12px;border:1px solid rgba(217,182,108,.35);border-radius:16px;background:rgba(7,11,21,.30);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.glance-controls-title{font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);padding:0 4px 4px;border-bottom:1px solid rgba(217,182,108,.22);margin-bottom:2px}
+.glance-opt{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 10px;border-radius:11px;cursor:pointer;user-select:none;transition:background .15s}
+.glance-opt:hover{background:rgba(255,255,255,.07)}
+.glance-opt:has(input:focus-visible){outline:2px solid var(--gold)}
+.glance-opt-text{display:flex;flex-direction:column;gap:2px;min-width:0;line-height:1.2}
+.glance-opt-text strong{font-size:13px;font-weight:850;color:#f7f1e2}
+.glance-opt-text small{font-size:11px;font-weight:700;color:#aeb9d6}
+.glance-class-master.mixed .glance-switch{background:linear-gradient(90deg,var(--green) 50%,#7f8794 50%)}
+.glance-class-master.mixed .glance-switch::after{transform:translateX(9px)}
+.glance-class-master.disabled{opacity:.5;cursor:default}.glance-class-master.disabled:hover{background:none}
+.class-col{min-width:210px}
+.class-cell{text-align:left!important;white-space:nowrap}
+.row-class-wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:190px}
+.row-class-meta{display:flex;align-items:center;gap:8px;min-width:0;flex:1}
+.row-class-icon{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:#27395f;border:1px solid rgba(217,182,108,.7);overflow:hidden;flex:0 0 auto}
+.row-class-icon img{width:23px;height:23px;object-fit:contain}
+.row-class-icon .class-icon-fallback{font-size:13px;color:#f3dfad}
+.row-class-name{font-size:12px;font-weight:850;color:#35415b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.row-class-name.none{color:#9296a0;font-weight:700;font-style:italic}
+.row-class-toggle{display:inline-flex;align-items:center;cursor:pointer;flex:0 0 auto}
+.row-class-toggle.disabled{visibility:hidden}
+.growth-table tr.class-off td:not(.char-cell):not(.class-cell){opacity:.88}.growth-table tr.class-off .row-class-meta{opacity:.5}.growth-table td.class-cell{border-left:1px solid rgba(117,81,24,.12);border-right:1px solid rgba(117,81,24,.12);background:rgba(217,182,108,.08)}
+@media(max-width:760px){.glance-controls{width:100%}.growth-page-head{gap:14px}}
 @media(max-width:1050px){.profile-info{grid-template-columns:1fr 1fr}.profile-info .info-card:last-child{grid-column:1/-1}}
 @media(max-width:760px){.profile-info{grid-template-columns:1fr}.profile-info .info-card:last-child{grid-column:auto}.growth-page-head{align-items:flex-start;flex-direction:column}.growth-link{width:100%}}
 
@@ -270,7 +303,19 @@ h1{margin:0;font-family:var(--serif);font-size:clamp(36px,5.4vw,60px);line-heigh
         <h2>Growth Rates at a Glance</h2>
         <p>Click a stat heading to sort. Click it again to reverse the sort, and a third time to clear it. Values of 50% or higher are highlighted as high growths.</p>
       </div>
-      <label class="mu-toggle glance-toggle"><input id="growthMuToggle" type="checkbox" checked><span></span> Mu passive</label>
+      <div class="glance-controls" role="group" aria-label="Display options">
+        <div class="glance-controls-title">Display options</div>
+        <label class="glance-opt" title="Mu's Signs of Growth passive">
+          <input id="growthMuToggle" type="checkbox" checked>
+          <span class="glance-opt-text"><strong>Mu passive</strong><small>Signs of Growth</small></span>
+          <span class="glance-switch"></span>
+        </label>
+        <label class="glance-opt glance-class-master" id="allClassGrowthsWrap" title="Enable or disable class growth modifiers for every character with a selected class">
+          <input id="allClassGrowthsToggle" type="checkbox">
+          <span class="glance-opt-text"><strong>Class growths</strong><small id="allClassGrowthsLabel">All class growths</small></span>
+          <span class="glance-switch"></span>
+        </label>
+      </div>
     </div>
     <div class="growth-legend"><span class="legend-chip high">50%+ High</span><span class="legend-chip mid">35–49%</span><span class="legend-chip low">0–34%</span></div>
     <div class="growth-table-wrap"><table class="growth-table" id="growthTable"></table></div>
@@ -435,6 +480,27 @@ function abilityCard(name){
   return `<div class="info-card"><h3>Personal Abilities <small>${skills.length}</small></h3><div class="ability-list">${skills.map(a=>`<div class="ability-item"><div class="ability-top"><span class="ability-name">${esc(a[0])}</span><span class="ability-unlock">${esc(a[1])}</span></div><div class="ability-desc">${esc(a[2])}</div></div>`).join('')}</div>${src}</div>`;
 }
 
+function updateAllClassGrowthsToggle(){
+  const toggle=$('#allClassGrowthsToggle'), wrap=$('#allClassGrowthsWrap'), label=$('#allClassGrowthsLabel');
+  if(!toggle || !wrap || !label) return;
+  const withClass=DATA.names.filter(n=>selectedClass(n));
+  if(!withClass.length){
+    toggle.checked=false; toggle.indeterminate=false; toggle.disabled=true;
+    wrap.classList.remove('mixed'); wrap.classList.add('disabled');
+    label.textContent='No classes selected';
+    return;
+  }
+  const enabledCount=withClass.filter(n=>classIsEnabled(n)).length;
+  const allOn=enabledCount===withClass.length;
+  const allOff=enabledCount===0;
+  toggle.disabled=false;
+  toggle.checked=allOn;
+  toggle.indeterminate=!allOn&&!allOff;
+  wrap.classList.toggle('mixed',!allOn&&!allOff);
+  wrap.classList.remove('disabled');
+  label.textContent=allOn?'All class growths on':allOff?'All class growths off':`${enabledCount}/${withClass.length} class growths on`;
+}
+
 function renderGrowthTable(){
   const toggle=$('#growthMuToggle'); if(toggle) toggle.checked=muPassive;
   let names=[...DATA.names];
@@ -444,31 +510,67 @@ function renderGrowthTable(){
   else if(idx>=0) names.sort((a,b)=>displayedGrowth(b)[idx]-displayedGrowth(a)[idx] || a.localeCompare(b));
   if(growthSortAsc && growthSort!=='roster') names.reverse();
 
-  const head=[['name','Character'],...STAT_NAMES.map(s=>[s,s]),['total','Total']].map(([key,label])=>`<th data-gsort="${key}" class="${growthSort===key?'active-sort':''}">${label}${growthSort===key?(growthSortAsc?' ↑':' ↓'):''}</th>`).join('');
+  const head=[
+    ['name','Character'],
+    ['class','Class'],
+    ...STAT_NAMES.map(s=>[s,s]),
+    ['total','Total']
+  ].map(([key,label])=>{
+    const sortable=key!=='class';
+    return `<th ${sortable?`data-gsort="${key}"`:''} class="${growthSort===key?'active-sort ':''}${key==='class'?'class-col':''}">${label}${growthSort===key?(growthSortAsc?' ↑':' ↓'):''}</th>`;
+  }).join('');
+
   const body=names.map(n=>{
     const v=displayedGrowth(n);
-    return `<tr><td class="char-cell"><a class="growth-char" href="#/${encodeURIComponent(n)}">${portrait(n)}<span class="growth-char-name">${esc(n)}${n==='Mu'&&muPassive?' ✦':''}</span></a></td>${v.map(x=>`<td><span class="growth-val ${growthTone(x)}">${x}%</span></td>`).join('')}<td><span class="growth-val ${growthTone(Math.round(v.reduce((a,b)=>a+b,0)/v.length))}">${v.reduce((a,b)=>a+b,0)}</span></td></tr>`;
+    const c=selectedClass(n);
+    const active=c?classIsEnabled(n):false;
+    const classUi=c
+      ? `<div class="row-class-wrap">
+          <span class="row-class-meta">
+            <span class="row-class-icon" data-initial="${esc(c.name[0])}">${classIcon(c.name)}</span>
+            <span class="row-class-name" title="${esc(c.name)}">${esc(c.name)}</span>
+          </span>
+          <label class="row-class-toggle" title="${active?'Disable':'Enable'} ${esc(c.name)} growth modifiers">
+            <input type="checkbox" data-class-row-toggle="${esc(n)}" ${active?'checked':''}>
+            <span class="row-switch"></span>
+          </label>
+        </div>`
+      : `<div class="row-class-wrap">
+          <span class="row-class-meta"><span class="row-class-name none">No class selected</span></span>
+          <label class="row-class-toggle disabled" title="Choose a class from this character's profile first">
+            <input type="checkbox" disabled><span class="row-switch"></span>
+          </label>
+        </div>`;
+    return `<tr class="${c&&!active?'class-off':''}">
+      <td class="char-cell"><a class="growth-char" href="#/${encodeURIComponent(n)}">${portrait(n)}<span class="growth-char-name">${esc(n)}${n==='Mu'&&muPassive?' ✦':''}</span></a></td>
+      <td class="class-cell">${classUi}</td>
+      ${v.map(x=>`<td><span class="growth-val ${growthTone(x)}">${x}%</span></td>`).join('')}
+      <td><span class="growth-val ${growthTone(Math.round(v.reduce((a,b)=>a+b,0)/v.length))}">${v.reduce((a,b)=>a+b,0)}</span></td>
+    </tr>`;
   }).join('');
+
   $('#growthTable').innerHTML=`<thead><tr>${head}</tr></thead><tbody>${body}</tbody>`;
+
+  document.querySelectorAll('[data-class-row-toggle]').forEach(input=>input.onchange=e=>{
+    const name=e.currentTarget.dataset.classRowToggle;
+    classEnabled[name]=e.currentTarget.checked;
+    saveSelectedClasses();
+    renderGrowthTable();
+  });
+
   document.querySelectorAll('[data-gsort]').forEach(th=>th.onclick=()=>{
     const key=th.dataset.gsort;
-
-    // Clicking the same column cycles:
-    // descending -> ascending -> cleared.
     if (growthSort === key) {
-      if (!growthSortAsc) {
-        growthSortAsc = true;
-      } else {
-        growthSort = 'roster';
-        growthSortAsc = true;
-      }
+      if (!growthSortAsc) growthSortAsc = true;
+      else { growthSort = 'roster'; growthSortAsc = true; }
     } else {
       growthSort = key;
       growthSortAsc = false;
     }
-
     renderGrowthTable();
   });
+
+  updateAllClassGrowthsToggle();
 }
 
 function recruitmentCard(name) {
@@ -540,6 +642,15 @@ function route() {
 $('#back').onclick = () => { location.hash = ''; };
 $('#growthBack').onclick = () => { location.hash = ''; };
 $('#growthMuToggle').onchange = e => { muPassive=e.target.checked; renderGrowthTable(); };
+$('#allClassGrowthsToggle').onchange = e => {
+  const withClass=DATA.names.filter(n=>selectedClass(n));
+  if(!withClass.length) return;
+  const allCurrentlyOn=withClass.every(n=>classIsEnabled(n));
+  const next=!allCurrentlyOn;
+  withClass.forEach(n=>classEnabled[n]=next);
+  saveSelectedClasses();
+  renderGrowthTable();
+};
 
 $('#classModalClose').onclick=closeClassModal;
 $('#classModal').addEventListener('click',e=>{if(e.target.id==='classModal')closeClassModal();});
