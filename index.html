@@ -163,7 +163,7 @@ h1{margin:0;font-family:var(--serif);font-size:clamp(36px,5.4vw,60px);line-heigh
 .mu-toggle input{position:absolute;opacity:0;pointer-events:none}.mu-toggle span{width:38px;height:22px;border-radius:99px;background:#9398a2;position:relative;transition:.15s;box-shadow:inset 0 1px 3px rgba(0,0,0,.25)}
 .mu-toggle span::after{content:"";position:absolute;width:16px;height:16px;left:3px;top:3px;border-radius:50%;background:#fff;transition:.15s;box-shadow:0 1px 4px rgba(0,0,0,.3)}
 .mu-toggle input:checked+span{background:var(--green)}.mu-toggle input:checked+span::after{transform:translateX(16px)}
-.growth-page-head{background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.02)),linear-gradient(135deg,#1d3157,#0e1730 70%);color:#f7f1e2;border:1px solid rgba(217,182,108,.5);border-radius:24px;padding:24px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:14px;box-shadow:var(--shadow)}
+.growth-page-head{background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.02)),linear-gradient(135deg,#1d3157,#0e1730 70%);color:#f7f1e2;border:1px solid rgba(217,182,108,.5);border-radius:24px;padding:24px;display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:14px;box-shadow:var(--shadow)}
 .growth-page-head h2{font-family:var(--serif);font-size:clamp(30px,5vw,46px);margin:0;color:#f7f1e2}.growth-page-head p{margin:8px 0 0;color:#cdd5ea}.glance-toggle{color:#f3dfad;font-size:13px}
 .growth-legend{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.legend-chip{padding:6px 11px;border-radius:999px;font-size:12px;font-weight:900;border:1px solid rgba(255,255,255,.2)}
 .legend-chip.high{background:#3b7f64;color:#fff}.legend-chip.mid{background:#b88a35;color:#fff}.legend-chip.low{background:#6f7480;color:#fff}
@@ -175,39 +175,57 @@ h1{margin:0;font-family:var(--serif);font-size:clamp(36px,5.4vw,60px);line-heigh
 .growth-table td.char-cell{position:sticky;left:0;text-align:left;background:#f6efdf;z-index:1}.growth-char{display:flex;align-items:center;gap:9px;text-decoration:none}.growth-char .portrait{width:40px;height:40px;border-radius:10px}.growth-char .fallback{font-size:16px}.growth-char-name{font-family:var(--serif);font-size:16px;font-weight:800}
 .growth-val{border-radius:9px;padding:7px 5px;display:block}.growth-val.high{background:#d9eadf;color:#236143}.growth-val.mid{background:#f0dfb6;color:#7a571c}.growth-val.low{background:#e2e3e7;color:#555b65}
 .growth-table tr:hover td.char-cell{background:#eee3cb}.growth-table tr:hover td:not(.char-cell){background:rgba(255,255,255,.4)}
-.glance-opt input,.row-class-toggle input{position:absolute;opacity:0;pointer-events:none}
+.total-filter-panel{margin:12px 0 14px;padding:14px 16px;border:1px solid rgba(217,182,108,.34);border-radius:18px;background:linear-gradient(180deg,rgba(18,29,54,.88),rgba(10,18,35,.88));box-shadow:0 10px 22px rgba(0,0,0,.14)}
+.total-filter-panel.compact{margin:10px 0 14px;padding:11px 12px;border-color:rgba(184,138,53,.28);background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(255,255,255,.36));box-shadow:none}
+.total-filter-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.total-filter-title{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:#f3dfad}
+.total-filter-panel.compact .total-filter-title{color:#6a5122}
+.total-filter-count{font-size:11px;font-weight:800;color:#aeb9d2}
+.total-filter-panel.compact .total-filter-count{color:#8a806e}
+.total-stat-chips{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.total-stat-chip{border:1px solid rgba(217,182,108,.32);background:rgba(255,255,255,.07);color:#dce4f6;padding:7px 10px;border-radius:999px;font:850 11px inherit;font-family:inherit;cursor:pointer;transition:.15s;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.total-stat-chip:hover{border-color:var(--gold);transform:translateY(-1px)}
+.total-stat-chip[aria-pressed="true"]{background:linear-gradient(180deg,#496b9f,#314b7a);border-color:#d9b66c;color:#fff8e7;box-shadow:0 3px 8px rgba(0,0,0,.18)}
+.total-filter-panel.compact .total-stat-chip{background:rgba(39,57,95,.07);color:#596172;border-color:rgba(184,138,53,.26)}
+.total-filter-panel.compact .total-stat-chip[aria-pressed="true"]{background:linear-gradient(180deg,#496b9f,#314b7a);color:#fff;border-color:#b88a35}
+.total-filter-actions{display:flex;gap:6px;margin-left:auto}
+.total-filter-action{border:1px solid rgba(217,182,108,.28);background:rgba(255,255,255,.05);color:#cdd5ea;border-radius:9px;padding:6px 9px;font:800 10px inherit;font-family:inherit;cursor:pointer}
+.total-filter-panel.compact .total-filter-action{color:#665b45;background:rgba(255,255,255,.48);border-color:rgba(184,138,53,.24)}
+.total-filter-action:hover{border-color:var(--gold)}
+.stat-excluded-col{opacity:.42}
+.growth-table th.stat-excluded-col{background:#202b43;color:#929bad}
+.growth-table td.stat-excluded-col .growth-val{filter:saturate(.35);opacity:.62}
+.gbar.stat-excluded{opacity:.46}
+.gbar.stat-excluded .track{filter:saturate(.35)}
+.gbar.stat-excluded .gname::after{content:" ×";font-size:10px;color:#a86e6e}
+.total-mini-note{margin-top:8px;font-size:11px;color:#8a806e}
+@media(max-width:620px){.total-filter-actions{width:100%;margin-left:0}.total-filter-action{flex:1}.total-stat-chip{padding:7px 9px}}
+.glance-controls{display:flex;align-items:center;justify-content:flex-end;gap:14px;flex-wrap:wrap}
+.glance-class-master{display:inline-flex;align-items:center;gap:9px;padding:8px 11px;border:1px solid rgba(217,182,108,.35);border-radius:13px;background:rgba(7,11,21,.28);color:#f3dfad;font-size:12px;font-weight:850;cursor:pointer;user-select:none}
+.glance-class-master input,.row-class-toggle input{position:absolute;opacity:0;pointer-events:none}
 .glance-switch,.row-switch{position:relative;display:inline-block;border-radius:999px;background:#7f8794;box-shadow:inset 0 1px 3px rgba(0,0,0,.3);transition:.16s;flex:0 0 auto}
 .glance-switch{width:42px;height:24px}.row-switch{width:34px;height:20px}
 .glance-switch::after,.row-switch::after{content:"";position:absolute;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.3);transition:.16s}
 .glance-switch::after{width:18px;height:18px;left:3px;top:3px}.row-switch::after{width:14px;height:14px;left:3px;top:3px}
-.glance-opt input:checked+.glance-switch,.row-class-toggle input:checked+.row-switch{background:var(--green)}
-.glance-opt input:checked+.glance-switch::after{transform:translateX(18px)}
+.glance-class-master input:checked+.glance-switch,.row-class-toggle input:checked+.row-switch{background:var(--green)}
+.glance-class-master input:checked+.glance-switch::after{transform:translateX(18px)}
 .row-class-toggle input:checked+.row-switch::after{transform:translateX(14px)}
-
-.glance-controls{flex:0 0 auto;width:260px;display:flex;flex-direction:column;gap:6px;padding:12px;border:1px solid rgba(217,182,108,.35);border-radius:16px;background:rgba(7,11,21,.30);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
-.glance-controls-title{font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);padding:0 4px 4px;border-bottom:1px solid rgba(217,182,108,.22);margin-bottom:2px}
-.glance-opt{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 10px;border-radius:11px;cursor:pointer;user-select:none;transition:background .15s}
-.glance-opt:hover{background:rgba(255,255,255,.07)}
-.glance-opt:has(input:focus-visible){outline:2px solid var(--gold)}
-.glance-opt-text{display:flex;flex-direction:column;gap:2px;min-width:0;line-height:1.2}
-.glance-opt-text strong{font-size:13px;font-weight:850;color:#f7f1e2}
-.glance-opt-text small{font-size:11px;font-weight:700;color:#aeb9d6}
 .glance-class-master.mixed .glance-switch{background:linear-gradient(90deg,var(--green) 50%,#7f8794 50%)}
 .glance-class-master.mixed .glance-switch::after{transform:translateX(9px)}
-.glance-class-master.disabled{opacity:.5;cursor:default}.glance-class-master.disabled:hover{background:none}
-.class-col{min-width:210px}
+.glance-class-master.disabled{opacity:.48;cursor:default}
+.class-col{min-width:170px}
 .class-cell{text-align:left!important;white-space:nowrap}
-.row-class-wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:190px}
-.row-class-meta{display:flex;align-items:center;gap:8px;min-width:0;flex:1}
+.row-class-wrap{display:flex;align-items:center;gap:9px;min-width:145px}
+.row-class-meta{display:flex;align-items:center;gap:7px;min-width:0;flex:1}
 .row-class-icon{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:#27395f;border:1px solid rgba(217,182,108,.7);overflow:hidden;flex:0 0 auto}
 .row-class-icon img{width:23px;height:23px;object-fit:contain}
 .row-class-icon .class-icon-fallback{font-size:13px;color:#f3dfad}
-.row-class-name{font-size:12px;font-weight:850;color:#35415b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.row-class-name{font-size:11px;font-weight:850;color:#35415b;overflow:hidden;text-overflow:ellipsis;max-width:90px}
 .row-class-name.none{color:#9296a0;font-weight:700;font-style:italic}
 .row-class-toggle{display:inline-flex;align-items:center;cursor:pointer;flex:0 0 auto}
-.row-class-toggle.disabled{visibility:hidden}
-.growth-table tr.class-off td:not(.char-cell):not(.class-cell){opacity:.88}.growth-table tr.class-off .row-class-meta{opacity:.5}.growth-table td.class-cell{border-left:1px solid rgba(117,81,24,.12);border-right:1px solid rgba(117,81,24,.12);background:rgba(217,182,108,.08)}
-@media(max-width:760px){.glance-controls{width:100%}.growth-page-head{gap:14px}}
+.row-class-toggle.disabled{opacity:.34;cursor:default}
+.growth-table tr.class-off td:not(.char-cell){opacity:.88}
+@media(max-width:760px){.glance-controls{justify-content:flex-start}.growth-page-head{gap:14px}}
 @media(max-width:1050px){.profile-info{grid-template-columns:1fr 1fr}.profile-info .info-card:last-child{grid-column:1/-1}}
 @media(max-width:760px){.profile-info{grid-template-columns:1fr}.profile-info .info-card:last-child{grid-column:auto}.growth-page-head{align-items:flex-start;flex-direction:column}.growth-link{width:100%}}
 
@@ -303,21 +321,17 @@ h1{margin:0;font-family:var(--serif);font-size:clamp(36px,5.4vw,60px);line-heigh
         <h2>Growth Rates at a Glance</h2>
         <p>Click a stat heading to sort. Click it again to reverse the sort, and a third time to clear it. Values of 50% or higher are highlighted as high growths.</p>
       </div>
-      <div class="glance-controls" role="group" aria-label="Display options">
-        <div class="glance-controls-title">Display options</div>
-        <label class="glance-opt" title="Mu's Signs of Growth passive">
-          <input id="growthMuToggle" type="checkbox" checked>
-          <span class="glance-opt-text"><strong>Mu passive</strong><small>Signs of Growth</small></span>
-          <span class="glance-switch"></span>
-        </label>
-        <label class="glance-opt glance-class-master" id="allClassGrowthsWrap" title="Enable or disable class growth modifiers for every character with a selected class">
+      <div class="glance-controls">
+        <label class="mu-toggle glance-toggle"><input id="growthMuToggle" type="checkbox" checked><span></span> Mu passive</label>
+        <label class="glance-class-master" id="allClassGrowthsWrap" title="Enable or disable class growth modifiers for every character with a selected class">
           <input id="allClassGrowthsToggle" type="checkbox">
-          <span class="glance-opt-text"><strong>Class growths</strong><small id="allClassGrowthsLabel">All class growths</small></span>
           <span class="glance-switch"></span>
+          <span id="allClassGrowthsLabel">All class growths</span>
         </label>
       </div>
     </div>
-    <div class="growth-legend"><span class="legend-chip high">50%+ High</span><span class="legend-chip mid">35–49%</span><span class="legend-chip low">0–34%</span></div>
+    <div id="growthTotalFilters"></div>
+    <div class="growth-legend"><span class="legend-chip high">50%+ High</span><span class="legend-chip mid">35–49%</span><span class="legend-chip low">0–34%</span><span class="legend-chip" style="background:#3a4354;color:#d5dbea">Faded = excluded from Total</span></div>
     <div class="growth-table-wrap"><table class="growth-table" id="growthTable"></table></div>
   </section>
   <div id="classModal" class="class-modal" role="dialog" aria-modal="true" aria-labelledby="classModalTitle">
@@ -366,6 +380,59 @@ function saveSelectedClasses(){
   const state={classes:selectedClasses,enabled:classEnabled};
   document.cookie=`${CLASS_COOKIE}=${encodeURIComponent(JSON.stringify(state))}; Max-Age=31536000; Path=/; SameSite=Lax`;
   try{localStorage.setItem("fwClassPrefsFallback",JSON.stringify(state));}catch{}
+}
+const TOTAL_STATS_COOKIE="fwGrowthTotalStats";
+function loadTotalStats(){
+  let raw=readCookie(TOTAL_STATS_COOKIE), parsed=null;
+  if(raw){try{parsed=JSON.parse(raw);}catch{}}
+  if(!parsed){try{parsed=JSON.parse(localStorage.getItem("fwGrowthTotalStatsFallback")||"null");}catch{}}
+  const result={};
+  STAT_NAMES.forEach(s=>result[s]=parsed && typeof parsed[s]==='boolean' ? parsed[s] : true);
+  return result;
+}
+const totalStatEnabled=loadTotalStats();
+function saveTotalStats(){
+  const payload=encodeURIComponent(JSON.stringify(totalStatEnabled));
+  document.cookie=`${TOTAL_STATS_COOKIE}=${payload}; Max-Age=31536000; Path=/; SameSite=Lax`;
+  try{localStorage.setItem("fwGrowthTotalStatsFallback",JSON.stringify(totalStatEnabled));}catch{}
+}
+function includedStatCount(){ return STAT_NAMES.filter(s=>totalStatEnabled[s]).length; }
+function growthTotal(values){ return values.reduce((sum,v,i)=>sum+(totalStatEnabled[STAT_NAMES[i]]?v:0),0); }
+function totalFilterMarkup(compact=false){
+  const count=includedStatCount();
+  return `<div class="total-filter-panel ${compact?'compact':''}">
+    <div class="total-filter-head">
+      <div>
+        <div class="total-filter-title">✦ Stats counted in Total</div>
+        <div class="total-filter-count">${count} of ${STAT_NAMES.length} stats included</div>
+      </div>
+      <div class="total-filter-actions">
+        <button class="total-filter-action" type="button" data-total-action="all">Include all</button>
+        <button class="total-filter-action" type="button" data-total-action="none">Exclude all</button>
+      </div>
+    </div>
+    <div class="total-stat-chips">
+      ${STAT_NAMES.map(s=>`<button type="button" class="total-stat-chip" data-total-stat="${s}" aria-pressed="${totalStatEnabled[s]}">${s}</button>`).join('')}
+    </div>
+  </div>`;
+}
+function bindTotalStatControls(scope=document){
+  scope.querySelectorAll('[data-total-stat]').forEach(btn=>btn.onclick=()=>{
+    const stat=btn.dataset.totalStat;
+    totalStatEnabled[stat]=!totalStatEnabled[stat];
+    saveTotalStats();
+    refreshGrowthDisplays();
+  });
+  scope.querySelectorAll('[data-total-action]').forEach(btn=>btn.onclick=()=>{
+    const on=btn.dataset.totalAction==='all';
+    STAT_NAMES.forEach(s=>totalStatEnabled[s]=on);
+    saveTotalStats();
+    refreshGrowthDisplays();
+  });
+}
+function refreshGrowthDisplays(){
+  if(growths && growths.classList.contains('active')) renderGrowthTable();
+  if(detail && detail.classList.contains('active') && current) showDetail(current);
 }
 let muPassive=true, growthSort='roster', growthSortAsc=true, growthSortClicks={};
 
@@ -434,7 +501,8 @@ function growthCard(name) {
   const rows = v.map((x,i)=>{
     const mod=c&&c.growth&&active?c.growth[i]:0;
     const delta=mod?`<span class="gdelta ${mod<0?'neg':''}">${mod>0?'+':''}${mod}</span>`:'';
-    return `<div class="gbar"><span class="gname">${STAT_NAMES[i]}</span><div class="track"><div class="fill ${growthClass(x)}" data-w="${Math.min(100,x/90*100)}"></div></div><span class="gval">${x}%${delta}</span></div>`;
+    const included=totalStatEnabled[STAT_NAMES[i]];
+    return `<div class="gbar ${included?'':'stat-excluded'}"><span class="gname">${STAT_NAMES[i]}</span><div class="track"><div class="fill ${growthClass(x)}" data-w="${Math.min(100,x/90*100)}"></div></div><span class="gval">${x}%${delta}</span></div>`;
   }).join('');
   const toggle = name==='Mu' ? `<label class="mu-toggle" title="Signs of Growth is active by default"><input id="muGrowthToggle" type="checkbox" ${muPassive?'checked':''}><span></span> Signs of Growth</label>` : '';
   const mu = name==='Mu' ? `<div class="info-note">${muPassive?'<strong>Passive applied:</strong> showing Mu’s effective personal growths with Signs of Growth.':'Showing Mu’s base growths without Signs of Growth.'}</div>` : '';
@@ -447,11 +515,13 @@ function growthCard(name) {
       ${c?`<div class="class-panel-foot"><label class="class-toggle"><input id="classGrowthToggle" type="checkbox" ${active?'checked':''}><span></span> Include class growths</label></div>`:''}
     </div>`;
   const classNote=c&&c.growth ? `<div class="info-note"><strong>${esc(c.name)}</strong> growth modifiers are ${active?'included in':'currently excluded from'} the totals above.</div>` : '';
-  return `<div class="info-card"><h3>Growth Rates <small>Total ${v.reduce((a,b)=>a+b,0)}%</small></h3>${toggle}
+  const total=growthTotal(v), includedCount=includedStatCount();
+  return `<div class="info-card"><h3>Growth Rates <small>Total ${total}% · ${includedCount}/${STAT_NAMES.length} stats</small></h3>${toggle}
     ${classPanel}
+    ${totalFilterMarkup(true)}
     ${rows}
     <div class="legend"><span><i style="background:var(--green)"></i>50%+ high</span><span><i style="background:var(--gold-deep)"></i>Average</span><span><i style="background:#7b818c"></i>25% or less</span></div>
-    <div class="info-note">Character growth + selected class growth = displayed growth.</div>${classNote}${mu}
+    <div class="info-note">Character growth + selected class growth = displayed growth. Only highlighted stats are counted in <strong>Total</strong>.</div>${classNote}${mu}
     <a class="source-link" href="https://serenesforest.net/fortunes-weave/characters/growth-rates/" target="_blank" rel="noopener">Character growths: Serenes Forest ↗</a><br>
     <a class="source-link" href="https://serenesforest.net/fortunes-weave/classes/growth-rates/" target="_blank" rel="noopener">Class growths: Serenes Forest ↗</a></div>`;
 }
@@ -503,10 +573,13 @@ function updateAllClassGrowthsToggle(){
 
 function renderGrowthTable(){
   const toggle=$('#growthMuToggle'); if(toggle) toggle.checked=muPassive;
+  const filterMount=$('#growthTotalFilters');
+  if(filterMount){ filterMount.innerHTML=totalFilterMarkup(false); bindTotalStatControls(filterMount); }
+
   let names=[...DATA.names];
   const idx=STAT_NAMES.indexOf(growthSort);
   if(growthSort==='name') names.sort((a,b)=>a.localeCompare(b));
-  else if(growthSort==='total') names.sort((a,b)=>displayedGrowth(b).reduce((x,y)=>x+y,0)-displayedGrowth(a).reduce((x,y)=>x+y,0) || a.localeCompare(b));
+  else if(growthSort==='total') names.sort((a,b)=>growthTotal(displayedGrowth(b))-growthTotal(displayedGrowth(a)) || a.localeCompare(b));
   else if(idx>=0) names.sort((a,b)=>displayedGrowth(b)[idx]-displayedGrowth(a)[idx] || a.localeCompare(b));
   if(growthSortAsc && growthSort!=='roster') names.reverse();
 
@@ -514,10 +587,11 @@ function renderGrowthTable(){
     ['name','Character'],
     ['class','Class'],
     ...STAT_NAMES.map(s=>[s,s]),
-    ['total','Total']
+    ['total',`Total (${includedStatCount()}/${STAT_NAMES.length})`]
   ].map(([key,label])=>{
     const sortable=key!=='class';
-    return `<th ${sortable?`data-gsort="${key}"`:''} class="${growthSort===key?'active-sort ':''}${key==='class'?'class-col':''}">${label}${growthSort===key?(growthSortAsc?' ↑':' ↓'):''}</th>`;
+    const excluded=STAT_NAMES.includes(key) && !totalStatEnabled[key];
+    return `<th ${sortable?`data-gsort="${key}"`:''} class="${growthSort===key?'active-sort ':''}${key==='class'?'class-col ':''}${excluded?'stat-excluded-col':''}">${label}${growthSort===key?(growthSortAsc?' ↑':' ↓'):''}</th>`;
   }).join('');
 
   const body=names.map(n=>{
@@ -541,11 +615,19 @@ function renderGrowthTable(){
             <input type="checkbox" disabled><span class="row-switch"></span>
           </label>
         </div>`;
+
+    const total=growthTotal(v);
+    const avgCount=Math.max(1,includedStatCount());
+    const avg=Math.round(total/avgCount);
+
     return `<tr class="${c&&!active?'class-off':''}">
       <td class="char-cell"><a class="growth-char" href="#/${encodeURIComponent(n)}">${portrait(n)}<span class="growth-char-name">${esc(n)}${n==='Mu'&&muPassive?' ✦':''}</span></a></td>
       <td class="class-cell">${classUi}</td>
-      ${v.map(x=>`<td><span class="growth-val ${growthTone(x)}">${x}%</span></td>`).join('')}
-      <td><span class="growth-val ${growthTone(Math.round(v.reduce((a,b)=>a+b,0)/v.length))}">${v.reduce((a,b)=>a+b,0)}</span></td>
+      ${v.map((x,i)=>{
+        const excluded=!totalStatEnabled[STAT_NAMES[i]];
+        return `<td class="${excluded?'stat-excluded-col':''}"><span class="growth-val ${growthTone(x)}">${x}%</span></td>`;
+      }).join('')}
+      <td><span class="growth-val ${growthTone(avg)}">${total}</span></td>
     </tr>`;
   }).join('');
 
@@ -572,7 +654,6 @@ function renderGrowthTable(){
 
   updateAllClassGrowthsToggle();
 }
-
 function recruitmentCard(name) {
   const src = `<a class="source-link" href="https://serenesforest.net/fortunes-weave/characters/recruitment/" target="_blank" rel="noopener">Source: Serenes Forest ↗</a>`;
   const r = RECRUITMENT[name];
@@ -606,6 +687,7 @@ function showDetail(name) {
     <div class="section-head"><h3 class="section-heading">Supports</h3>${list.length?`<div class="filters" role="group" aria-label="Filter by rank">${filters}</div>`:''}</div>
     <div class="support-list" id="supportList"></div>
     <div class="note-panel"><strong>Reading the chart:</strong> each badge shows a rank the pair can reach — ${badge('C')}${badge('B')}${badge('A')} means the bond climbs all the way to A. Click any name to jump to that character.</div>`;
+  bindTotalStatControls(detailContent);
   const muToggle=$('#muGrowthToggle');
   if(muToggle) muToggle.onchange=()=>{muPassive=muToggle.checked;showDetail(name);};
   const chooseClass=$('#chooseClassBtn'); if(chooseClass) chooseClass.onclick=()=>openClassModal(name);
