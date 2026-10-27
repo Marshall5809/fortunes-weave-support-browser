@@ -15,6 +15,26 @@
       <p>A character-focused way to browse the Support Chart. Choose a unit to see every support bond, growth rates and recruitment, then follow the threads to connected characters.</p>
       <div class="chips" id="stats"></div>
     </div>
+
+    <details class="recruit-planner" id="recruitPlanner" aria-label="Recruitment planner" open>
+      <summary class="planner-collapse-summary">
+        <span class="planner-summary-title"><span class="planner-summary-icon">✦</span><span>Campaign Planner</span></span>
+        <span class="planner-summary-right"><span id="plannerSummaryState">No Flame Lord selected</span><span class="planner-collapse-chevron">⌄</span></span>
+      </summary>
+      <div class="planner-inner">
+        <div class="planner-head">
+          <div>
+            <div class="planner-kicker">Route Recruitment</div>
+            <h2>Choose Your Flame Lord</h2>
+            <p>Click a Flame Lord to select their route. Click the selected Flame Lord again to clear the route and return to the normal roster.</p>
+          </div>
+          <div class="planner-save-note">✦ Saved per route</div>
+        </div>
+        <div id="flameLordPicker" class="flame-lord-picker"></div>
+        <div id="plannerRouteContent"></div>
+      </div>
+    </details>
+
     <div class="toolbar" id="toolbar">
       <div class="search-wrap" id="searchWrap">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>

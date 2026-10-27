@@ -178,6 +178,77 @@ const home=$('#home'), detail=$('#detail'), growths=$('#growths'), grid=$('#grid
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let sortMode='roster', rankFilter='all', homeScroll=0, current=null;
 
+const FLAME_LORDS=['Dietrich','Cai','Theodora','Leda'];
+const RECRUIT_LORD_COOKIE='fwRecruitFlameLord';
+const RECRUIT_PLAN_PREFIX='fwRecruitPlan_';
+let recruitFilter='all';
+
+function setPlannerCookie(name,value){
+  document.cookie=`${name}=${encodeURIComponent(value)}; Max-Age=31536000; Path=/; SameSite=Lax`;
+}
+function loadFlameLord(){
+  let saved=readCookie(RECRUIT_LORD_COOKIE);
+  if(saved===null){try{saved=localStorage.getItem(RECRUIT_LORD_COOKIE);}catch{}}
+  return FLAME_LORDS.includes(saved)?saved:'';
+}
+let activeFlameLord=loadFlameLord();
+
+function loadRecruitPlan(lord){
+  let parsed=null;
+  const raw=readCookie(RECRUIT_PLAN_PREFIX+lord);
+  if(raw){try{parsed=JSON.parse(raw);}catch{}}
+  if(!parsed){try{parsed=JSON.parse(localStorage.getItem(RECRUIT_PLAN_PREFIX+lord)||'null');}catch{}}
+  return {
+    wanted:new Set(Array.isArray(parsed?.wanted)?parsed.wanted.filter(n=>DATA.names.includes(n)):[]),
+    recruited:new Set(Array.isArray(parsed?.recruited)?parsed.recruited.filter(n=>DATA.names.includes(n)):[])
+  };
+}
+const recruitPlans=Object.fromEntries(FLAME_LORDS.map(lord=>[lord,loadRecruitPlan(lord)]));
+
+function saveRecruitPlan(lord){
+  const plan=recruitPlans[lord];
+  const state={wanted:[...plan.wanted],recruited:[...plan.recruited]};
+  const value=JSON.stringify(state);
+  setPlannerCookie(RECRUIT_PLAN_PREFIX+lord,value);
+  try{localStorage.setItem(RECRUIT_PLAN_PREFIX+lord,value);}catch{}
+}
+function selectFlameLord(lord){
+  const clearing=activeFlameLord===lord;
+  activeFlameLord=clearing?'':lord;
+  recruitFilter='all';
+  if(activeFlameLord){
+    setPlannerCookie(RECRUIT_LORD_COOKIE,activeFlameLord);
+    try{localStorage.setItem(RECRUIT_LORD_COOKIE,activeFlameLord);}catch{}
+  }else{
+    document.cookie=`${RECRUIT_LORD_COOKIE}=; Max-Age=0; Path=/; SameSite=Lax`;
+    try{localStorage.removeItem(RECRUIT_LORD_COOKIE);}catch{}
+  }
+  renderRecruitPlanner();
+  renderGrid();
+}
+function routeRecruitmentItems(name,lord=activeFlameLord){
+  if(!lord) return [];
+  const items=RECRUITMENT[name]?.items||[];
+  const exact=new Set([lord,`${lord} route`]);
+  const generic=new Set(['Prologue','Part 2','Part 3']);
+  return items.filter(x=>exact.has(x.label)||generic.has(x.label));
+}
+function hasRecruitmentPath(name,lord=activeFlameLord){
+  const items=routeRecruitmentItems(name,lord);
+  return items.length>0 && !items.every(x=>/no recruitment entry/i.test(x.text));
+}
+function routeRequirementMarkup(name,lord=activeFlameLord){
+  const items=routeRecruitmentItems(name,lord);
+  if(!items.length) return `<span class="unit-route-unavailable">No listed path on ${esc(lord)}'s route</span>`;
+  return items.map(x=>`<span><span class="route-tag">${esc(x.label)}</span>${esc(x.text)}</span>`).join('<br>');
+}
+function routeRequirementPlain(name,lord=activeFlameLord){
+  const items=routeRecruitmentItems(name,lord);
+  if(!items.length) return `No listed recruitment path on ${lord}'s route.`;
+  return items.map(x=>`${x.label}: ${x.text}`).join(' • ');
+}
+
+
 const initials = n => { const p=n.trim().split(/\s+/); return p.length>1 ? (p[0][0]+p[p.length-1][0]).toUpperCase() : n[0].toUpperCase(); };
 const slug = n => ASSET_ALIAS[n] || n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const cls = r => r==='?' ? 'Q' : r;
@@ -192,23 +263,189 @@ const dots = n => { const t=tally(n); return ['A','B','C','?'].filter(r=>t[r]).m
 const bonds = Object.values(DATA.supports).reduce((a,l)=>a+l.length,0)/2;
 $('#stats').innerHTML = `<span class="chip"><b>${DATA.names.length}</b> characters</span><span class="chip"><b>${Math.round(bonds)}</b> support bonds</span><span class="chip"><b>${Object.values(DATA.supports).reduce((a,l)=>a+l.filter(s=>s.rank==='A').length,0)/2}</b> A-rank pairs</span>`;
 
+
+function renderRecruitPlanner(){
+  const picker=$('#flameLordPicker'), content=$('#plannerRouteContent'), state=$('#plannerSummaryState');
+  if(!picker||!content) return;
+
+  if(state) state.textContent=activeFlameLord?`${activeFlameLord} route`:'No Flame Lord selected';
+
+  picker.innerHTML=FLAME_LORDS.map(lord=>`
+    <button class="flame-lord" type="button" data-flame-lord="${esc(lord)}" aria-pressed="${activeFlameLord===lord}" title="${activeFlameLord===lord?'Clear route selection':`Select ${lord}'s route`}">
+      ${portrait(lord)}
+      <span><span class="flame-lord-name">${esc(lord)}</span><span class="flame-lord-sub">${activeFlameLord===lord?'Selected · click again to clear':'Flame Lord route'}</span></span>
+    </button>`).join('');
+
+  picker.querySelectorAll('[data-flame-lord]').forEach(btn=>btn.onclick=()=>selectFlameLord(btn.dataset.flameLord));
+
+  if(!activeFlameLord){
+    content.innerHTML=`<div class="planner-route"><div class="planner-none-note">No route is selected. The character list below is behaving normally with no recruitment filters or planner controls applied.</div></div>`;
+    return;
+  }
+
+  const lord=activeFlameLord;
+  const plan=recruitPlans[lord];
+  const wanted=DATA.names.filter(n=>plan.wanted.has(n));
+  const recruited=DATA.names.filter(n=>plan.recruited.has(n));
+  const remaining=wanted.filter(n=>!plan.recruited.has(n));
+  const recruitable=DATA.names.filter(n=>hasRecruitmentPath(n,lord));
+
+  const wantedSummary=wanted.length ? wanted.map(name=>{
+    const isRecruited=plan.recruited.has(name);
+    return `<div class="plan-row is-wanted ${isRecruited?'was-recruited':''}">
+      <a class="plan-person" href="#/${encodeURIComponent(name)}">${portrait(name,'small')}<span class="plan-person-name">${esc(name)}</span></a>
+      <div class="plan-requirement">${routeRequirementMarkup(name,lord)}</div>
+      <div class="plan-row-controls">
+        <button type="button" class="plan-want-toggle active" data-plan-wanted="${esc(name)}">★ Wanted</button>
+        <label class="plan-status-toggle ${isRecruited?'':'not-recruited'}" title="Mark ${esc(name)} as ${isRecruited?'not recruited':'recruited'}">
+          <input type="checkbox" data-plan-recruited="${esc(name)}" ${isRecruited?'checked':''}>
+          <span class="plan-status-dot">✓</span><span>${isRecruited?'Recruited':'Not recruited'}</span>
+        </label>
+      </div>
+    </div>`;
+  }).join('') : `<div class="plan-empty">No wanted recruits selected yet. Add them here or use the character cards below.</div>`;
+
+  const candidates=recruitable.map(name=>{
+    const isWanted=plan.wanted.has(name), isRecruited=plan.recruited.has(name);
+    return `<div class="plan-row ${isWanted?'is-wanted':''} ${isRecruited?'was-recruited':''}">
+      <a class="plan-person" href="#/${encodeURIComponent(name)}">${portrait(name,'small')}<span class="plan-person-name">${esc(name)}</span></a>
+      <div class="plan-requirement">${routeRequirementMarkup(name,lord)}</div>
+      <div class="plan-row-controls">
+        <button type="button" class="plan-want-toggle ${isWanted?'active':''}" data-plan-wanted="${esc(name)}">${isWanted?'★ Wanted':'☆ Not wanted'}</button>
+        <label class="plan-status-toggle ${isRecruited?'':'not-recruited'}" title="Mark ${esc(name)} as ${isRecruited?'not recruited':'recruited'}">
+          <input type="checkbox" data-plan-recruited="${esc(name)}" ${isRecruited?'checked':''}>
+          <span class="plan-status-dot">✓</span><span>${isRecruited?'Recruited':'Not recruited'}</span>
+        </label>
+      </div>
+    </div>`;
+  }).join('');
+
+  content.innerHTML=`
+    <div class="planner-route">
+      <div class="planner-route-top">
+        <div class="planner-route-title">✦ ${esc(lord)} Route Recruitment Plan</div>
+        <div class="planner-counts">
+          <span class="planner-count"><strong>${recruitable.length}</strong> recruitable</span>
+          <span class="planner-count"><strong>${wanted.length}</strong> wanted</span>
+          <span class="planner-count"><strong>${remaining.length}</strong> remaining</span>
+          <span class="planner-count"><strong>${recruited.length}</strong> recruited</span>
+        </div>
+      </div>
+
+      <div class="recruit-filter-seg" role="group" aria-label="Filter roster by recruitment plan">
+        ${[
+          ['all','All characters'],
+          ['recruitable','Recruitable'],
+          ['wanted','Wanted'],
+          ['remaining','Remaining'],
+          ['recruited','Recruited']
+        ].map(([key,label])=>`<button type="button" data-recruit-filter="${key}" aria-pressed="${recruitFilter===key}">${label}</button>`).join('')}
+      </div>
+
+      <div class="recruit-plan-summary">
+        <details class="plan-summary-details" ${wanted.length?'open':''}>
+          <summary>Wanted recruits & requirements <span>${wanted.length} selected</span></summary>
+          <div class="plan-summary-body">${wantedSummary}</div>
+        </details>
+
+        <details class="route-candidate-details">
+          <summary>All ${esc(lord)} route recruitment options <span>${recruitable.length} characters</span></summary>
+          <div class="route-candidate-list">${candidates || '<div class="plan-empty">No recruitment options are listed for this route.</div>'}</div>
+        </details>
+      </div>
+    </div>`;
+
+  content.querySelectorAll('[data-recruit-filter]').forEach(btn=>btn.onclick=()=>{
+    recruitFilter=btn.dataset.recruitFilter;
+    renderRecruitPlanner();
+    renderGrid();
+  });
+
+  content.querySelectorAll('[data-plan-wanted]').forEach(btn=>btn.onclick=()=>{
+    const name=btn.dataset.planWanted;
+    plan.wanted.has(name)?plan.wanted.delete(name):plan.wanted.add(name);
+    saveRecruitPlan(lord);
+    renderRecruitPlanner();
+    renderGrid();
+  });
+
+  content.querySelectorAll('[data-plan-recruited]').forEach(input=>input.onchange=()=>{
+    const name=input.dataset.planRecruited;
+    input.checked?plan.recruited.add(name):plan.recruited.delete(name);
+    saveRecruitPlan(lord);
+    renderRecruitPlanner();
+    renderGrid();
+  });
+}
+
 function renderGrid() {
   const q = search.value.trim().toLowerCase();
   $('#searchWrap').classList.toggle('has-text', !!q);
   let names = DATA.names.filter(n => n.toLowerCase().includes(q));
+
+  if(activeFlameLord){
+    const plan=recruitPlans[activeFlameLord];
+    if(recruitFilter==='recruitable') names=names.filter(n=>hasRecruitmentPath(n));
+    else if(recruitFilter==='wanted') names=names.filter(n=>plan.wanted.has(n));
+    else if(recruitFilter==='remaining') names=names.filter(n=>plan.wanted.has(n)&&!plan.recruited.has(n));
+    else if(recruitFilter==='recruited') names=names.filter(n=>plan.recruited.has(n));
+  }
+
   if (sortMode==='az') names.sort((a,b)=>a.localeCompare(b));
   if (sortMode==='most') names.sort((a,b)=>DATA.supports[b].length-DATA.supports[a].length || a.localeCompare(b));
-  $('#resultCount').textContent = q ? `${names.length} of ${DATA.names.length} characters` : `${names.length} characters`;
-  if (!names.length) { grid.innerHTML = `<div class="empty">No one by that name…<small>Try a shorter search.</small></div>`; return; }
-  grid.innerHTML = names.map((n,i) => `
-    <a class="unit" href="#/${encodeURIComponent(n)}" style="--i:${Math.min(i,24)};text-decoration:none">
-      ${portrait(n)}
-      <span><span class="name" style="display:block">${esc(n)}</span>
-      <span class="count" style="display:block">${DATA.supports[n].length} support${DATA.supports[n].length===1?'':'s'}</span>
-      <span class="dots">${dots(n)}</span></span>
-    </a>`).join('');
-}
 
+  const filterLabel=activeFlameLord&&recruitFilter!=='all' ? ` · ${recruitFilter}` : '';
+  $('#resultCount').textContent = q
+    ? `${names.length} matching characters${filterLabel}`
+    : `${names.length} characters${filterLabel}`;
+
+  if (!names.length) {
+    grid.innerHTML = `<div class="empty">No characters match this view.<small>Clear the search or choose a different recruitment filter.</small></div>`;
+    return;
+  }
+
+  const plan=activeFlameLord?recruitPlans[activeFlameLord]:null;
+  grid.innerHTML = names.map((n,i) => {
+    const recruitable=activeFlameLord&&hasRecruitmentPath(n);
+    const wanted=!!plan?.wanted.has(n);
+    const recruited=!!plan?.recruited.has(n);
+    const routeActions=!activeFlameLord ? '' : recruitable ? `
+      <div class="unit-route-actions">
+        <button type="button" class="unit-route-btn ${wanted?'wanted':''}" data-want-recruit="${esc(n)}" title="${wanted?'Remove from':'Add to'} wanted recruits">${wanted?'★ Wanted':'☆ Want'}</button>
+        <label class="unit-route-check" title="Track whether ${esc(n)} has actually joined">
+          <input type="checkbox" data-recruited="${esc(n)}" ${recruited?'checked':''}>
+          <span class="unit-check-mark">✓</span><span>Recruited</span>
+        </label>
+      </div>` : `<div class="unit-route-actions"><span class="unit-route-unavailable">No listed ${esc(activeFlameLord)} route recruitment path</span></div>`;
+
+    return `<article class="unit ${wanted?'route-wanted':''} ${recruited?'route-recruited':''}" style="--i:${Math.min(i,24)}">
+      <a class="unit-main" href="#/${encodeURIComponent(n)}">
+        ${portrait(n)}
+        <span><span class="name" style="display:block">${esc(n)}</span>
+        <span class="count" style="display:block">${DATA.supports[n].length} support${DATA.supports[n].length===1?'':'s'}</span>
+        <span class="dots">${dots(n)}</span></span>
+      </a>
+      ${routeActions}
+    </article>`;
+  }).join('');
+
+  if(activeFlameLord){
+    grid.querySelectorAll('[data-want-recruit]').forEach(btn=>btn.onclick=()=>{
+      const name=btn.dataset.wantRecruit, plan=recruitPlans[activeFlameLord];
+      plan.wanted.has(name)?plan.wanted.delete(name):plan.wanted.add(name);
+      saveRecruitPlan(activeFlameLord);
+      renderRecruitPlanner();
+      renderGrid();
+    });
+    grid.querySelectorAll('[data-recruited]').forEach(input=>input.onchange=()=>{
+      const name=input.dataset.recruited, plan=recruitPlans[activeFlameLord];
+      input.checked?plan.recruited.add(name):plan.recruited.delete(name);
+      saveRecruitPlan(activeFlameLord);
+      renderRecruitPlanner();
+      renderGrid();
+    });
+  }
+}
 
 function giftChips(items,type){
   if(!items || !items.length) return `<span class="gift-empty">None listed</span>`;
@@ -425,9 +662,39 @@ function renderGrowthTable(){
 function recruitmentCard(name) {
   const src = `<a class="source-link" href="https://serenesforest.net/fortunes-weave/characters/recruitment/" target="_blank" rel="noopener">Source: Serenes Forest ↗</a>`;
   const r = RECRUITMENT[name];
-  if (!r) return `<div class="info-card"><h3>Recruitment</h3><div class="info-note">No recruitment entry was found for this character on the Serenes Forest page.</div>${src}</div>`;
-  const items = r.items.map(x=>`<div class="recruit-item"><span class="recruit-label">${esc(x.label)}</span><div>${esc(x.text)}</div></div>`).join('');
-  return `<div class="info-card"><h3>Recruitment</h3><div class="recruit-list">${items}</div>${r.note?`<div class="info-note">${esc(r.note)}</div>`:''}${src}</div>`;
+  if (!r) return `<div class="info-card recruitment-card"><details class="recruitment-details"><summary><div class="recruit-summary-main"><div class="recruit-summary-title">Recruitment</div><div class="recruit-summary-glance">No recruitment entry found.</div></div><span class="recruit-chevron">⌄</span></summary><div class="recruitment-body"><div class="info-note">No recruitment entry was found for this character on the Serenes Forest page.</div>${src}</div></details></div>`;
+
+  const routeItems=activeFlameLord?routeRecruitmentItems(name,activeFlameLord):[];
+  const glance=activeFlameLord
+    ? (routeItems.length ? `${activeFlameLord}: ${routeItems.map(x=>x.text).join(' • ')}` : `No listed path on ${activeFlameLord}'s route`)
+    : `${r.items.length} recruitment ${r.items.length===1?'entry':'entries'} · expand to view`;
+
+  const routeHighlight=activeFlameLord ? `
+    <div class="current-route-recruit">
+      <div class="current-route-head">✦ Current route · ${esc(activeFlameLord)}</div>
+      <div class="current-route-text">${routeItems.length?routeItems.map(x=>`<strong>${esc(x.label)}:</strong> ${esc(x.text)}`).join('<br>'):`No listed recruitment path for ${esc(name)} on ${esc(activeFlameLord)}'s route.`}</div>
+    </div>` : '';
+
+  const currentLabels=new Set(routeItems.map(x=>x.label));
+  const items = r.items.map(x=>{
+    const current=currentLabels.has(x.label);
+    return `<div class="recruit-item ${current?'route-current':''}"><span class="recruit-label ${current?'current':''}">${esc(x.label)}</span><div>${esc(x.text)}</div></div>`;
+  }).join('');
+
+  return `<div class="info-card recruitment-card">
+    <details class="recruitment-details">
+      <summary>
+        <div class="recruit-summary-main"><div class="recruit-summary-title">Recruitment</div><div class="recruit-summary-glance">${esc(glance)}</div></div>
+        <span class="recruit-chevron">⌄</span>
+      </summary>
+      <div class="recruitment-body">
+        ${routeHighlight}
+        <div class="recruit-list">${items}</div>
+        ${r.note?`<div class="info-note">${esc(r.note)}</div>`:''}
+        ${src}
+      </div>
+    </details>
+  </div>`;
 }
 
 function renderSupports() {
@@ -522,5 +789,5 @@ addEventListener('keydown', e => {
   if (e.key==='Escape') { if (typing && search.value) { search.value=''; renderGrid(); } else if (current) location.hash=''; }
 });
 grid.classList.add('intro'); setTimeout(()=>grid.classList.remove('intro'),1500);
-renderGrid(); route();
+renderRecruitPlanner(); renderGrid(); route();
 })();
