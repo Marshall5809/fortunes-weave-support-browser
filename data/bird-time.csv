@@ -1,0 +1,479 @@
+﻿Character,Order,Prompt,Reaction
+Cai,1,"How do you become an adult, anyway? It seems like everyone has to overcome a challenge to do it.",Gaze intently.
+Cai,2,Do you think I’ll ever be better with a spear than my dad?,Nod.
+Cai,3,"It’s nice to unwind a little sometimes, huh?",Sing a beautiful tune.
+Cai,4,"Sometimes, it’s like people can guess what’s on my mind. Am I that easy to read?",Tilt your head.
+Cai,5,I bet it’d be fun to play hide-and-seek with you!,Flap your wings.
+Cai,6,I can’t stand cowardice. But I guess maybe that’s better than getting used to it.,Nod.
+Cai,7,It’s neat how quick birds can move. You look like you could dodge any attack!,Spread your wings.
+Cai,8,I hear pretty birdsong sometimes. Is that you?,Sing a beautiful tune.
+Cai,9,I wonder what the world looks like through your eyes.,Gaze intently.
+Cai,10,Today’s a perfect day for fishing! You wanna come along with me sometime?,Spread your wings.
+Peter,1,I just don’t know what to do about these feelings I have for Tialla.,Sing a beautiful tune.
+Peter,2,"Everyone’s fighting. It’s scary, but I’m doing my best!",Spread your wings.
+Peter,3,What should I do when I get so scared my legs start shaking and I can’t move?,Spread your wings.
+Peter,4,"Some animals make all kinds of racket. But you don’t do that, do you?",Nod.
+Peter,5,There’s a ginji tree not far from here. We should go together and pick some of the fruit!,Spread your wings.
+Peter,6,I had a dream about a beautiful bird … I wonder if it was a friend of yours.,Tilt your head.
+Peter,7,"I like clouds. They’re so big, and it’s neat to see all the shapes they can take.",Spread your wings.
+Peter,8,"Taking it easy makes me sleepy … Hey, if I fall asleep, will you wake me up?",Nod.
+Peter,9,"It’s nice to walk around the forest and listen to all the sounds the animals make, huh?",Sing a beautiful tune.
+Peter,10,I look at you and … You make me feel like I can face even the most difficult things in life.,Gaze intently.
+Tialla,1,I can see such intelligence in your eyes. I think we could get along!,Gaze intently.
+Tialla,2,You have such beautiful plumage. Do you mind if I take a closer look?,Spread your wings.
+Tialla,3,I’d love to be a bird. I’d fly through the open windows and right into the temple library.,Flap your wings.
+Tialla,4,I like to lie in the warm sun. Do you like it too?,Spread your wings.
+Tialla,5,"These glasses are pretty nice, don’t you think? They’re a hand-me-down from my grandfather.",Nod.
+Tialla,6,"Technique is important, yes. But without knowledge of why it works, it won’t be of much use.",Nod.
+Tialla,7,I’ll always remember being with Grandpa when I was little. We heard a bard sing the prettiest song.,Sing a beautiful tune.
+Tialla,8,"I might be inexperienced, but I’ve studied hard and learned more than most people!",Spread your wings.
+Tialla,9,"If something bad is going to happen no matter what, is there any point in fighting it?",Tilt your head.
+Tialla,10,"It’s bad to overthink things, isn’t it? It makes your head go all fuzzy.",Sing a beautiful tune.
+Ultand,1,"I can save money, yes, but I feel like the odds are low that it’ll start increasing on its own.",Tilt your head.
+Ultand,2,I think this hairstyle is quite lovely. What do you think?,Nod.
+Ultand,3,Do you think I’ll have a happy family in the future?,Nod.
+Ultand,4,I’ve noticed something interesting. I find just looking at you to be unusually soothing.,Gaze intently.
+Ultand,5,"I enjoy a good fish dinner, but you can’t eat nothing but fish every day, can you?",Tilt your head.
+Ultand,6,What do you do when there’s someone you like and you want them to notice you?,Spread your wings.
+Ultand,7,I could listen to bards sing all day. Their songs are so lovely.,Sing a beautiful tune.
+Ultand,8,I feel like sometimes there’s just no avoiding snapping at your superiors.,Nod.
+Ultand,9,You’re so cute! Can I take you home with me?,Be intimidating.
+Ultand,10,I’ve been so exhausted lately. I could really do with some pampering …,Sing a beautiful tune.
+Dietrich,1,Still your mind. Let it be a secluded pond. Give yourself to slience. It is good to meditate.,Nod.
+Dietrich,2,I sense in you someting profound and menacing. Perhaps Answerer can expose it.,Be intimidating.
+Dietrich,3,I have slain giant birds. Yet I feel I would enjoy battling you even more.,Be intimidating.
+Dietrich,4,You show no signs of fear. That is unusual. You are unusual.,Gaze intently.
+Dietrich,5,I sense in you someting profound and menacing. Perhaps Answerer can expose it.,Be intimidating.
+Dietrich,6,"I cannot find a fitting opponent for a duel. I am parched. Not my throat, but my soul.",Sing a beautiful tune.
+Dietrich,7,A sea beast diverted me to this land. Perhaps it was the hand of fate.,Nod.
+Dietrich,8,I detest restraints. And you?,Tilt your head.
+Dietrich,9,I dislike those who fetter me… They constrain joy and supply boredom.,Spread your wings.
+Dietrich,10,I like your eyes. They are as bright as sunlight.,Gaze intently.
+Dietrich,11,You do not mind if I touch you?,Spread your wings.
+Fabio,1,"I have spent some time with this guise by now. I have, hmm, acclimated to it.",Gaze intently.
+Fabio,2,"I have feigned the role of a missionary for years, yet these simple beasts do not question it. Amazing.",Tilt your head.
+Fabio,3,You are the best kind og beast—no foolish words or wasted actions.,Gaze intently.
+Fabio,4,"Is this land strange, or have I become strange? I find I cannot say.",Tilt your head.
+Fabio,5,"How beautiful you are. A fine specimen for my scalpel, hmm?",Be intimidating.
+Fabio,6,Simply catching sight of a thing of beauty is enough to lift the spirits.,Sing a beautiful tune.
+Fabio,7,"In this land, the sun’s rays are relentless. I wish for something to block them.",Spread your wings.
+Fabio,8,The plants of Dagda are of much interest to me. I would observe and sketch many more.,Nod.
+Fabio,9,"I am ill-suited to physical labor. Those who are should be the ones to do it. Obvious, isn’t it?",Nod.
+Fabio,10,"What, then, is the purpose of celebrating the day of one’s birth? It escapes me.",Tilt your head.
+Esmeralda,1,"I hope my mom’s doing OK. If I could fly like you, I’d go see her.",Spread your wings.
+Esmeralda,2,"If you’re hungry, come find me! I’ll slip you some tasty fish!",Spread your wings.
+Esmeralda,3,"When I’m all by myself fishing, I like to sing. Just me, the waves, the wind, and my voice.",Sing a beautiful tune.
+Esmeralda,4,My dad taught me everything I know about the sea. I wonder if I’m shaping up to be like him.,Nod.
+Esmeralda,5,"All the nobles like to throw flashy parties, or so I hear. What’s so great about parties?",Dance.
+Esmeralda,6,What I hate the most are liars. It’s not good to deceive people and then laugh about it to yourself.,Nod.
+Esmeralda,7,My mom and dad always said I have pretty eyes. What do you think?,Gaze intently.
+Esmeralda,8,"Sometimes the guys in Dagsion turn my head, but… No! Sweetie’s the one for me!",Nod.
+Esmeralda,9,"You know, you don’t smell like other birds. Hold still. Let me check!",Be intimidating.
+Esmeralda,10,I hate being looked down on. But I guess a refined lady can’t wallop her foes…can she?,Tilt your head.
+Mikaela,1,Just because a mom’s marriage failed doesn’t mean her daughter will make the same mistake. Right?,Nod.
+Mikaela,2,"I’m not the best singer. I enjoy it, but I can’t carry a tune.",Sing a beautiful tune.
+Mikaela,3,Say there’s a guy in the tavern causing a fuss and I need to punch him out. Should I avoid the face?,Tilt your head.
+Mikaela,4,My sister taught me how to cook. She’s incredible. One taste and your heart just soars.,Spread your wings.
+Mikaela,5,I wonder how much strength is in that body. Maybe I should just give you a little squeeze.,Be intimidating.
+Mikaela,6,"Owing debts is no good. As long as they’re hanging over you, you can’t think straight.",Nod.
+Mikaela,7,Money is the root of hardship. Not that you need to worry about that!,Tilt your head.
+Mikaela,8,"Be careful out there. If you see someone suspicious, just fly off, quick as you can!",Nod.
+Mikaela,9,It’s good to get strong. That way you’re ready when it’s time to kick out your good-for-nothing husband!,Tilt your head.
+Mikaela,10,Do you have someone dear to you? I hope so. Do whatever you can to protect them.,Spread your wings.
+Theodora,1,There is a firm resolve in your eyes not often seen in birds.,Gaze intently.
+Theodora,2,"In truth, I have no fondness for insects. Do you eat them often?",Tilt your head.
+Theodora,3,"We see ourselves as indebted to Yu Phas, so we cannot help but afford her the proper reverence.",Nod.
+Theodora,4,I find myself somewhat weary of late…,Sing a beautiful tune.
+Theodora,5,"If I can make this world a place where my people can thrive, I will consider myself satisfied.",Spread your wings.
+Theodora,6,"As a child, I used to fall asleep listening to bedtime stories and lullabies.",Sing a beautiful tune.
+Theodora,7,I yearn to be a queen that Yu Phas and the people of Saramis can take pride in.,Spread your wings.
+Theodora,8,My retainer winces at the sight of the sketches I enjoy drawing. I blame this new arm of mine.,Nod.
+Theodora,9,"As a child of Damascar, I cannot be expected to place my trust in the temples.",Nod.
+Theodora,10,I have considered training my spear technique against you. Surely you can avoid my blows.,Be intimidating.
+Bonaventure,1,Future generations will surely surpass us. Hm! I look forward to it.,Spread your wings.
+Bonaventure,2,Is it obvious that I take painstaking care of my beard?,Nod.
+Bonaventure,3,Looking at you gives me a sense of déjà vu. Why do you suppose that is?,Gaze intently.
+Bonaventure,4,"Of late, I find myself mired in dismal thoughts…",Sing a beautiful tune.
+Bonaventure,5,Surely I do not lecture as much as they say. Do I?,Tilt your head.
+Bonaventure,6,"As they listened, the lovely maidens were enchanted by the bard’s voice.",Sing a beautiful tune.
+Bonaventure,7,Do you believe a bright future awaits Saramis?,Spread your wings.
+Bonaventure,8,I would say I remain sharp despite my age. Wouldn’t you agree?,Nod.
+Bonaventure,9,Would a wild and unfettered bird consider it cruel to be captured as a gift for my queen?,Be intimidating.
+Bonaventure,10,One’s duties must take precedence over all else. Even if the end result is divorce.,Tilt your head.
+Tobias,1,(yawn) I’m in the mood for some shuteye.,Sing a beautiful tune.
+Tobias,2,Gettin’ old doesn’t stop a guy from dominating on the battlefield. You know what I’m saying?,Nod.
+Tobias,3,"Hey, is it a problem to go a few glasses past your limit?",Tilt your head.
+Tobias,4,I can still hold my own against anyone half my age!,Spread your wings.
+Tobias,5,I like to sing when I work. Puts me in a good mood.,Sing a beautiful tune.
+Tobias,6,It happened again! Some folks saw me and crossed the street. Am I really that scary-lookin’?,Gaze intently.
+Tobias,7,"It’s not a bad thing to drink until you fall asleep, is it?",Tilt your head.
+Tobias,8,Love a good party! I wish we could have one every day.,Nod.
+Tobias,9,"Wine, mead, meat, and fish! That’s what I call a full meal!",Spread your wings.
+Tobias,10,You look like you wouldn’t taste so good.,Be intimidating.
+Lilian,1,Do you like sparkly things? Wanna see my gems?,Gaze intently.
+Lilian,2,I like counting my savings over and over. Makes me feel like I’m getting closer to my dream.,Tilt your head.
+Lilian,3,I’ll have to be careful not to shoot you by mistake when I go hunting.,Be intimidating.
+Lilian,4,"Next time I go hunting, I’ll bring back some for you.",Spread your wings.
+Lilian,5,Urgh… I wish the day would come that my whole family could live together like we used to.,Gaze intently.
+Lilian,6,When I think about what I’ll do with all this money I’ve saved … that’s gonna be a great day.,Nod.
+Lilian,7,"When I’ve been working nonstop, sometimes a breather does me a world of good.",Sing a beautiful tune.
+Lilian,8,"Working for someone who doesn’t trust you isn’t too bad. The money’s nice, at least.",Nod.
+Lilian,9,Would it be coldhearted of me to say that money’s more important to me than trust?,Tilt your head.
+Lilian,10,Your wings are so pretty. Let me get a better look.,Spread your wings.
+Lysander,1,Am I too serious? Sometimes people react to me as if I was nagging them.,Tilt your head.
+Lysander,2,Being with you puts me at such ease that I wish I could cage you to take you wherever I go.,Be intimidating.
+Lysander,3,"Despite the complaints, I have every right to refuse a night’s drinking. I don’t tolerate alcohol well.",Nod.
+Lysander,4,I bet it would feel incredible to fly alongside you in the clouds.,Spread your wings.
+Lysander,5,I like gazing at the sky. There’s nothing silly about that… right?,Nod.
+Lysander,6,"I must strive to surpass my father, so I can stand shoulder to shoulder with the brave veterans!",Spread your wings.
+Lysander,7,I sometimes find my own inexperience frustrating…,Sing a beautiful tune.
+Lysander,8,I’m considering if I should force myself to visit home. My stepfather and I don’t get along very well.,Tilt your head.
+Lysander,9,To look at you gives me the same feeling as when I gaze up at the sky.,Flap your wings.
+Lysander,10,"Turning down the advances of passionate women wears on me, mentally and physically…",Sing a beautiful tune.
+Leda,1,I often wonder if there’s any point in praying to the gods.,Gaze intently.
+Leda,2,I’ve been having trouble sleeping. I wonder if hearing a lullaby would help.,Sing a beautiful tune.
+Leda,3,"In the middle of playing, I often find I’m returning to songs from back home. I guess I’m nostalgic.",Gaze intently.
+Leda,4,I’m willing to use any means—make any sacrifice—to achieve my goal. Is that wrong?,Tilt your head.
+Leda,5,"I can’t stand snakes. If there was a snake here, you would chase it away, right?",Be intimidating.
+Leda,6,"Birds are good at singing, aren’t they? So how about I play my vihuela and you sing for me?",Sing a beautiful tune.
+Leda,7,"If you see me on a horse ride, you’d better swoop down and say hello.",Spread your wings.
+Leda,8,"It’s nice being showered in applause. If you want to experience it, come fly to me when I’m performing.",Spread your wings.
+Leda,9,"The next time I make food, will you try it? Humans don’t seem to like my cooking, but maybe a bird…",Tilt your head.
+Leda,10,"The key to dancing is posture. Slouch, and you’ll only give a pitiful performance.",Dance.
+Buccar,1,"The older I get, the more I find to grumble about. Perhaps I should work on that.",Tilt your head.
+Buccar,2,"You’re tenacious. If you were human, I’d want to train you as a knight.",Spread your wings.
+Buccar,3,"Most my age have had romantic relationships—I’ve only had loyalty to my lord. But that’s fine, right?",Nod.
+Buccar,4,"When I lived in Cydonia, I tutored youths in combat. Would you like me to teach you some martial arts?",Do a somersault.
+Buccar,5,Milady’s heart is consumed with a desire for revenge. What I would do to free her from it…,Sing a beautiful tune.
+Buccar,6,"Any scar you get in your lord’s service is a badge of honor. Mine is handsome, don’t you think?",Nod.
+Buccar,7,It’s strange to see a bird with such conviction in its eyes.,Gaze intently.
+Buccar,8,Let’s say an enemy attacked while your charge stood behind you. What would you do?,Be intimidating.
+Buccar,9,"When we were in hiding, I did all the cooking. Would you like me to make you something?",Nod.
+Sirocco,1,I detest shabby men. The sight of them sours my spirits. Is there something you similarly loathe?,Nod.
+Sirocco,2,"I’m envied by most men. Not that it’s any wonder why. I mean, have you looked at me?",Gaze intently.
+Sirocco,3,"It was during a hailstorm that I was left at Kalla’s temple. So when you see hail, think of me.",Nod.
+Sirocco,4,"A bird’s instrument is its chirp, but I’m no less skilled with my own. Would you like to hear?",Nod.
+Sirocco,5,"Considering my own skill in music, I thought we might enjoy playing a song together. What say you?",Sing a beautiful tune.
+Sirocco,6,I am confident in my memory. No doubt I could recognize you amidst a flock of winged creatures.,Spread your wings.
+Sirocco,7,Kalla is too resplendent for words. You ought to admire for yourself what a marvel she is.,Gaze intently.
+Sirocco,8,One must see the world in all its contours to melt others’ hearts as I do.,Gaze intently.
+Sirocco,9,The name given to me by my lady Kalla is so excellent. Do you like your own name?,Nod.
+Sirocco,10,The women of Kalla’s temple are no longer seduced by my poetry. What else could I do to woo them?,Sing a beautiful tune.
+Mu,1,I don’t know where my dad is now. Hope he’s eating and stuff.,Tilt your head.
+Mu,2,"I’m pretty knowledgeable about medicinal herbs. If you ever get injured, I’ll fix you up!",Nod.
+Mu,3,"My mom loves singing, and she;s AWFUL at it. You seem like a good singer, though, right?",Sing a beautiful tune.
+Mu,4,Sirocco’s so great—I just really wish he didn’t spend all his time womanizing.,Nod
+Mu,5,Wanna try my cooking sometimes? No one else will eat it.,Nod timidly.
+Mu,6,You have kind eyes. Looking at them really makes me feel better.,Gaze intently.
+Mu,7,Everyone treats me like a kid. I wonder if that’ll ever change.,Spread your wings.
+Mu,8,"I didn’t think I had much in common with my mom, but maybe she’s where I got mu pushiness.",Tilt your head.
+Mu,9,I want to help people when they’re in trouble. But I gotta get way stronger to do that!,Spread your wings.
+Mu,10,"Back when Mom still lived at home, she’d train me! Wanna give that a shot?",Be intimidating.
+Olympia,1,I was recognized as the Blue Rose of Caelus. Would you like to hear me play?,Spread your wings.
+Olympia,2,"I will best Leilidahna one day, I swear it. And I hope you’ll cheer me on!",Spread your wings.
+Olympia,3,Kalla is so lovely! I imagine you’d fall in love with her at first sight.,Nod.
+Olympia,4,"In either music or dance, one missed day of practice costs you some skill. Never neglect your studies!",Sing a beautiful tune.
+Olympia,5,"Oh dear, my handicraft turned out poorly again. I understand not why my artistc talent is failing me.",Tilt your head.
+Olympia,6,"Listening to music played by another, I can sometimes feel their emotions. Do you share this?",Nod.
+Olympia,7,I have the greatest confidence in my singing. And yourself?,Sing softly.
+Olympia,8,"Shall I compose a poem about you? If so, I’ll do all I can to make sure it pleases you…",Do a somersault.
+Olympia,9,What must motherhood be like? I can’t help but find the prospect terrifying.,Tilt your head.
+Olympia,10,Flowering trees bloom even as they get old. It proves that age should not impede one’s pursuits! Agreed?,Nod.
+Jester,1,I can’t arouse suspicion. Will I look more like a clown if you’re perched on my wrist?,Tilt your head.
+Jester,2,"Ahh, I’m feeling great since I got to let my freak loose! How ’bout you?",Spread your wings.
+Jester,3,"Made this costume myself. Pretty good uniform for the Infernal Clown, don’t ya think?",Spread your wings.
+Jester,4,"Makeup’s great. It hides your blood, your tears… your crimes. You wanna get made up?",Nod.
+Jester,5,Guuh. Too many nasty stories. I’m gonna sleep — keep an eye out.,Nod.
+Jester,6,"Guh, there’s nothing I hate more than people who act high and mighty. I wanna yank out their guts!",Tilt your head.
+Jester,7,Lookin’ for a new look? How about a little birdie-blood dye job? Heh heh heh!,Be intimidating.
+Jester,8,Bertrand’s so serious! The guy hardly ever takes a joke. Y’know how hard that is for me?,Nod.
+Jester,9,"Birds, you’re so lucky. In a flash, you can fly out to murder scenes! Heh heh heh!",Tilt your head.
+Jester,10,I’m tired — almost like I’m sick. I’m at such a low point… I can’t take it!,Sing softly.
+Goliath,1,"No matter how hard he gets knocked down, my brother keeps gettin’ up. He’s got spirit, that guy!",Gaze intently.
+Goliath,2,"People like having me around in battles, but other than that, usually not.",Tilt your head.
+Goliath,3,Don’t sit on my hand. I’m worried I might squish you.,Tremble.
+Goliath,4,"Ugh, busywork makes me so mad! Is there some way for me to feel better?",Sing a beautiful tune.
+Goliath,5,"Hey, if some bully ever comes at you, you talk to me. I’ll twist ’em in knots!",Nod.
+Goliath,6,"My head’s spinning… When people talk about stuff that’s complicated, I get dizzy.",Sing a beautiful tune.
+Goliath,7,"I never forget to train. If your body’s in shape, there’s nothing you can’t do!",Spread your wings.
+Goliath,8,"The chief of my old tribe was a jerk. If you ever see him, let me know, and I’ll knock him out.",Tilt your head.
+Goliath,9,They say I got giant’s blood. Bwahaha. It’s funny!,Tilt your head.
+Dante,1,"I’m partial to birds’ faces—not like fishes’, with those soulless eyes. Mirrors reflecting nothing. Gah!",Gaze intently.
+Dante,2,Intoxicants add color to one’s experiences—bring out a new side to any conversation! Don’t you agree?,Tilt your head.
+Dante,3,"I grew up in a home surrounded by natural beauty, where I awoke each morning to birdsong.",Sing a beautiful tune.
+Dante,4,I will read you the masterpiece by my father Aeneus. It’s powerful enough to move even your avian heart!,Nod.
+Dante,5,"Had I wings like yours, I could fly at once to any research subject I wanted. Imagine it!",Spread your wings.
+Dante,6,It’s too bad you don’t speak any human languages. I’m sure you’d have tales to tell.,Tilt your head..
+Dante,7,"Ahh, how I adore the city. You can sit back and witness the bustle, the confusion—the ecstasy!",Gaze intently.
+Dante,8,"Through the temples, I’ve been given so many story ideas! In that way the temples are a generous patron.",Nod.
+Dante,9,My last work was a masterpiece—but my next will be even better. Yes! For I am always improving.,Spread your wings.
+Dante,10,"In moments of reflection, a demon taunts me, telling me I have no talent. Have you heard its voice too?",Tilt your head.
+Diego,1,You have a strangely penetrating gaze. Your eyes would be an advantage in battle.,Gaze intently.
+Diego,2,"I’ve been all over, doing work as a messenger for a temple. But I’ve never seen a bird like you until now.",Tilt your head.
+Diego,3,"Orchel once saved my life. It’s only natural that I want to return the favor, right?",Nod.
+Diego,4,I don’t need to sleep on a bed. I can rest anywhere. Is it the same for you?,Nod.
+Diego,5,I know how to preserve meat by applying an herbal rub and smoking it. Do you like fragrant food?,Spread your wings.
+Diego,6,"You need agility to survive in forests. I wonder, are you agile when you’re in trees?",Do a somersault.
+Diego,7,"My tattoos mark me as a member of the Har Hali clan. I left them years ago, but they’re still part of me.",Gaze intently.
+Diego,8,"Poisonous plants will harm people, but they can be made into medicine. As always, knowledge is key.",Nod.
+Diego,9,I’m happy with my life now. There’s no reason to worry about me.,Spread your wings.
+Diego,10,"Do you worship Balor? I used to long ago, but I don’t these days.",Tilt your head.
+Loretta,1,"Birds eat fish, right? I’ll catch a big one for you sometime!",Spread your wings.
+Loretta,2,"I don’t know who my parents are, but I don’t really care. Things are good now. That’s what matters",Spread your wings.
+Loretta,3,There’s a horrible guy who I know from my temple. I’m going to punch him if he treats me badly again.,Tilt your head.
+Loretta,4,I stole things before I worked for the temple. I’d get punished if caught and still have a scar. Wanna see?,Avert your eyes.
+Loretta,5,"Even if it gets kinda boring, I can’t complain if I’ve got a place to sleep and enough to eat.",Nod.
+Loretta,6,"You live in the forest, right? So tell me… how do you feel about ghosts?",Tilt your head.
+Loretta,7,It’s better to learn how to use a blade than sit around in a classroom learning stuff. I’m right… right?,Tilt your head.
+Loretta,8,I love sweets. How about I bring you my favorites sometime?,Spread your wings.
+Loretta,9,"Ozin taught me how to defend myself. Now I want to be strong enough, so he doesn’t have to worry!",Spread your wings.
+Loretta,10,I’m pretty happy with my life now. But my heart goes out to my ol’ street-orphan friends…,Sing softly.
+Seteth,1,I enjoy writing fables. Are there any tales shared among birds? I’d love to hear them.,Sing a beautiful tune.
+Seteth,2,"Care to join me fishing? It’s nice to spend time idly, casting a fishing line.",Spread your wings.
+Seteth,3,I like lending a hand to those already trying to help themselves. Does that make me a meddler?,Flap your wings.
+Seteth,4,Do you detect anything… strange about how I look? I don’t want to stand out.,Gaze intently.
+Seteth,5,People tell me I have a stern look much of the time. Do I really seem so harsh?,
+Seteth,6,My daughter is currently in a long slumber. I hope to be at her side by the time she awakens.,Sing softly.
+Seteth,7,"Despite appearances, I carry more concerns than most people. Could I rest at your side awhile?",Nod.
+Seteth,8,The land of Dagda is full of interesting things. It’d be fascinating to explore it with you.,Flap your wings.
+Seteth,9,Your white appearance reminds of someone very close to me. I’d like a closer look.,Spread your wings.
+Ninae,1,"Looking at the clouds always is a balm for my hurt and heart. Would you join me, looking?",Look at the sky.
+Ninae,2,"When I look at someone, they in turn look away. It seems that I’m forever feared.",Gaze intently.
+Ninae,3,I like being alone in my solitude. Do you too?,Nod.
+Ninae,4,The spirits want to talk to you. They’re… curious about you.,Spread your wings.
+Ninae,5,"Yes, truly… It is wonderful fun, isn’t it… What, can’t you see who I’m speaking with?",Tilt your head.
+Ninae,6,I have a strong dislike for insects. Could you chase off any who draw too close to me?,Nod.
+Ninae,7,I fear that my words enter the ear in strange ways. I am misunderstood… and avoided.,Tilt your head.
+Ninae,8,Death haunts me. Are you haunted by death?,Tilt your head.
+Ninae,9,"I would be grateful if you would pray with me, that wayward souls may move on to the next world.",Sing a beautiful tune.
+Nezha,1,"You’ve got weird eyes. Ya know, they kinda remind me of Anatolia’s.",Tilt your head.
+Nezha,2,"We ate what we could get in the village. Even bugs. Back there, you woulda been a delicacy.",Be intimidating.
+Nezha,3,"If you see someone in trouble, you should help them. It’s that simple!",Spread your wings.
+Nezha,4,"The people of the village were real nice to me, so I wanna try and make them happy",Gaze intently.
+Nezha,5,Martial arts tightens my mind and strengthens my body. You should give it a try too!,Do a somersault.
+Nezha,6,Everybody’s always yelling at me to be quiet. Am I really that loud?,Nod.
+Nezha,7,Maybe I got a little too into my training? I’m sleepy now.,Sing softly.
+Nezha,8,"Everybody treats me like a kid just ’cause I’m short. It’s no good to judge folks on appearances, ya know?",Nod.
+Halvin,1,"I bought a cute accessory case the other day! But it was cheap, and it broke the next day.",Sing softly.
+Halvin,2,"I’m good at crafts. I ought to try making something with bird feathers, maybe.",Spread your wings.
+Halvin,3,I saw a magician make a bird appear in their hand from nowhere! I want to try it. Can you shrink?,Tilt your head.
+Halvin,4,"I can’t fight as well as everybody else, but I can maybe be useful in other ways, right?",Nod.
+Halvin,5,I like making sweets. Maybe I could make something sweet for you sometime.,Gaze intently.
+Halvin,6,Nasshim used to take care of me. He was so nice. I still think about him sometimes…,Spread your wings.
+Halvin,7,"I’ve been thinking about my next performance, and I think people would love it if we did a trick together.",Do a somersault.
+Halvin,8,"When I think about the future, I always end up worrying about stuff I can’t do anything about.",Flap your wings.
+Halvin,9,"It doesn’t matter how long I’m gone, thinking of my family and my hometown makes me feel so lonely.",Sing a beautiful tune.
+Halvin,10,"I think taste is more important than looks when it comes to vegetables, don’t you?",Nod.
+Dadao,1,Anatolia’s always so hard on me. You think it’s her way of flirting with me?,Tilt your head.
+Dadao,2,I can tell how a building is put together with just a glance. What about you?,Tilt your head.
+Dadao,3,"My parents are gone, but I don’t really feel lonely. I’m stronger than anyone, ya know!",Spread your wings.
+Dadao,4,"Being hungry can make ya sad. You ever need food, you let me know.",Nod.
+Dadao,5,Everyone in the village is always hungry. I wanna make it so they can all eat whenever they want.,Gaze intently.
+Dadao,6,"Back in the village, we hunted and ate sandworms. I’ll bring you some sometime!",Nod.
+Dadao,7,"I can tell you’re interested in me. I’m a good-lookin’ guy, so I can’t blame ya!",Gaze intently.
+Dadao,8,"Nothing personal, but you don’t really look that tasty. You’re all bones for one thing. I’ll save you for last.",Be intimidating.
+Dadao,9,"Know what? I like you. How about if you join the Dadao Gang? i’m strong, and I’ll take care of you!",Spread your wings.
+Sha Lan,1,You’re quite calm around humans. Aren’t you afraid of creatures bigger than you?,Spread your wings.
+Sha Lan,2,"Our mission, the hopes of the villagers… It’s all important, but so is protecting family, right?",Nod.
+Sha Lan,3,I have no idea what birds eat. Maybe you could let me try one of your meals sometime?,Nod.
+Sha Lan,4,I’m always drawn to people older than me. My first love was like that. Is that why I can’t forget them?,Sing a beautiful tune.
+Sha Lan,5,It can be wonderful traveling the outside world. But it does get scary sometimes.,Sing softly.
+Sha Lan,6,Your eyes are so charming. I wonder how mine look to you?,Gaze intently.
+Sha Lan,7,I love taking care of others. Do you think I could preen your feathers sometime?,Spread your wings.
+Sha Lan,8,"If I’d remained in the village, I could be holding a baby in my arms.",Tilt your head.
+Sha Lan,9,You’ve seen the world from up in the sky. I wish I spoke bird language. I bet you have a lot of stories.,Flap your wings.
+Sha Lan,10,I’m always a little wary of talking to people from the temples. What about you?,Nod.
+Ursula,1,I know I can’t return home… But… sometimes I can’t help but pine for what’s gone…,Gaze intently.
+Ursula,2,"In my homeland, I lived a life of hiding… But in Dagda, I’m free to be myself. Do you like it here?",Nod.
+Ursula,3,"I can’t stand a messy desk. If it’s just a little bit out of sorts, I get an overwhelming urge to clean it.",Nod.
+Ursula,4,You seem far sharper than the average bird. How would you like to be a pet at the company?,Be intimidating.
+Ursula,5,"To be honest, sometimes I get so annoyed at my own jealous feelings. I wish I could control them better…",Sing a beautiful tune.
+Ursula,6,"Your feathers are simply gorgeous. Perhaps, one day, I can draw your portrait.",Spread your wings.
+Ursula,7,"Hey… If you ever see me become a beast, remember that you mustn’t approach me, alright?",Tilt your head.
+Ursula,8,I can’t read your thoughts like other animals… Are you really a bird?,Tilt your head.
+Ursula,9,"Back then, when I was being hunted for my crest, I thought if I was a bird, maybe I could just fly away.",Spread your wings.
+Ursula,10,Talimun has saved me in far more ways than one. Attending his misadventures is a small price to pay.,Gaze intently.
+Ludia,1,"Dante’s work is amazing! Here, let me read you something!",Nod.
+Ludia,2,"Father always said I was a fantastic swordsman. Couldn’t ever impress him with axes, though…",Tilt your head.
+Ludia,3,I’ve been working so hard at the company. Whew! I think I need a vacation.,Sing a beautiful tune.
+Ludia,4,"You know, I do a little bit of writing myself. I should write something with you as the main character.",Spread your wings.
+Ludia,5,"I saw this couple the other day, and they had so much passion! Kinda made me jealous",Spread your wings.
+Ludia,6,If I had wings? I’d travel the world and see everything this life has to offer.,Spread your wings.
+Ludia,7,"Ugh! Gummy, sticky, greasy… I just hate dirty things.",Nod.
+Ludia,8,"One day, I’d love to be the main character of some grand adventure. Would you want to come with me?",Nod.
+Ludia,9,"Ugggh. Turns out, the person I like already has a partner… How will I ever recover…",Sing a beautiful tune.
+Ludia,10,You’re pretty smart for a bird. Are you one of those spirits in disguise like in the stores?!,Tilt your head.
+Fianna,1,Your eyes are so kind. They make me feel safe…,Gaze intently.
+Fianna,2,"Maybe the reason I’m drawn to you is because, like that person, you’re hard to grasp…",Cling to your perch.
+Fianna,3,Romance has always been a bit tough for me to grasp. Maybe a friend like you is all I need.,Spread your wings.
+Fianna,4,Oh… I’m sorry… I suddenly feel like crying…,Sing a beautiful tune.
+Fianna,5,Love is a strange thing… Have you ever had feelings for someone?,Nod.
+Fianna,6,"Sometimes when I read poetry, I swear it’s almost like I’m listening to music.",Sing a beautiful tune.
+Fianna,7,"If you’re ever hurt, come find me, and I’ll heal you.",Spread your wings.
+Fianna,8,"War and pain, fighting and hate… All of it just makes me sad… I’d like to avoid those things if I can.",Nod.
+Fianna,9,"There are times when I can’t take my mind off of the one I adore… That’s normal, right?",Nod.
+Fianna,10,Um… Doesn’t being with me… bore you?,Tilt your head.
+Simon,1,"It’s not too hard to be a merc, really. Fly over a battlefield, and maybe you’ll see some in action!",Flap your wings.
+Simon,2,Nosy people drive me up the wall. You know what I mean?,Nod.
+Simon,3,Just because my ancestors were from Damascar doesn’t mean I pray to Yu Phas too.,Nod.
+Simon,4,"Now, if I could fly from battlefield to battlefield? Man, that would be the life",Sing with vigor.
+Simon,5,"You’re a strange one, aren’t you? An animal that cares about living longer is usually more careful.",Be intimidating.
+Simon,6,"Launching a surprise attack is probably easier if you can fly, huh? As long as no archers are around.",Do a somersault.
+Simon,7,"Sometimes, even when I’m not on the battlefield, I feel this… tension in me, you know?",Sing a beautiful tune.
+Simon,8,"You know, I’ve always liked carving little wooden statues. Maybe, one day, I’ll carve you.",Sit still.
+Simon,9,You’re in the pink of health. Like you could survive anywhere.,Spread your wings.
+Simon,10,"In the field, nice guys always die fast. One minute, they’re cracking jokes, and the next… they’re gone.",Sing a beautiful tune.
+Alexandra,1,Have you ever been to my home in Tellus? It’s a wealthy county and has an easiness to it.,Spread your wings.
+Alexandra,2,How do you take care of your feathers? They’re so pretty.,Preen.
+Alexandra,3,I heard someone talking about me behind my back earlier. What should I do about that?,Be intimidating.
+Alexandra,4,It must be scary to live out in the wild. Please call for me if you’re ever gong somewhere dangerous!,Nod.
+Alexandra,5,Would you like to meet Bucephalus? It’d be fun if you two were friends!,Nod.
+Alexandra,6,"It feels great to soar in the sky, doesn’t it? How high can you fly?",Spread your wings.
+Alexandra,7,I’m confident in my abilities in battle. I should show you what I can do sometime!,Gaze intently.
+Alexandra,8,"I’m trying to live up to the name of “Silver Maiden,” and with Bucephalus, I’m sure that I will!",Spread your wings.
+Alexandra,9,I go on long rides every now and then. Would you like to come along sometime?,Spread your wings.
+Alexandra,10,"I have nothing but happy memories of my parents. But I do get sad, knowing they live only in memory.",Sing a beautiful tune.
+Benditz,1,"Rarities fetch a high price, which is why I like them. Not that you’d know about such things.",Tilt your head.
+Benditz,2,"Have you read the War Chronicle of Hasdrubal? I assure you, its scenes will thrill you to the core!",Do a somersault.
+Benditz,3,"I was a fine specimen of a man in my youth. No matter where I went, people sang my praises!",Sing a beautiful tune.
+Benditz,4,"No matter how many times you fail, your dream doesn’t die until you do. Good advice, right?",Spread your wings.
+Benditz,5,"I am brilliant, amazing, dashing, and more! And I’m a perfect general! You agree fully, correct?",Nod.
+Benditz,6,"Words like “repent,” “regret,” and “reform” are all strange to me. But I suspect you do all of that.",Be intimidating.
+Benditz,7,"I despise a bland meal. I want a life of luxury. You must want that too, yes?",Nod.
+Benditz,8,It’s only a matter of time before you realize that I was the best leader of this whole era!,Gaze intently.
+Benditz,9,I got a secret under my eye patch that relates to my past. I won’t tell you about it though. HA!,Tilt your head.
+Catania,1,Caring for one’s personal appearance is crucial. Are you taking good care of yourself?,Spread your wings.
+Catania,2,I keep hearing about people getting married… Where is my ideal partner? I’ve been searching.,Sing softly.
+Catania,3,"I’ve traveled for years, so I learned how to amuse myself. Care to learn how to while away the time?",Spread your wings.
+Catania,4,"I have a terrible scar that’s hidden by my outfit. It’s proof that I fight bravely. Impressive, yes?",Nod.
+Catania,5,I can tell if a bird’s singing voice is truly beautiful or not. Is your song of sterling quality?,Sing a beautiful tune.
+Catania,6,"Always conduct yourself well, or it reflects badly on your lord. Keep that in mind if you serve someone.",Nod.
+Catania,7,"If you value top quality, you develop an eye for it. And I am a sterling knight, you know.",Gaze intently.
+Catania,8,"My pockets are getting emptier, and so is my stomach. Maybe I’ll just eat some bird food here…",Be intimidating.
+Catania,9,I used to serve a noble. But a terrible incident led to his downfall. Very regrettable…,Sing softly.
+Catania,10,My pegasus has a refined palate and kicks away any food that’s not up to par. It’s bad behavior.,Sing softly.
+Guzran,1,All this peace and quiet is making me sleepy. How about you do something to wake me up?,Do a somersault.
+Guzran,2,"Are you living your life to the fullest? If not, why bother being alive at all!",Spread your wings.
+Guzran,3,"Ha! A lady socked me real hard a little earlier. That just means she was shy, yeah?",Tilt your head.
+Guzran,4,"I earned my nickname, Unkillable Guzran, one scar at a time. Pretty cool, right?",Nod.
+Guzran,5,"I like your determined look. Hey, you know you can count on the Unkillable Guzran, right?",Nod.
+Guzran,6,I’m one of the most seasoned mercenaries here! Do I have the look of a battle survivor?,Nod.
+Guzran,7,Lots of people got to where they are today because of me. One merc is now imperial inspector!,Tilt your head.
+Guzran,8,"My advice—make certain you’re the one to make the calls in battle. Otherwise, it’s a sure way to die.",Nod.
+Guzran,9,"The truth is—my true form is that of a bird. So I wonder, are you really a person?",Tilt your head.
+Guzran,10,"There are only so many meals we can eat in our lifetimes. Best to eat what you want, yeah?",Nod.
+Inyoni,1,"I lose all track of time when I’m practicing with my bow. So if you see me at night, give a holler!",Sing a beautiful tune.
+Inyoni,2,"When I’m fighting, I’ll say some horrifying things. Like I did when I possessed those awful remains.",Sing a beautiful tune.
+Inyoni,3,"It’s nice having family and friends to help when you’re in trouble. Always treasure your friends, OK?",Nod.
+Inyoni,4,I used to hunt birds with my bow. Ha! Want to see if you can outfly one of my arrows?,Be intimidating.
+Inyoni,5,I don’t leave much of an impression on people. But you’re so beautiful I bet you do…,Tilt your head.
+Inyoni,6,I wonder how I would have fared in the Heroic Games if I didn’t have Ugo’s bow…,Tilt your head.
+Inyoni,7,I’m not very skilled at dealing with men. Could you help me out if one harasses me?,Be intimidating.
+Inyoni,8,Everyone back at my village speaks in a very unique way. Do birds have accents or dialects?,Tilt your head.
+Inyoni,9,Do you know the Order of Mithras? I’d suggest that you steer clear of them.,Nod.
+Io,1,I’m a bit tired. Forgive me if I fall asleep.,Sing softly.
+Io,2,What would you do if I said there’s a venomous spider behind you? Let’s practice. Drive it off… now!,Be intimidating.
+Io,3,You bring a sort of calm atmosphere to a place. Mind if I linger here a little longer?,Nod.
+Io,4,Do you think it wrong to accept payment from a lord you’re drawn to serve?,Tilt your head.
+Io,5,"I’m not all that ill-tempered, really. I wonder if you’d like to be more sociable too.",Tilt your head.
+Io,6,"Do you think we need someone to lead us? I believe in such an ideal, and I welcome your thoughts on it.",Spread your wings.
+Io,7,"Ha, you have an interesting face. I never get tired of seeing it.",Tilt your head.
+Io,8,"My beloved steed, Rocinan, is aging very well. Do you think that when you see him?",Gaze intently.
+Io,9,I end up saying too much when talk turns to lords and their duties. Should I say less about it all?,Tilt your head.
+Io,10,It’s natural to help one’s friends and also the weak. But it sometimes takes courage to do what’s right.,Sing boldly.
+Jasmine,1,I’ve traveled all over the land. Have you visited lots of places too?,Flap your wings.
+Jasmine,2,"When you do nothing but battle, you can end up feeling pretty frazzled…",Sing softly.
+Jasmine,3,I have things I want to protect. Is there something that you want to protect?,Spread your wings.
+Jasmine,4,"Sometimes you’ve got to get sneaky if you want to survive. I mean, when you really have to!",Nod.
+Jasmine,5,What’s it like if you get hit by heavy rain while you’re flying?,Do a somersault.
+Jasmine,6,"When you love your family and it all falls apart, that’s about as bad as it gets, right?",Nod.
+Jasmine,7,"If someone settles down somewhere, a big home is best to house a big family, right?",Nod.
+Jasmine,8,"I had a husband, you know. He died some time ago, but I wonder if he watches over me.",Look at the sky.
+Jasmine,9,I don’t value money over other things. But aren’t there things you can’t protect without money?,Tilt your head.
+Jasmine,10,"You always seem to be alone. Don’t you get lonely out there in the world, all by yourself?",Tilt your head.
+Kiroc,1,I’ve been praying a lot ever since I’ve been seeing ghosts of those I killed. You pray too if you see ’em.,Nod.
+Kiroc,2,My old crew used to love me. I hope they’re doing alright. You think they’ll join up with me again?,Nod.
+Kiroc,3,"You should join my Black-Swan Pirates. I tell you, there’s nothing more fun than life as a pirate!",Nod timidly.
+Kiroc,4,The Order of Mithras is rotten to the core. They’re far more dangerous than pirates.,Nod.
+Kiroc,5,"That fool sank my ship, but I still see it sailing right and fine in my dreams. A beautiful vessel!",Sing softly.
+Kiroc,6,"I’m the Rukh, and you’re a little bird. So you’ll help a friend out if I’m chased down, right?",Spread your wings.
+Kiroc,7,"What would you do if you saw a ghost? Truth be told, I just faint dead away. Pathetic, I know…",Tilt your head.
+Kiroc,8,"When I get my crew together, I swear I’ll do no harm, only look for treasure. Would you come with me?",Tilt your head.
+Kiroc,9,"You know a royal jerk who goes by Talimun? Peck out his eyes if you see him, alright?",Be intimidating.
+Kiroc,10,"They say I’m successor to the legendary pirate Drake. His hideout was all mine. Incredible, right?",Spread your wings.
+Majde,1,"If my Southern Cross Brigade crew had battled in the games, we would have won, right?",Nod.
+Majde,2,That damned Order of Mithras left me for dead. They can’t abandon the great Majide!,Nod.
+Majde,3,I’m bored as hell. Got a good move to show me?,Do a somersault.
+Majde,4,"You’re not scared of me, which means you don’t get how great I am. How about I show you?",Be intimidating.
+Majde,5,Nothin’ better than smacking around nobodies when I’m annoyed. What do you do when you are?,Sing with vigor.
+Majde,6,"I shoved a mouthy drunk real hard. Felt pretty good, i gotta admit. But now it’s time I catch some z’s.",Sing softly.
+Majde,7,Everyone knows the great Majide has the strength of 10 men. How about I smash some rocks for you?,Spread your wings.
+Majde,8,None of these grunts around here have a chance of beating me. Why do they even try?,Tilt your head.
+Majde,9,"Prison cells are my home away from home. Next time I’m locked up, find me and we’ll play a game!",Tilt your head.
+Majde,10,"Doesn’t matter who comes at me—they’re no match for the great Majide, right?",Spread your wings.
+Noctula,1,"Back home, I don’t rank that high in importance, but as the chief’s daughter, I’m singled out for marital challenges. Can you see why I hate it back there?",Nod.
+Noctula,2,"I grew up thinking you had to marry the person who can defeat you in a fair fight. It’s a dumb tradition, right? I’m tougher than the guys back home anyway.",Sing boldly.
+Noctula,3,"I learned a lot living on a mountain, like hunting and blacksmithing. Good to have skills, right?",Nod.
+Noctula,4,I like fighting with my fists. Keeps me feeling free and nimble in battle. Get what I mean?,Nod.
+Noctula,5,"I trained most days of my life, going up and down Mount Orgus. Want me to kick your perch in half?",Be intimidating.
+Noctula,6,I want to add a new move to my wrestle-dancing. Have any great ideas?,Do a somersault.
+Noctula,7,"I’d like to call you something more than “bird.” How’s Birdlee? Nah, that’s not right. Any advice?",Tilt your head.
+Noctula,8,My third eldest brother is traveling the world like I am. Say hello if you see him. He loves animals.,Flap your wings.
+Noctula,9,"Something good is coming up soon. My gut is always right, you know!",Gaze intently.
+Noctula,10,You’re always here alone. Did you leave your flock? I did something like that too. Let’s be friends!,Spread your wings.
+Nuzzuno,1,"City life is still strange to a forest-dweller like me. If I get lost in Dagsion, would you show me the way?",Flap your wings.
+Nuzzuno,2,"Birds have many meals each day, yes? I hope you eat well and fly vigorously",Flap your wings.
+Nuzzuno,3,We of the Har Hali live in harmony with nature. You are not the first bird I would befriend.,Spread your wings.
+Nuzzuno,4,Hm. These disheveled feathers must make it hard to fly. I’ll straighten them for you.,Sit still.
+Nuzzuno,5,I suspect no one could tarnish your wings. Keep true to your way of life. Let no one take you captive.,Spread your wings.
+Nuzzuno,6,My skills did not live up to those of previous chiefs. Have I been of use to my people at all?,Sing softly.
+Nuzzuno,7,A mere graze from our poison arrows can fell a bird instantly. Stay well away during our hunts.,Be intimidating.
+Nuzzuno,8,My people use the behavior of animals as an omen for battle. A bold attitude is a good omen.,Be intimidating.
+Nuzzuno,9,Rule based on strength only chokes the people. I’m sure you would also feel suffocated under oppression.,Nod.
+Nuzzuno,10,We must not isolate ourselves out of pride. That way is death. Do not forget this.,Nod.
+Nydine,1,Merceries are more selective about work than you’d think. People don’t understand that.,Nod.
+Nydine,2,You have to learn a little bit about everything to grow. What can I learn from your movements?,Do a somersault.
+Nydine,3,I studied hard to learn how to read and write. Do you think you could do that too?,Nod.
+Nydine,4,"After I left my kingdom, I broke one of its laws by learning to write. Yu Phas will surely punish me.",Tilt your head.
+Nydine,5,Don’t worry. I have no interest in hunting you. I don’t even like meat.,Gaze intently.
+Nydine,6,"People rely on me a lot, but I have to admit it’d be nice if I could rely on others more.",Nod.
+Nydine,7,I like eating sweet things. That surprises people. But is that really so unexpected?,Tilt your head.
+Nydine,8,"I left my kingdom behind, but there are still many in Saramis who look up to me. I’m grateful.",Spread your wings.
+Peppe,1,More of the people here grow to love us by the day. Is this the effect kings have on others?,Spread your wings.
+Peppe,2,We find ourselves bored at the moment. Can you perform any tricks?,Do a somersault.
+Peppe,3,We have enjoyed seafood since our earliest days and would like to savor Dagdan specialties with you.,Spread your wings.
+Peppe,4,"We are from Brigid, which is a kingdom that loves nature. So we enjoy our time with you.",Spread your wings.
+Peppe,5,"We deem you worthy of our protection, so if you’re ever in trouble, please let us handle it",Spread your wings.
+Peppe,6,You must visit our kingdom. We would feed and entertain you magnificently!,Nod.
+Peppe,7,"We are very fond of the people of Brigid. So if you see any, please tell us, alright?",Nod.
+Peppe,8,You remind us of the spirits of our homeland. Perhaps we are connected somehow.,Gaze intently.
+Peppe,9,"To learn the ways of a foreign land, there’s no better way than to mingle with its people, right?",Nod.
+Sofia,1,"Be careful not to get too near me when I’m really hungry. You do look delicious, I’m sorry to say.",Gaze intently.
+Sofia,2,"Don’t you think Lord Solel is wonderful? He’s so kind, amazing, and just plain great!",Nod.
+Sofia,3,"I grew up enjoying food at my dad’s feasts with his friends. If I have a big party like that, want to come?",Spread your wings.
+Sofia,4,"I have a VERY healthy appetite. The pay I get from the temple can’t cover my meals. Tragic, right?",Sing softly.
+Sofia,5,I like to give everyone cute little names. I hope it’s cute anyway. Maybe it’s kind of weird?,Tilt your head.
+Sofia,6,"I love spicy food more than anything. Too bad it always gets eaten up quick. Why is that, I wonder?",Tilt your head.
+Sofia,7,"I never get tipsy, no matter how many mugs of suds I drink. How about you?",Tilt your head.
+Sofia,8,"I was born and raised at Lyoshan Fort. If you ever go there, watch out for all the ruffians!",Nod.
+Sofia,9,"If I think someone’s cute, I can’t help calling them a fun name. I’m going to call you Li’l Birdie!",Spread your wings.
+Sofia,10,"Mmm, roasted? Braised? Oh! Sorry, I didn’t mean anything by it. You don’t look tasty at all!",Be intimidating.
+Yang Jie,1,"When my body has perished, and I float as a soul, let’s frolic in the sky. What do you say?",Spread your wings.
+Yang Jie,2,There is a saying that a bird flown from the coop is truly still close to home. Does that sound right?,Nod.
+Yang Jie,3,To live or die… To be tipsy or sober…These are similar states in a fleeting world. Don’t you agree?,Tilt your head.
+Yang Jie,4,Birdsong makes everything better. It pairs especially well with a fine drink. Wouldn’t you say?,Sing a beautiful tune.
+Yang Jie,5,I’ve heard of a monstrous bird who turned perfectly good wine into poison. I trust that’s not you?,Tild your head.
+Yang Jie,6,I have the odor of hitting the bottles too heavily. Yet you don’t mind. Do you enjoy a tipsy drink?,Tilt your head.
+Yang Jie,7,Some say that belief is the same as not thinking. I disagree. Not thinking is entirely different.,Nod.
+Yang Jie,8,Practicing silence was part of my training. How about you give it a try?,Gaze intently.
+Yang Jie,9,"If birds have hearts, I wonder what kind beats under those feathers of yours.",Spread your wings
+Zarcone,1,"Good idea not fighting anyone who looks too dangerous. Whoever lasts longest… wins, right?",Nod.
+Zarcone,2,"Got parents? If you don’t, you’d fit in with me and my pals just fine. You could join our bandit crew!",Tilt your head.
+Zarcone,3,I thought I could get anything I want through plunder and fighting. But how can I get myself a family…,Sing softly.
+Zarcone,4,"If anyone gets robbed or snuffed out … they shouldn’t be so weak! Fight harder, that’s what I say!",Be intimidating.
+Zarcone,5,It’s common sense to pick off the weaklings in battle. You look like easy prey to me!,Be intimidating.
+Zarcone,6,People think bandits eat nothin’ but meat. It’s vegetables all the way with me. Keep that in mind.,Nod.
+Zarcone,7,"The guys in the Gaia Brigade left me for dead as soon as we lost our battle in the games. Cruel, huh?",Nod.
+Zarcone,8,"The mountains are like home to me. I should build me and my pals a castle up there, right?",Spread your wings.
+Zarcone,9,There’s no way I can give up on pillaging now! You know how many years I’ve been at it?,Tilt your head.
+Zarcone,10,Weaklings like you end up as dinner. So try to fly extra-high so the arrows don’t get you.,Flap your wings.

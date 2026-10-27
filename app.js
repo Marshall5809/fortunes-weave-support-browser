@@ -25,7 +25,7 @@ function parseCSV(text){
   return rows.filter(r=>r.some(x=>x!=='')).map(r=>Object.fromEntries(header.map((h,i)=>[h,r[i]??''])));
 }
 
-const [characterRows,supportRows,growthRows,classRows,recruitmentRows,abilityRows,giftRows,preferenceRows] = await Promise.all([
+const [characterRows,supportRows,growthRows,classRows,recruitmentRows,abilityRows,giftRows,preferenceRows,birdTimeRows] = await Promise.all([
   loadText('./data/characters.csv').then(parseCSV),
   loadText('./data/supports.csv').then(parseCSV),
   loadText('./data/growths.csv').then(parseCSV),
@@ -33,7 +33,8 @@ const [characterRows,supportRows,growthRows,classRows,recruitmentRows,abilityRow
   loadText('./data/recruitment.csv').then(parseCSV),
   loadText('./data/abilities.csv').then(parseCSV),
   loadText('./data/gifts.csv').then(parseCSV),
-  loadText('./data/preferences.csv').then(parseCSV)
+  loadText('./data/preferences.csv').then(parseCSV),
+  loadText('./data/bird-time.csv').then(parseCSV)
 ]);
 
 const STAT_NAMES=["HP","Str","Mag","Spd","Dex","Def","Res","Lck","Cha"];
@@ -83,6 +84,11 @@ preferenceRows.forEach(r=>{
   if(r.Type==='Like') p.likes.push(r.Preference);
   else if(r.Type==='Interest') p.interests.push(r.Preference);
 });
+
+const BIRD_TIME=Object.fromEntries(names.map(n=>[n,[]]));
+birdTimeRows
+  .sort((a,b)=>a.Character.localeCompare(b.Character)||Number(a.Order)-Number(b.Order))
+  .forEach(r=>(BIRD_TIME[r.Character]??=[]).push({prompt:r.Prompt,reaction:r.Reaction}));
 
 
 
@@ -200,14 +206,21 @@ function loadRecruitPlan(lord){
   if(!parsed){try{parsed=JSON.parse(localStorage.getItem(RECRUIT_PLAN_PREFIX+lord)||'null');}catch{}}
   return {
     wanted:new Set(Array.isArray(parsed?.wanted)?parsed.wanted.filter(n=>DATA.names.includes(n)):[]),
-    recruited:new Set(Array.isArray(parsed?.recruited)?parsed.recruited.filter(n=>DATA.names.includes(n)):[])
+    recruited:new Set(Array.isArray(parsed?.recruited)?parsed.recruited.filter(n=>DATA.names.includes(n)):[]),
+    supportProgress:parsed?.supportProgress && typeof parsed.supportProgress==='object' ? parsed.supportProgress : {},
+    renownDone:parsed?.renownDone && typeof parsed.renownDone==='object' ? parsed.renownDone : {}
   };
 }
 const recruitPlans=Object.fromEntries(FLAME_LORDS.map(lord=>[lord,loadRecruitPlan(lord)]));
+function recruitedRoutes(name){
+  return FLAME_LORDS.filter(lord=>recruitPlans[lord]?.recruited?.has(name));
+}
 
 function saveRecruitPlan(lord){
   const plan=recruitPlans[lord];
-  const state={wanted:[...plan.wanted],recruited:[...plan.recruited]};
+  const supportProgress=Object.fromEntries(Object.entries(plan.supportProgress||{}).filter(([,v])=>Number(v)>0));
+  const renownDone=Object.fromEntries(Object.entries(plan.renownDone||{}).filter(([,v])=>v===true));
+  const state={wanted:[...plan.wanted],recruited:[...plan.recruited],supportProgress,renownDone};
   const value=JSON.stringify(state);
   setPlannerCookie(RECRUIT_PLAN_PREFIX+lord,value);
   try{localStorage.setItem(RECRUIT_PLAN_PREFIX+lord,value);}catch{}
@@ -247,6 +260,37 @@ function routeRequirementPlain(name,lord=activeFlameLord){
   if(!items.length) return `No listed recruitment path on ${lord}'s route.`;
   return items.map(x=>`${x.label}: ${x.text}`).join(' • ');
 }
+function requirementTargets(name,lord=activeFlameLord){
+  const text=routeRecruitmentItems(name,lord).map(x=>x.text||'').join(' ');
+  const support=[...text.matchAll(/Support\s+(\d+)/gi)].map(m=>Number(m[1])).filter(Number.isFinite);
+  const renown=[...text.matchAll(/Renown\s+(\d+)/gi)].map(m=>Number(m[1])).filter(Number.isFinite);
+  return {
+    support:support.length?Math.max(...support):0,
+    renown:renown.length?Math.max(...renown):0
+  };
+}
+function requirementProgressMarkup(name,lord,plan){
+  const req=requirementTargets(name,lord);
+  if(!req.support && !req.renown) return '';
+  const current=Math.max(0,Math.min(req.support,Number(plan.supportProgress?.[name]||0)));
+  const renownDone=plan.renownDone?.[name]===true;
+  const support=req.support?`
+    <div class="req-progress-group">
+      <span class="req-progress-label">Support <b>${current}/${req.support}</b></span>
+      <div class="support-progress-steps" aria-label="${esc(name)} support progress">
+        ${Array.from({length:req.support},(_,i)=>{
+          const level=i+1, achieved=level<=current;
+          return `<button type="button" class="support-step ${achieved?'achieved':''}" data-support-progress="${esc(name)}" data-support-level="${level}" title="Set support progress to ${level}">${level}</button>`;
+        }).join('')}
+      </div>
+    </div>`:'';
+  const renown=req.renown?`
+    <button type="button" class="renown-progress-toggle ${renownDone?'achieved':'not-achieved'}" data-renown-progress="${esc(name)}" title="Toggle whether Renown ${req.renown} has been reached" aria-pressed="${renownDone}">
+      <span class="renown-progress-check">${renownDone?'✓':'!'}</span>
+      <span class="renown-progress-text">Renown ${req.renown}</span>
+    </button>`:'';
+  return `<div class="requirement-progress">${support}${renown}</div>`;
+}
 
 
 const initials = n => { const p=n.trim().split(/\s+/); return p.length>1 ? (p[0][0]+p[p.length-1][0]).toUpperCase() : n[0].toUpperCase(); };
@@ -284,41 +328,40 @@ function renderRecruitPlanner(){
   }
 
   const lord=activeFlameLord;
+  if(!['all','remaining','recruited'].includes(recruitFilter)) recruitFilter='all';
   const plan=recruitPlans[lord];
   const wanted=DATA.names.filter(n=>plan.wanted.has(n));
   const recruited=DATA.names.filter(n=>plan.recruited.has(n));
   const remaining=wanted.filter(n=>!plan.recruited.has(n));
   const recruitable=DATA.names.filter(n=>hasRecruitmentPath(n,lord));
 
-  const wantedSummary=wanted.length ? wanted.map(name=>{
-    const isRecruited=plan.recruited.has(name);
-    return `<div class="plan-row is-wanted ${isRecruited?'was-recruited':''}">
-      <a class="plan-person" href="#/${encodeURIComponent(name)}">${portrait(name,'small')}<span class="plan-person-name">${esc(name)}</span></a>
-      <div class="plan-requirement">${routeRequirementMarkup(name,lord)}</div>
-      <div class="plan-row-controls">
-        <button type="button" class="plan-want-toggle active" data-plan-wanted="${esc(name)}">★ Wanted</button>
-        <label class="plan-status-toggle ${isRecruited?'':'not-recruited'}" title="Mark ${esc(name)} as ${isRecruited?'not recruited':'recruited'}">
-          <input type="checkbox" data-plan-recruited="${esc(name)}" ${isRecruited?'checked':''}>
-          <span class="plan-status-dot">✓</span><span>${isRecruited?'Recruited':'Not recruited'}</span>
-        </label>
-      </div>
-    </div>`;
-  }).join('') : `<div class="plan-empty">No wanted recruits selected yet. Add them here or use the character cards below.</div>`;
+  let plannerNames=[...wanted];
+  if(recruitFilter==='remaining') plannerNames=plannerNames.filter(n=>!plan.recruited.has(n));
+  else if(recruitFilter==='recruited') plannerNames=plannerNames.filter(n=>plan.recruited.has(n));
 
-  const candidates=recruitable.map(name=>{
+  const rowMarkup=(name,forceWanted=false)=>{
+    const recruitableHere=hasRecruitmentPath(name,lord);
     const isWanted=plan.wanted.has(name), isRecruited=plan.recruited.has(name);
-    return `<div class="plan-row ${isWanted?'is-wanted':''} ${isRecruited?'was-recruited':''}">
+    const requirement=recruitableHere?routeRequirementMarkup(name,lord):`<span class="unit-route-unavailable">No listed ${esc(lord)} route recruitment path</span>`;
+    return `<div class="plan-row ${isWanted?'is-wanted':''} ${isRecruited?'was-recruited':''} ${recruitableHere?'':'not-recruitable'}">
       <a class="plan-person" href="#/${encodeURIComponent(name)}">${portrait(name,'small')}<span class="plan-person-name">${esc(name)}</span></a>
-      <div class="plan-requirement">${routeRequirementMarkup(name,lord)}</div>
+      <div class="plan-requirement-block">
+        <div class="plan-requirement">${requirement}</div>
+        ${recruitableHere?requirementProgressMarkup(name,lord,plan):''}
+      </div>
       <div class="plan-row-controls">
-        <button type="button" class="plan-want-toggle ${isWanted?'active':''}" data-plan-wanted="${esc(name)}">${isWanted?'★ Wanted':'☆ Not wanted'}</button>
-        <label class="plan-status-toggle ${isRecruited?'':'not-recruited'}" title="Mark ${esc(name)} as ${isRecruited?'not recruited':'recruited'}">
-          <input type="checkbox" data-plan-recruited="${esc(name)}" ${isRecruited?'checked':''}>
+        <button type="button" class="plan-want-toggle ${isWanted?'active':''}" data-plan-wanted="${esc(name)}" ${recruitableHere?'':'disabled'}>${isWanted?'★ Wanted':'☆ Not wanted'}</button>
+        <label class="plan-status-toggle ${isRecruited?'':'not-recruited'} ${recruitableHere?'':'disabled'}" title="${recruitableHere?`Mark ${esc(name)} as ${isRecruited?'not recruited':'recruited'}`:'No recruitment path listed on this route'}">
+          <input type="checkbox" data-plan-recruited="${esc(name)}" ${isRecruited?'checked':''} ${recruitableHere?'':'disabled'}>
           <span class="plan-status-dot">✓</span><span>${isRecruited?'Recruited':'Not recruited'}</span>
         </label>
       </div>
     </div>`;
-  }).join('');
+  };
+
+  const plannerRows=plannerNames.length
+    ? plannerNames.map(name=>rowMarkup(name,true)).join('')
+    : `<div class="plan-empty">${wanted.length?'No selected recruits match this filter.':'No wanted recruits selected yet. Use the Want button on character profiles below.'}</div>`;
 
   content.innerHTML=`
     <div class="planner-route">
@@ -332,25 +375,18 @@ function renderRecruitPlanner(){
         </div>
       </div>
 
-      <div class="recruit-filter-seg" role="group" aria-label="Filter roster by recruitment plan">
+      <div class="recruit-filter-seg" role="group" aria-label="Filter selected recruits">
         ${[
-          ['all','All characters'],
-          ['recruitable','Recruitable'],
-          ['wanted','Wanted'],
+          ['all','All wanted'],
           ['remaining','Remaining'],
           ['recruited','Recruited']
         ].map(([key,label])=>`<button type="button" data-recruit-filter="${key}" aria-pressed="${recruitFilter===key}">${label}</button>`).join('')}
       </div>
 
       <div class="recruit-plan-summary">
-        <details class="plan-summary-details" ${wanted.length?'open':''}>
-          <summary>Wanted recruits & requirements <span>${wanted.length} selected</span></summary>
-          <div class="plan-summary-body">${wantedSummary}</div>
-        </details>
-
-        <details class="route-candidate-details">
-          <summary>All ${esc(lord)} route recruitment options <span>${recruitable.length} characters</span></summary>
-          <div class="route-candidate-list">${candidates || '<div class="plan-empty">No recruitment options are listed for this route.</div>'}</div>
+        <details class="plan-summary-details" open>
+          <summary>Wanted recruits & requirements <span>${plannerNames.length} shown · ${wanted.length} selected</span></summary>
+          <div class="plan-summary-body">${plannerRows}</div>
         </details>
       </div>
     </div>`;
@@ -358,7 +394,6 @@ function renderRecruitPlanner(){
   content.querySelectorAll('[data-recruit-filter]').forEach(btn=>btn.onclick=()=>{
     recruitFilter=btn.dataset.recruitFilter;
     renderRecruitPlanner();
-    renderGrid();
   });
 
   content.querySelectorAll('[data-plan-wanted]').forEach(btn=>btn.onclick=()=>{
@@ -376,6 +411,24 @@ function renderRecruitPlanner(){
     renderRecruitPlanner();
     renderGrid();
   });
+
+  content.querySelectorAll('[data-support-progress]').forEach(btn=>btn.onclick=()=>{
+    const name=btn.dataset.supportProgress;
+    const level=Number(btn.dataset.supportLevel);
+    const current=Number(plan.supportProgress?.[name]||0);
+    plan.supportProgress[name]=current===level?Math.max(0,level-1):level;
+    if(plan.supportProgress[name]===0) delete plan.supportProgress[name];
+    saveRecruitPlan(lord);
+    renderRecruitPlanner();
+  });
+
+  content.querySelectorAll('[data-renown-progress]').forEach(btn=>btn.onclick=()=>{
+    const name=btn.dataset.renownProgress;
+    plan.renownDone[name]=!(plan.renownDone?.[name]===true);
+    if(!plan.renownDone[name]) delete plan.renownDone[name];
+    saveRecruitPlan(lord);
+    renderRecruitPlanner();
+  });
 }
 
 function renderGrid() {
@@ -383,21 +436,13 @@ function renderGrid() {
   $('#searchWrap').classList.toggle('has-text', !!q);
   let names = DATA.names.filter(n => n.toLowerCase().includes(q));
 
-  if(activeFlameLord){
-    const plan=recruitPlans[activeFlameLord];
-    if(recruitFilter==='recruitable') names=names.filter(n=>hasRecruitmentPath(n));
-    else if(recruitFilter==='wanted') names=names.filter(n=>plan.wanted.has(n));
-    else if(recruitFilter==='remaining') names=names.filter(n=>plan.wanted.has(n)&&!plan.recruited.has(n));
-    else if(recruitFilter==='recruited') names=names.filter(n=>plan.recruited.has(n));
-  }
-
   if (sortMode==='az') names.sort((a,b)=>a.localeCompare(b));
   if (sortMode==='most') names.sort((a,b)=>DATA.supports[b].length-DATA.supports[a].length || a.localeCompare(b));
 
-  const filterLabel=activeFlameLord&&recruitFilter!=='all' ? ` · ${recruitFilter}` : '';
+  const recruitedShown=names.filter(n=>recruitedRoutes(n).length).length;
   $('#resultCount').textContent = q
-    ? `${names.length} matching characters${filterLabel}`
-    : `${names.length} characters${filterLabel}`;
+    ? `${names.length} matching characters · ${recruitedShown} recruited`
+    : `${names.length} characters · ${recruitedShown} recruited`;
 
   if (!names.length) {
     grid.innerHTML = `<div class="empty">No characters match this view.<small>Clear the search or choose a different recruitment filter.</small></div>`;
@@ -409,6 +454,11 @@ function renderGrid() {
     const recruitable=activeFlameLord&&hasRecruitmentPath(n);
     const wanted=!!plan?.wanted.has(n);
     const recruited=!!plan?.recruited.has(n);
+    const allRecruitedRoutes=recruitedRoutes(n);
+    const recruitedAnywhere=allRecruitedRoutes.length>0;
+    const overviewBadge=recruitedAnywhere
+      ? `<span class="general-recruited-badge" title="Recruited on: ${esc(allRecruitedRoutes.join(', '))}"><span class="general-recruited-check">✓</span> Recruited</span>`
+      : '';
     const routeActions=!activeFlameLord ? '' : recruitable ? `
       <div class="unit-route-actions">
         <button type="button" class="unit-route-btn ${wanted?'wanted':''}" data-want-recruit="${esc(n)}" title="${wanted?'Remove from':'Add to'} wanted recruits">${wanted?'★ Wanted':'☆ Want'}</button>
@@ -418,12 +468,13 @@ function renderGrid() {
         </label>
       </div>` : `<div class="unit-route-actions"><span class="unit-route-unavailable">No listed ${esc(activeFlameLord)} route recruitment path</span></div>`;
 
-    return `<article class="unit ${wanted?'route-wanted':''} ${recruited?'route-recruited':''}" style="--i:${Math.min(i,24)}">
+    return `<article class="unit ${wanted?'route-wanted':''} ${recruited?'route-recruited':''} ${recruitedAnywhere?'general-recruited':''}" style="--i:${Math.min(i,24)}">
       <a class="unit-main" href="#/${encodeURIComponent(n)}">
         ${portrait(n)}
         <span><span class="name" style="display:block">${esc(n)}</span>
         <span class="count" style="display:block">${DATA.supports[n].length} support${DATA.supports[n].length===1?'':'s'}</span>
-        <span class="dots">${dots(n)}</span></span>
+        <span class="dots">${dots(n)}</span>
+        ${overviewBadge}</span>
       </a>
       ${routeActions}
     </article>`;
@@ -474,6 +525,30 @@ function bindGiftControls(scope=document){
   scope.querySelectorAll('[data-gift-more]').forEach(btn=>btn.onclick=()=>{
     const wrap=btn.closest('.gift-chips'); wrap.querySelectorAll('.gift-hidden').forEach(x=>x.classList.remove('gift-hidden')); btn.remove();
   });
+}
+
+function birdTimeCard(name){
+  const rows=BIRD_TIME[name]||[];
+  const body=rows.length
+    ? `<div class="bird-time-list">${rows.map((row,i)=>`
+        <div class="bird-time-row">
+          <div class="bird-time-num">${i+1}</div>
+          <div class="bird-time-prompt">${esc(row.prompt)}</div>
+          <div class="bird-time-reaction">${row.reaction?esc(row.reaction):'<span class="bird-time-missing">—</span>'}</div>
+        </div>`).join('')}</div>`
+    : `<div class="bird-time-empty">No Bird Time entries are listed for ${esc(name)} in the supplied guide.</div>`;
+
+  return `<details class="bird-time-card">
+    <summary class="bird-time-summary">
+      <span class="bird-time-title"><span class="bird-time-icon">◆</span> Bird Time</span>
+      <span class="bird-time-meta">${rows.length?`${rows.length} prompt${rows.length===1?'':'s'}`:'No entries'} <span class="bird-time-chevron">⌄</span></span>
+    </summary>
+    <div class="bird-time-body">
+      ${rows.length?'<div class="bird-time-columns"><span>Prompt</span><span>Correct response</span></div>':''}
+      ${body}
+      <a class="source-link bird-time-source" href="https://raiderking.com/fire-emblem-fortunes-weave-feed-pale-raven-all-characters-perfect-bird-time/" target="_blank" rel="noopener">Bird Time guide: Raider King ↗</a>
+    </div>
+  </details>`;
 }
 
 
@@ -719,6 +794,7 @@ function showDetail(name) {
         <div class="dots">${dots(name)}</div></div>
     </div>
     ${giftCard(name)}
+    ${birdTimeCard(name)}
     <div class="profile-info">${growthCard(name)}${abilityCard(name)}${recruitmentCard(name)}</div>
     <div class="section-head"><h3 class="section-heading">Supports</h3>${list.length?`<div class="filters" role="group" aria-label="Filter by rank">${filters}</div>`:''}</div>
     <div class="support-list" id="supportList"></div>

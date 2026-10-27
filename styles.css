@@ -430,3 +430,246 @@ h1{margin:0;font-family:var(--serif);font-size:clamp(36px,5.4vw,60px);line-heigh
   .route-candidate-list .plan-row{grid-template-columns:1fr}
   .plan-row-controls{justify-content:flex-start}
 }
+
+
+/* Larger campaign planner listings + requirement progress */
+.plan-person-name{font-size:17px;line-height:1.15}
+.plan-person .portrait{width:42px;height:42px;border-radius:11px}
+.plan-person .fallback{font-size:15px}
+.plan-requirement-block{min-width:0}
+.plan-requirement{font-size:13.5px;line-height:1.55;color:#d0d8e7}
+.route-tag{font-size:10px;padding:3px 7px}
+.plan-want-toggle,.plan-status-toggle{font-size:11.5px;padding:7px 10px}
+.route-candidate-details>summary,.plan-summary-details summary{font-size:13px}
+.route-candidate-list .plan-row,.plan-summary-body .plan-row{padding:11px 12px;gap:12px}
+.route-candidate-list .plan-row.not-recruitable{opacity:.52;filter:saturate(.55)}
+.plan-want-toggle:disabled{cursor:not-allowed;opacity:.4}
+.plan-status-toggle.disabled{cursor:not-allowed;opacity:.4}
+
+.requirement-progress{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:8px}
+.req-progress-group{display:flex;align-items:center;gap:7px;padding:5px 7px;border:1px solid rgba(217,182,108,.18);border-radius:10px;background:rgba(255,255,255,.045)}
+.req-progress-label{font-size:11px;font-weight:850;color:#bfc9da;white-space:nowrap}
+.req-progress-label b{color:#fff}
+.support-progress-steps{display:flex;gap:4px}
+.support-step{width:27px;height:27px;border-radius:8px;border:1px solid rgba(217,182,108,.26);background:rgba(255,255,255,.06);color:#c8d0df;font:900 11px inherit;font-family:inherit;cursor:pointer;transition:.13s}
+.support-step:hover{border-color:#d9b66c;transform:translateY(-1px)}
+.support-step.achieved{background:linear-gradient(180deg,#4d9a7a,#33725a);border-color:#67ad8f;color:#fff;box-shadow:0 2px 7px rgba(31,97,71,.28)}
+.renown-progress-toggle{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(217,182,108,.2);border-radius:10px;padding:6px 8px;background:rgba(255,255,255,.045);color:#c7cfde;font:850 11px inherit;font-family:inherit;cursor:pointer;transition:.13s}
+.renown-progress-toggle:hover{border-color:#d9b66c}
+.renown-progress-toggle small{font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:#949fb4}
+.renown-progress-check{width:20px;height:20px;border-radius:6px;display:grid;place-items:center;background:#676f7c;color:transparent;font-size:12px}
+.renown-progress-toggle.achieved{background:rgba(59,127,100,.15);border-color:rgba(91,169,135,.55);color:#eefaf4}
+.renown-progress-toggle.achieved .renown-progress-check{background:#3b7f64;color:#fff}
+.renown-progress-toggle.achieved small{color:#8fd0b2}
+
+@media(max-width:850px){
+  .plan-person-name{font-size:16px}
+  .plan-requirement{font-size:13px}
+}
+
+
+/* Renown progress badge: fixed text, red/green state */
+.renown-progress-toggle{
+  border-radius:999px;
+  padding:6px 10px 6px 7px;
+  gap:7px;
+  font-size:11.5px;
+  font-weight:900;
+}
+.renown-progress-toggle .renown-progress-check{
+  width:21px;
+  height:21px;
+  border-radius:50%;
+  font-size:12px;
+  font-weight:900;
+}
+.renown-progress-toggle .renown-progress-text{
+  white-space:nowrap;
+}
+.renown-progress-toggle.not-achieved{
+  background:rgba(153,63,63,.16);
+  border-color:rgba(198,92,92,.55);
+  color:#ffd9d9;
+}
+.renown-progress-toggle.not-achieved .renown-progress-check{
+  background:#9a4545;
+  color:#fff;
+}
+.renown-progress-toggle.achieved{
+  background:rgba(59,127,100,.18);
+  border-color:rgba(91,169,135,.62);
+  color:#e8fff3;
+}
+.renown-progress-toggle.achieved .renown-progress-check{
+  background:#3b7f64;
+  color:#fff;
+}
+
+
+/* Bird Time profile section */
+.bird-time-card{
+  margin:14px 0;
+  border:1px solid rgba(217,182,108,.24);
+  border-radius:18px;
+  background:linear-gradient(180deg,rgba(19,31,55,.92),rgba(10,18,33,.94));
+  box-shadow:0 10px 30px rgba(0,0,0,.16);
+  overflow:hidden;
+}
+.bird-time-summary{
+  list-style:none;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:15px 17px;
+  cursor:pointer;
+  user-select:none;
+  background:linear-gradient(90deg,rgba(217,182,108,.09),rgba(255,255,255,.02));
+}
+.bird-time-summary::-webkit-details-marker{display:none}
+.bird-time-title{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:#fff0c8;
+  font-family:var(--serif);
+  font-size:18px;
+  font-weight:850;
+}
+.bird-time-icon{
+  width:28px;
+  height:28px;
+  border-radius:9px;
+  display:grid;
+  place-items:center;
+  background:rgba(217,182,108,.15);
+  border:1px solid rgba(217,182,108,.3);
+  color:#e4c77d;
+  font-size:11px;
+}
+.bird-time-meta{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:#aeb9cd;
+  font-size:11px;
+  font-weight:800;
+}
+.bird-time-chevron{
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:rgba(255,255,255,.06);
+  color:#e5cd91;
+  font-size:16px;
+  transition:.15s;
+}
+.bird-time-card[open] .bird-time-chevron{transform:rotate(180deg)}
+.bird-time-card[open] .bird-time-summary{border-bottom:1px solid rgba(217,182,108,.14)}
+.bird-time-body{padding:12px 14px 14px}
+.bird-time-columns{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(145px,220px);
+  gap:12px;
+  padding:0 42px 7px 45px;
+  color:#8290a8;
+  font-size:9px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+}
+.bird-time-list{display:grid;gap:7px}
+.bird-time-row{
+  display:grid;
+  grid-template-columns:28px minmax(0,1fr) minmax(145px,220px);
+  gap:12px;
+  align-items:start;
+  padding:10px 11px;
+  border:1px solid rgba(255,255,255,.065);
+  border-radius:12px;
+  background:rgba(255,255,255,.028);
+}
+.bird-time-num{
+  width:25px;
+  height:25px;
+  border-radius:8px;
+  display:grid;
+  place-items:center;
+  background:rgba(217,182,108,.11);
+  color:#ddc47e;
+  font-size:10px;
+  font-weight:900;
+}
+.bird-time-prompt{
+  color:#dce3ef;
+  font-size:13px;
+  line-height:1.5;
+}
+.bird-time-reaction{
+  display:inline-flex;
+  align-items:center;
+  width:max-content;
+  max-width:100%;
+  padding:5px 8px;
+  border-radius:9px;
+  background:rgba(59,127,100,.17);
+  border:1px solid rgba(91,169,135,.38);
+  color:#dff7eb;
+  font-size:12px;
+  line-height:1.35;
+  font-weight:850;
+}
+.bird-time-missing{color:#8d98aa}
+.bird-time-empty{
+  padding:12px;
+  border:1px dashed rgba(217,182,108,.2);
+  border-radius:11px;
+  color:#aeb8ca;
+  font-size:12px;
+}
+.bird-time-source{display:inline-block;margin-top:11px}
+
+@media(max-width:700px){
+  .bird-time-columns{display:none}
+  .bird-time-row{grid-template-columns:28px minmax(0,1fr)}
+  .bird-time-reaction{grid-column:2}
+}
+
+
+/* General roster recruitment overview */
+.general-recruited-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  margin-top:7px;
+  padding:4px 8px;
+  border:1px solid rgba(91,169,135,.5);
+  border-radius:999px;
+  background:rgba(59,127,100,.16);
+  color:#dff8ec;
+  font-size:10.5px;
+  font-weight:900;
+  line-height:1;
+  letter-spacing:.01em;
+}
+.general-recruited-check{
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#3b7f64;
+  color:#fff;
+  font-size:10px;
+  box-shadow:0 1px 4px rgba(0,0,0,.22);
+}
+.unit.general-recruited::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  box-shadow:inset 0 0 0 1px rgba(91,169,135,.12);
+}
