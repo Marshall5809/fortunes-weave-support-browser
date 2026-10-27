@@ -737,12 +737,23 @@ function renderGrowthTable(){
 function recruitmentCard(name) {
   const src = `<a class="source-link" href="https://serenesforest.net/fortunes-weave/characters/recruitment/" target="_blank" rel="noopener">Source: Serenes Forest ↗</a>`;
   const r = RECRUITMENT[name];
-  if (!r) return `<div class="info-card recruitment-card"><details class="recruitment-details"><summary><div class="recruit-summary-main"><div class="recruit-summary-title">Recruitment</div><div class="recruit-summary-glance">No recruitment entry found.</div></div><span class="recruit-chevron">⌄</span></summary><div class="recruitment-body"><div class="info-note">No recruitment entry was found for this character on the Serenes Forest page.</div>${src}</div></details></div>`;
+  if (!r) return `<div class="info-card recruitment-card recruitment-static">
+    <div class="recruitment-static-head">
+      <div class="recruit-summary-main">
+        <div class="recruit-summary-title">Recruitment</div>
+        <div class="recruit-summary-glance">No recruitment entry found.</div>
+      </div>
+    </div>
+    <div class="recruitment-body">
+      <div class="info-note">No recruitment entry was found for this character on the Serenes Forest page.</div>
+      ${src}
+    </div>
+  </div>`;
 
   const routeItems=activeFlameLord?routeRecruitmentItems(name,activeFlameLord):[];
   const glance=activeFlameLord
     ? (routeItems.length ? `${activeFlameLord}: ${routeItems.map(x=>x.text).join(' • ')}` : `No listed path on ${activeFlameLord}'s route`)
-    : `${r.items.length} recruitment ${r.items.length===1?'entry':'entries'} · expand to view`;
+    : `${r.items.length} recruitment ${r.items.length===1?'entry':'entries'}`;
 
   const routeHighlight=activeFlameLord ? `
     <div class="current-route-recruit">
@@ -756,19 +767,19 @@ function recruitmentCard(name) {
     return `<div class="recruit-item ${current?'route-current':''}"><span class="recruit-label ${current?'current':''}">${esc(x.label)}</span><div>${esc(x.text)}</div></div>`;
   }).join('');
 
-  return `<div class="info-card recruitment-card">
-    <details class="recruitment-details">
-      <summary>
-        <div class="recruit-summary-main"><div class="recruit-summary-title">Recruitment</div><div class="recruit-summary-glance">${esc(glance)}</div></div>
-        <span class="recruit-chevron">⌄</span>
-      </summary>
-      <div class="recruitment-body">
-        ${routeHighlight}
-        <div class="recruit-list">${items}</div>
-        ${r.note?`<div class="info-note">${esc(r.note)}</div>`:''}
-        ${src}
+  return `<div class="info-card recruitment-card recruitment-static">
+    <div class="recruitment-static-head">
+      <div class="recruit-summary-main">
+        <div class="recruit-summary-title">Recruitment</div>
+        <div class="recruit-summary-glance">${esc(glance)}</div>
       </div>
-    </details>
+    </div>
+    <div class="recruitment-body">
+      ${routeHighlight}
+      <div class="recruit-list">${items}</div>
+      ${r.note?`<div class="info-note">${esc(r.note)}</div>`:''}
+      ${src}
+    </div>
   </div>`;
 }
 

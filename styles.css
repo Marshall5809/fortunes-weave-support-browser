@@ -673,3 +673,17 @@ h1{margin:0;font-family:var(--serif);font-size:clamp(36px,5.4vw,60px);line-heigh
   border-radius:inherit;
   box-shadow:inset 0 0 0 1px rgba(91,169,135,.12);
 }
+
+
+/* Recruitment profile section is permanently expanded */
+.recruitment-static .recruitment-static-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px 16px;
+  border-bottom:1px solid rgba(217,182,108,.14);
+}
+.recruitment-static .recruitment-body{
+  display:block !important;
+}
