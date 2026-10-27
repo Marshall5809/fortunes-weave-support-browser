@@ -1,0 +1,178 @@
+﻿Character,Order,Ability,Unlock,Description
+Eshmel,1,Light of Salvation,Auto,Cancels Underworld Boon for foes within 2 spaces.
+Eshmel,2,Scorching Sun,Lv 45,Can nullify damage from undead foes (5% trigger).
+Eshmel,3,Scorching Sun+,Lv 60,Improves the undead-damage nullification trigger to 10%.
+Cai,1,Brio,Auto,Grants +1 Mov.
+Cai,2,Flamekeeper,Lv 35,Unit/allies ignore Underworld Flames and take half damage while standing in them.
+Tialla,1,Tactician’s Wit,Auto,Adds +1 range to combat arts used on allies.
+Tialla,2,Tactician’s Insight,Lv 20,"After initiating combat, lowers that foe’s Avo by 5 for its next combat."
+Tialla,3,Tactician’s Insight+,Lv 35,Improves the Avo penalty to -10.
+Peter,1,Steady Aim,Auto,Bow combat arts gain +1 range.
+Peter,2,Correct for Drift,Lv 20,"At 90%+ displayed hit, gains +10 Hit."
+Peter,3,Correct for Drift+,Lv 35,"At 75%+ displayed hit, gains +20 Hit."
+Ultand,1,Patch Up,Auto,Heals a little HP for an adjacent ally after that ally’s combat.
+Ultand,2,Pray for Safety,Lv 20,Adjacent allies gain +10 Ddg.
+Ultand,3,Pray for Safety+,Lv 35,Adjacent allies gain +20 Ddg.
+Bertrand,1,Requiem Style,Auto,Can make a follow-up regardless of AS (5% trigger).
+Bertrand,2,Go No Sen,—,Can attack first during enemy-phase combat (25% trigger).
+Bertrand,3,Sen No Sen,—,"If attacking first, can move the follow-up before the foe’s counter (25% trigger)."
+Gaitz,1,Brave Assist,Auto,Adjacent allies gain +3 Def.
+Gaitz,2,Flashing Fang,Lv 20,"When attacking, can gain +4 Atk and +50 Hit (20% trigger)."
+Gaitz,3,Flashing Fang+,Lv 35,Improves the bonus to +7 Atk and +100 Hit.
+Jester,1,Blink of an Eye,Auto,"After Swap, gains +3 Def until the next phase."
+Jester,2,Flickering Edge,Lv 20,"After evading an attack, gains +3 Atk for the combat."
+Jester,3,Flickering Edge+,Lv 35,Improves the Atk bonus to +5.
+Goliath,1,Heavyweight Class,Auto,Cannot become cavalry/flying and gains +5 Bld.
+Goliath,2,Pin Down,Lv 20,Adjacent foes suffer -3 Mov.
+Goliath,3,Pin Down+,Lv 35,Improves the penalty to -5 Mov.
+Dante,1,Stage Direction,Auto,Nearby allies can gain +10 Ddg during combat; trigger scales with ally Cha.
+Dante,2,Dramatic Effect,Lv 20,"When Stage Direction triggers, also grants +10 Hit."
+Dante,3,Dramatic Effect+,Lv 35,Also grants +10 Hit and +10 Crit.
+Dietrich,1,Murderous Intent,Auto,"If initiating combat, gains +5 Crit."
+Dietrich,2,Bestial Impulse,Lv 5,"After combat, builds +2 Crit until a critical hit occurs."
+Fabio,1,Dark Calling,Auto,Adjacent foes suffer -5 Ddg.
+Fabio,2,Dark Secrets,Lv 20,Extends Dark Calling to 2 spaces.
+Fabio,3,Dark Secrets+,Lv 35,Extends Dark Calling to 3 spaces.
+Esmeralda,1,Brawn,Auto,Reduces equipped item weight to 80%.
+Esmeralda,2,Throwing Arm,Lv 20,Thrown spears gain +10 Hit and +2 Atk.
+Esmeralda,3,Throwing Arm+,Lv 35,Improves to +20 Hit and +4 Atk.
+Mikaela,1,Veteran’s Mettle,Auto,Gains +10 Hit against adjacent foes.
+Mikaela,2,Redblade’s Will,Lv 20,Gains +3 Atk against adjacent foes.
+Mikaela,3,Redblade’s Will+,Lv 35,Keeps the +3 Atk and can add another +3 when attacking adjacent foes.
+Orchel,1,Solid and Sturdy,Auto,"Gains +5 Def, counts as armored, and cannot become cavalry/flying."
+Orchel,2,Predictive Sense,—,"If initiating, magic attacks gain +20 Hit."
+Orchel,3,Harmonic Soul,—,Additional personal ability listed by Serenes Forest.
+Orchel,4,Harmonic Soul+,—,Healing an ally with magic also restores some HP to Orchel.
+Orchel,5,Self-Repair,—,Restores a large amount of HP at the start of the phase during Overblaze.
+Diego,1,Caretaker,Auto,Adjacent allies have a chance to prevent enemy follow-ups.
+Diego,2,No Mercy,Lv 20,Follow-up attacks gain +5 Hit/Crit.
+Diego,3,No Mercy+,Lv 35,Improves the bonus to +10 Hit/Crit.
+Loretta,1,Steadfast,Auto,"At 50%+ HP, gains +10 Avo."
+Loretta,2,Peak Form,Lv 20,"At full HP, gains +3 Atk."
+Loretta,3,Peak Form+,Lv 35,"At full HP, gains +3 Atk and +10 Avo."
+Seteth,1,Ready for Battle,Auto,"On the first enemy-phase combat, can attack first (50% trigger)."
+Seteth,2,Pass Judgement,Lv 20,"When Diadem of Balance triggers, gains +4 Atk."
+Seteth,3,Pass Judgement+,Lv 35,Improves the bonus to +7 Atk.
+Ninae,1,Spirits’ Voice,Auto,"Against magic-using foes, gains +10 Hit/Avo."
+Ninae,2,Spirits’ Guidance,Lv 20,Grants Spirits’ Voice to adjacent allies.
+Ninae,3,Spirits’ Guidance+,Lv 35,Extends it to allies within 2 spaces.
+Theodora,1,Royal Resolve,Auto,Can halve incoming damage when attacked (30% trigger).
+Theodora,2,Unstoppable Force,—,Deals triple damage to obstacles.
+Theodora,3,Direct Hit,—,Blaze Arts can deal +10 damage (30% trigger).
+Bonaventure,1,Sage Advice,Auto,Adjacent allies gain +3 Def.
+Bonaventure,2,Additional Intel,Lv 20,Adjacent allies can gain +10 Hit in combat.
+Bonaventure,3,Additional Intel+,Lv 35,Improves the Hit bonus to +20.
+Tobias,1,Power Arts,Auto,Combat arts gain +3 Atk.
+Tobias,2,All-Out Attack,Lv 20,Combat art damage can be multiplied by 1.3.
+Tobias,3,All-Out Attack+,Lv 35,Improves the multiplier to 1.5.
+Lilian,1,Safety First,Auto,"If the foe cannot counter, gains +10 Hit."
+Lilian,2,Upper Hand,Lv 20,"At 100% displayed hit, gains +3 Atk when attacking."
+Lilian,3,Upper Hand+,Lv 35,Improves the Atk bonus to +5.
+Lysander,1,Racing Attack,Auto,"If initiating combat, gains +15 Avo."
+Lysander,2,Accelerate,Lv 20,"Defeating foes builds Spd by +1, up to +10 for the map."
+Lysander,3,Accelerate+,Lv 35,"Builds +2 Spd per defeat, still capped at +10."
+Talimun,1,Swashbuckler’s Luck,Auto,Grants +3 Lck.
+Talimun,2,Cannoning Flair,—,Artillery attacks gain +30 Hit.
+Talimun,3,Winds of Victory,—,Can gain +15 Hit when attacking or +15 Avo when attacked; trigger scales with Lck.
+Talimun,4,Swashbuckler’s Luck+,—,Raises the Lck bonus to +5 for Talimun and allies.
+Ursula,1,Management Skills,Auto,Unit and allies within 2 spaces can access storage.
+Ursula,2,Seize the Chance,Lv 20,Can multiply attack damage by 1.3; trigger scales with Lck.
+Ursula,3,Seize the Chance+,Lv 35,Improves the multiplier to 1.5.
+Ludia,1,Falcon,Auto,"If initiating combat, gains +3 AS."
+Ludia,2,Perception,Lv 20,"If able to follow up, gains +10 Avo."
+Ludia,3,Perception+,Lv 35,Improves the Avo bonus to +20.
+Simon,1,Close Call,Auto,Can survive lethal damage at 1 HP; trigger scales with Lck.
+Simon,2,Devil’s Luck,Lv 20,"Defeating foes builds +1 Lck, up to +10 for the map."
+Simon,3,Devil’s Luck+,Lv 35,"Builds +2 Lck per defeat, still capped at +10."
+Fianna,1,Graceful Light,Auto,Healing magic can cost 0; trigger scales with Lck.
+Fianna,2,Gift of Faith,Lv 20,Healing magic can restore +20 extra HP.
+Fianna,3,Gift of Faith+,Lv 35,Improves the extra healing to +30 HP.
+Leda,1,Blindside,Auto,"If initiating, can prevent the foe from countering (5% trigger)."
+Leda,2,Improviso,—,"After using Blaze Arts during Overblaze, can still attack."
+Buccar,1,Guardian’s Duty,Auto,Reduces damage taken to 90%.
+Buccar,2,Retaliatory Blow,Lv 20,"When the foe attacks first, can multiply attack damage by 1.3."
+Buccar,3,Retaliatory Blow+,Lv 35,Same multiplier with a higher trigger chance.
+Sirocco,1,Goddess’s Favor,Auto,Restores 5 HP after combat.
+Sirocco,2,Wind’s Caprice,Lv 20,"Randomly grants +1, +5, or +20 Avo in combat."
+Sirocco,3,Wind’s Caprice+,Lv 35,Adds a possible +30 Avo result.
+Olympia,1,Competitive Zeal,Auto,"While equipped with magic, gains +10 Crit."
+Olympia,2,Ardent Nosferatu,Lv 20,Nosferatu gains +3 Atk and +5 Crit.
+Olympia,3,Ardent Nosferatu+,Lv 35,Improves to +5 Atk and +10 Crit.
+Mu,1,Signs of Growth,Auto,Enhances Mu’s basic stat growths whenever she levels up.
+Mu,2,Warrior’s Blood,Lv 20,Grants a stat bonus based on equipped weapon type.
+Mu,3,Warrior’s Blood+,Lv 35,Grants a larger weapon-based stat bonus.
+Anatolia,1,Celestial Flow,Auto,Grants +3 Avo.
+Anatolia,2,Continuum,—,"After avoiding an attack, restores 5 HP."
+Anatolia,3,Continuum+,—,Improves the heal to 10 HP.
+Sha Lan,1,Cooler Heads,Auto,"After Draw Back, can still use assist magic."
+Sha Lan,2,Watchfulness,Lv 20,Adjacent allies gain +2 Spd.
+Sha Lan,3,Watchfulness+,Lv 35,Improves the bonus to +4 Spd.
+Nezha,1,Quick Draw,Auto,"If initiating, can gain +3 Atk (50% trigger)."
+Nezha,2,Never Stop,Lv 20,"After Quick Draw, can gain +5 Atk when attacking."
+Nezha,3,Never Stop+,Lv 35,Raises the trigger chance for the +5 Atk effect.
+Dadao,1,One Chance,Auto,"If neither unit can follow up, gains +5 Atk."
+Dadao,2,Full Strength,Lv 20,Can multiply attack damage by 1.3; trigger scales with Str.
+Dadao,3,Full Strength+,Lv 35,Improves the multiplier to 1.5.
+Halvin,1,Adaptability,Auto,"After combat, builds +2 Hit up to +30 for the map."
+Halvin,2,Halt Advance,Lv 20,"After initiating combat, lowers the foe’s Spd by 2 for its next combat."
+Halvin,3,Halt Advance+,Lv 35,Improves the Spd penalty to -3.
+Hong Hua,1,Zhu Ming,Auto,"While equipped with magic, gains +10 Hit."
+Hong Hua,2,Amplify Magic,Lv 50,"After combat, can gain +4 Atk through the next combat; trigger scales with Mag."
+Hong Hua,3,Amplify Magic+,Lv 60,Improves the Atk bonus to +7.
+Troy,1,Yun Shou,Auto,"While equipped with gauntlets, gains +10 Hit."
+Troy,2,Modified Weapon,Lv 50,Zerberus attacks become effective against flying foes.
+Troy,3,Modified Weapon+,Lv 60,Improves that flying effectiveness.
+Guzran,1,Hot-Headed,Auto,"Randomly gains +10 Hit, Avo, or Crit in combat."
+Guzran,2,Top Form,Lv 20,Raises Hot-Headed’s bonus to +15.
+Guzran,3,Top Form+,Lv 35,Raises it to +20.
+Yang Jie,1,Monkly Havoc,Auto,"After defeating a foe, can fully heal; trigger scales with Lck."
+Yang Jie,2,Robust Health,Lv 20,Can gain +3 Shld when attacked; trigger scales with remaining HP.
+Yang Jie,3,Robust Health+,Lv 35,Improves the Shld bonus to +5.
+Io,1,With My Steed,Auto,"[Cavalry] If initiating, gains +3 Shld and +30 Ddg."
+Io,2,Mounted Push,Lv 20,"[Cavalry] If initiating, gains +10 Hit."
+Io,3,Mounted Push+,Lv 35,Also adds +3 Atk.
+Peppe,1,Hunter’s Snare,Auto,"On enemy phase, can attack first if the foe is already damaged."
+Peppe,2,King’s Majesty,Lv 20,"Against damaged foes, gains +2 Atk and +5 Crit."
+Peppe,3,King’s Majesty+,Lv 35,Improves to +4 Atk and +10 Crit.
+Noctula,1,Warrior’s Clarity,Auto,"After combat, gains +3 Avo until the next phase."
+Noctula,2,Attuned,Lv 20,"When Warrior’s Clarity triggers, can add +10 Avo."
+Noctula,3,Attuned+,Lv 35,Raises the trigger chance for the extra +10 Avo.
+Sofia,1,Healing Knowledge,Auto,Healing magic restores +10 extra HP.
+Sofia,2,Distant Healing,Lv 20,Healing magic gains +1 range.
+Sofia,3,Distant Healing+,Lv 35,Improves to +2 range.
+Catania,1,Punishing Squall,Auto,"If AS is at least 3 higher than the foe’s, gains +20 Hit."
+Catania,2,Wind My Friend,Lv 20,"At AS +5 over the foe, gains +3 Atk."
+Catania,3,Wind My Friend+,Lv 35,Keeps +3 Atk and can also grant +20 Avo at AS +8.
+Nydine,1,Barge Through,Auto,"[Cavalry] Can move through enemy spaces, except large-scale foes."
+Nydine,2,At a Gallop,Lv 20,"[Cavalry] Reduces terrain movement cost by 1, minimum 1."
+Nydine,3,At a Gallop+,Lv 35,"Reduces terrain movement cost by 2, minimum 1."
+Zarcone,1,Hatchet Man,Auto,"While equipped with an axe, gains +10 Hit."
+Zarcone,2,Vulgar Conduct,Lv 20,"Against foes at 50% HP or less, gains +20 Hit."
+Zarcone,3,Vulgar Conduct+,Lv 35,Also grants +3 Atk.
+Majde,1,Hellbent Axe,Auto,"While equipped with an axe, gains +3 Str."
+Majde,2,Fear Nothing,Lv 20,"If initiating, gains +3 Atk but suffers -30 Avo."
+Majde,3,Fear Nothing+,Lv 35,Improves the Atk bonus to +6.
+Benditz,1,Wheeled Warrior,Auto,"[Cavalry] As a charioteer, gains +20 Hit."
+Benditz,2,Chariot Stagger,Lv 20,"As a charioteer, gains +1 use of staggering blows."
+Benditz,3,Chariot Stagger+,Lv 35,Improves to +2 uses.
+Inyoni,1,Heavy-Bow User,Auto,"While equipped with a bow, gains +3 Str."
+Inyoni,2,Pierce,Lv 20,Bow combat arts gain +2 Atk and +5 Crit.
+Inyoni,3,Pierce+,Lv 35,Improves to +4 Atk and +10 Crit.
+Jasmine,1,Expert Counter,Auto,"If the foe attacks first, gains +20 Hit."
+Jasmine,2,Raging Counter,Lv 20,"If the foe attacks first, gains +3 Atk."
+Jasmine,3,Raging Counter+,Lv 35,Also adds +10 Crit.
+Alexandra,1,Silver Maiden,Auto,Gains +5 Hit/Avo for each adjacent ally.
+Alexandra,2,Soar,Lv 20,"On inaccessible terrain, gains +3 AS."
+Alexandra,3,Soar+,Lv 35,Improves the bonus to +5 AS.
+Nuzzuno,1,Har Hali Wisdom,Auto,"When effective against the foe, gains +3 Atk."
+Nuzzuno,2,Precision Strike,Lv 20,"When effective, gains +10 Hit."
+Nuzzuno,3,Precision Strike+,Lv 35,Improves the Hit bonus to +20.
+Centurio,1,Sturdy Corundum,Auto,Takes half damage in the first enemy-phase combat.
+Aswan,1,Princess of Arrows,Auto,"While equipped with a bow, gains +20 Hit."
+Nathan,1,Headlong Rush,Auto,"If initiating, gains +3 AS and +10 Hit."
+Creek,1,Steady Hands,Auto,"If the foe attacks first, gains +3 AS and +10 Avo."
+Kiroc,1,Tyranny,Auto,"Against a foe with a status effect, gains +3 Atk and +10 Crit."
+Kiroc,2,Menace,Lv 20,Can halve the foe’s Ddg (10% trigger).
+Kiroc,3,Menace+,Lv 35,Raises the trigger chance to 20%.
+Tahonia,1,Python Technique,Auto,"With a gauntlet combat art, can follow up regardless of AS (15% trigger)."
+Anna,1,Elephant Rush,Auto,"[Cavalry] As an elephant rider, gains +1 use of staggering blows."

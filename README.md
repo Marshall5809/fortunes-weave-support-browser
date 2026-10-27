@@ -1,31 +1,53 @@
-# Fire Emblem: Fortune's Weave Support Browser
+# Fortune's Weave Support Archive — CSV Edition
 
-An interactive browser for the Fire Emblem: Fortune's Weave support chart.
+## Data files
+- `data/characters.csv` — roster + portrait mappings
+- `data/supports.csv` — support relationships
+- `data/growths.csv` — personal growths + Mu's Signs of Growth variant
+- `data/classes.csv` — class tiers and class growth modifiers
+- `data/recruitment.csv` — recruitment information
+- `data/abilities.csv` — personal abilities
+- `data/gifts.csv` — loved/really-liked gifts
+- `data/preferences.csv` — likes and interests
 
-## Features
+## Recommended workflow
+1. Clone the repo once.
+2. Open the repo folder in VS Code.
+3. Edit the file you need.
+4. Open Source Control (`Ctrl+Shift+G`).
+5. Review changes.
+6. Enter a commit message and click Commit.
+7. Click Sync Changes / Push.
+8. GitHub Pages redeploys automatically.
 
-- Browse supports by character
-- Search characters
-- View available support ranks
-- Click support characters to quickly navigate between units
-- Mobile-friendly layout
+You do not re-upload the entire project every time.
 
-## Data Sources
+## Local testing
+Because CSV files are loaded with `fetch()`, run a local server:
 
-Support information was transcribed from the published **Fire Emblem: Fortune's Weave support chart on IGN**.
+```powershell
+python -m http.server 8000
+```
 
-Character portraits are loaded from the **Fire Emblem Wiki**.
+Then visit `http://localhost:8000`.
 
-## Privacy
+Keep all portrait `.webp` files in `portraits/` and class icons in `class-icons/`.
 
-This is a static website.
 
-- No login
-- No cookies
-- No analytics
-- No tracking
-- No user data collection
+## Portrait folder
 
-## Disclaimer
+All character portrait images now belong in:
 
-This is a fan-made project and is not affiliated with Nintendo or Intelligent Systems.
+```text
+portraits/
+```
+
+Examples:
+
+```text
+portraits/eshmel.webp
+portraits/honghua.webp
+portraits/cai.webp
+```
+
+Do not keep character portraits in the repository root anymore.

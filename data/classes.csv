@@ -1,0 +1,59 @@
+﻿Order,Tier,Class,HP,Str,Mag,Spd,Dex,Def,Res,Lck,Cha
+1,Beginner,Gladiator,10,10,0,0,0,0,0,0,0
+2,Beginner,Hunter,10,0,0,10,10,0,0,0,0
+3,Beginner,Soldier,10,5,0,-5,5,10,0,0,0
+4,Beginner,Ornius Rider,10,0,0,10,0,0,5,5,0
+5,Beginner,Diviner,5,-5,15,0,5,-5,10,0,0
+6,Specialty,Myrmidon,10,0,0,15,10,0,0,5,5
+7,Specialty,Brigand,15,15,-5,5,0,5,0,0,5
+8,Specialty,Pugilist,15,10,-5,10,5,10,0,0,5
+9,Specialty,Archer,10,0,0,10,15,5,0,5,5
+10,Specialty,Rogue,10,0,0,15,10,0,5,5,0
+11,Specialty,Armored Knight,10,10,-5,-5,5,25,-5,0,5
+12,Specialty,Light Cavalry,10,5,-5,5,0,5,0,5,10
+13,Specialty,Charioteer,10,5,-5,-5,15,10,0,5,10
+14,Specialty,Armored Ornius Rider,10,0,-5,10,5,10,0,5,5
+15,Specialty,Wing Soldier,10,0,5,0,5,5,5,5,10
+16,Specialty,Shaman,5,-5,15,10,10,-10,10,10,0
+17,Specialty,Priest,5,-5,10,5,5,-10,15,15,10
+18,Advanced,Shido,10,5,0,15,10,0,-5,5,5
+19,Advanced,Warrior,20,20,-5,0,0,5,-5,0,5
+20,Advanced,Blacksmith,15,10,10,0,5,10,10,0,5
+21,Advanced,Sniper,10,5,0,10,20,5,5,5,5
+22,Advanced,Forest Knight,10,5,0,10,10,5,5,5,5
+23,Advanced,Ranger,10,5,0,15,15,0,10,15,0
+24,Advanced,Guardian,10,10,0,0,5,10,15,5,5
+25,Advanced,Dreadnought,15,15,-5,-10,5,30,-10,0,5
+26,Advanced,Bardinger,10,10,-5,0,0,5,10,5,10
+27,Advanced,Elephant Rider,20,10,-5,-10,20,15,-5,5,10
+28,Advanced,Caladrius,15,0,10,10,5,10,10,5,5
+29,Advanced,Dragoon,15,5,0,5,0,10,10,10,5
+30,Advanced,Ovate,10,-5,20,5,15,-10,15,10,0
+31,Advanced,Bishop,10,-5,15,0,5,-10,20,20,10
+32,Advanced,Troubadour,10,0,15,0,5,5,15,15,10
+33,Advanced,Cataphract,,,,,,,,,
+34,Advanced,Dancer,,,,,,,,,
+35,Master,Swordmaster,15,10,0,20,15,0,0,5,5
+36,Master,High Savant,10,15,15,10,5,5,5,5,5
+37,Master,Battlemaster,25,25,-5,5,-5,10,-5,-5,5
+38,Master,War Monk,15,10,0,15,0,5,15,5,5
+39,Master,Bow Adept,15,5,0,15,20,5,5,5,5
+40,Master,Bow Knight,10,10,0,15,10,5,0,5,5
+41,Master,Shadow Seeker,15,5,0,25,15,0,10,15,0
+42,Master,Sentinel,15,15,0,5,5,10,15,5,5
+43,Master,Castle Knight,25,20,-5,-15,5,30,-10,0,5
+44,Master,Orichaldia,15,15,-5,5,0,5,5,5,10
+45,Master,Great Knight,20,20,-5,-10,0,15,-10,0,5
+46,Master,Celestial Trooper,15,5,-5,10,5,5,15,15,10
+47,Master,Bau Lord,15,5,0,5,0,10,10,10,5
+48,Master,Druid,10,-5,30,10,15,-10,20,10,0
+49,Master,Wiseman,10,-5,20,5,0,-10,25,20,10
+50,Master,Valkyrium,10,0,15,5,5,5,10,15,10
+51,Divine,The Blade,15,10,10,20,20,5,5,5,10
+52,Divine,The Apsara,15,5,10,25,15,5,5,10,30
+53,Divine,The Eternal,30,30,0,10,0,15,0,0,10
+54,Divine,The Godhand,15,10,10,15,5,10,15,5,10
+55,Divine,The Calamity,15,5,15,25,20,5,15,15,5
+56,Divine,The Trident,15,15,5,10,10,15,15,5,10
+57,Divine,The Cavalier,20,15,5,10,10,15,10,5,15
+58,Divine,The Avatar,10,-5,30,10,5,-5,30,20,10
